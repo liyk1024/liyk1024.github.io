@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.key1024.cn/2019/07/19/Django-debug-toolbar/</loc>
+    
+    <lastmod>2019-07-19T06:37:54.888Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.key1024.cn/2019/07/19/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2019-07-19T03:56:43.417Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.key1024.cn/2019/07/19/Docker%E4%B8%8A%E5%AE%89%E8%A3%85mongodb/</loc>
     
     <lastmod>2019-07-19T03:23:50.355Z</lastmod>
