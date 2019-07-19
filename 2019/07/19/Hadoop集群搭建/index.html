@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="Docker,">
+  <meta name="keywords" content="Hadoop,">
 
 
 
@@ -94,18 +94,29 @@
 
 
 
-<meta name="description" content="安装docker 安装 123456781.下载yum源https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/docker-ce.repo2.修改baseurl地址底行模式下：%s/https:\/\/download.docker.com\//https:\/\/mirrors.tuna.tsinghua.edu.cn\/dock">
-<meta name="keywords" content="Docker">
+<meta name="description" content="基础配置 三台机器上编辑/etc/hosts配置文件，修改主机名。    三台机器在集群中担任的角色：  master:NameNode、DataNode、ResourceManager、NodeManager node1:DataNode、NodeManager node2:DataNode、NodeManager    配置ssh免密登录  1234# 三台机器上分别执行，互相免密登录ssh-">
+<meta name="keywords" content="Hadoop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker部署lnmp">
-<meta property="og:url" content="http://www.key1024.cn/2019/06/15/Docker部署lnmp/index.html">
+<meta property="og:title" content="Hadoop集群搭建">
+<meta property="og:url" content="http://www.key1024.cn/2019/07/19/Hadoop集群搭建/index.html">
 <meta property="og:site_name" content="So what">
-<meta property="og:description" content="安装docker 安装 123456781.下载yum源https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/docker-ce.repo2.修改baseurl地址底行模式下：%s/https:\/\/download.docker.com\//https:\/\/mirrors.tuna.tsinghua.edu.cn\/dock">
+<meta property="og:description" content="基础配置 三台机器上编辑/etc/hosts配置文件，修改主机名。    三台机器在集群中担任的角色：  master:NameNode、DataNode、ResourceManager、NodeManager node1:DataNode、NodeManager node2:DataNode、NodeManager    配置ssh免密登录  1234# 三台机器上分别执行，互相免密登录ssh-">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-01T05:49:08.000Z">
+<meta property="og:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-1.png">
+<meta property="og:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-2.png">
+<meta property="og:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-3.png">
+<meta property="og:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-4.png">
+<meta property="og:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-6.png">
+<meta property="og:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-7.png">
+<meta property="og:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-8.png">
+<meta property="og:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-9.png">
+<meta property="og:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-10.png">
+<meta property="og:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-11.png">
+<meta property="og:updated_time" content="2019-07-19T06:53:07.071Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker部署lnmp">
-<meta name="twitter:description" content="安装docker 安装 123456781.下载yum源https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/docker-ce.repo2.修改baseurl地址底行模式下：%s/https:\/\/download.docker.com\//https:\/\/mirrors.tuna.tsinghua.edu.cn\/dock">
+<meta name="twitter:title" content="Hadoop集群搭建">
+<meta name="twitter:description" content="基础配置 三台机器上编辑/etc/hosts配置文件，修改主机名。    三台机器在集群中担任的角色：  master:NameNode、DataNode、ResourceManager、NodeManager node1:DataNode、NodeManager node2:DataNode、NodeManager    配置ssh免密登录  1234# 三台机器上分别执行，互相免密登录ssh-">
+<meta name="twitter:image" content="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-1.png">
 
 
 
@@ -135,13 +146,13 @@
 
 
 
-  <link rel="canonical" href="http://www.key1024.cn/2019/06/15/Docker部署lnmp/">
+  <link rel="canonical" href="http://www.key1024.cn/2019/07/19/Hadoop集群搭建/">
 
 
 
 
 
-  <title>Docker部署lnmp | So what</title>
+  <title>Hadoop集群搭建 | So what</title>
   
 
 
@@ -300,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2019/06/15/Docker部署lnmp/">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2019/07/19/Hadoop集群搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Key liyk">
@@ -317,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker部署lnmp</h1>
+          <h1 class="post-title" itemprop="name headline">Hadoop集群搭建</h1>
         
 
         <div class="post-meta">
@@ -329,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-15T19:06:00+08:00">
-                2019-06-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-19T14:51:00+08:00">
+                2019-07-19
               </time>
             
 
@@ -352,8 +363,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
                   </a>
                 </span>
 
@@ -383,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  834 字
+                  1.6k 字
                 </span>
               
 
@@ -399,7 +410,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -420,47 +431,175 @@
       
 
       
-        <h4 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h4><ul>
-<li><p>安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.下载yum源</span><br><span class="line">https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">2.修改baseurl地址</span><br><span class="line">底行模式下：%s/https:\/\/download.docker.com\//https:\/\/mirrors.tuna.tsinghua.edu.cn\/docker-ce\//g</span><br><span class="line">3.查看程序包 </span><br><span class="line">yum repolist</span><br><span class="line">4.安装</span><br><span class="line">yum install -y docker-ce</span><br></pre></td></tr></table></figure>
+        <h4 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h4><blockquote>
+<p>三台机器上编辑/etc/hosts配置文件，修改主机名。</p>
+</blockquote>
+<p><img src="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-1.png" alt="image"></p>
+<blockquote>
+<p>三台机器在集群中担任的角色：</p>
+<ul>
+<li>master:NameNode、DataNode、ResourceManager、NodeManager</li>
+<li>node1:DataNode、NodeManager</li>
+<li>node2:DataNode、NodeManager</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>配置ssh免密登录</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 三台机器上分别执行，互相免密登录</span><br><span class="line">ssh-keygen -t rsa</span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub node1</span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub node2</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装JDK</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 官网下载</span><br><span class="line">https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</span><br><span class="line">http://anchnet-script.oss-cn-shanghai.aliyuncs.com/oracle/jdk-8u171-linux-x64.rpm</span><br><span class="line">yum localinstall jdk-8u171-linux-x64.rpm -y</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>配置java环境变量</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 三台均操作</span><br><span class="line">vim /etc/profile</span><br><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_171-amd64</span><br><span class="line">JAVA_BIN=/usr/java/jdk1.8.0_171-amd64/bin</span><br><span class="line">JRE_HOME=/usr/java/jdk1.8.0_171-amd64/jre</span><br><span class="line">export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH</span><br><span class="line"># source命令加载配置文件，让其生效</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h4 id="Hadpop配置分发"><a href="#Hadpop配置分发" class="headerlink" title="Hadpop配置分发"></a>Hadpop配置分发</h4><blockquote>
+<p>下载hadoop</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://www.apache.org/dist/hadoop/common/</span><br><span class="line">wget https://www.apache.org/dist/hadoop/common/hadoop-2.6.5/hadoop-2.6.5.tar.gz</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解压</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.6.5.tar.gz -C /data/modules</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查看hadoop目录结构    </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /data/modules/hadoop-2.6.5/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-2.png" alt="image">                        </p>
+<ul>
+<li>bin目录存放可执行文件</li>
+<li>etc目录存放配置文件</li>
+<li>sbin目录下存放服务的启动命令</li>
+<li>share目录下存放jar包与文档</li>
+</ul>
+<blockquote>
+<p>配置hadoop环境变量</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br><span class="line">export HADOOP_HOME=/data/modules/hadoop-2.6.5/</span><br><span class="line">export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH</span><br><span class="line">source !$</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>编辑hadoop配置文件</strong></p>
+<ul>
+<li>编辑etc/core-site.xml</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.default.name&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://10.234.2.169:8020&lt;/value&gt;</span><br><span class="line">        # 指定默认的访问地址以及端口号</span><br><span class="line">    &lt;/property&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>编辑etc/hdfs-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/data/hadoop/app/tmp/dfs/name&lt;/value&gt;</span><br><span class="line">        # namenode临时文件所存放的目录</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/data/hadoop/app/tmp/dfs/data&lt;/value&gt;  </span><br><span class="line">        # datanode临时文件所存放的目录</span><br><span class="line">    &lt;/property&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">配置文件：/etc/docker/daemon.json ,docker启动之前不存在可自行定义创建，启动之前就自动生成。</span><br><span class="line">&#123;</span><br><span class="line">    &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line"># 阿里云镜像</span><br><span class="line">&#123;</span><br><span class="line">    &quot;registry-mirrors&quot;: [&quot;https://6ucotgoh.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line"># systemctl daemon-reload</span><br><span class="line"># systemcctl start docker</span><br></pre></td></tr></table></figure>
+<li><p>创建数据目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/hadoop/app/tmp/dfs/name</span><br><span class="line">mkdir -p /data/hadoop/app/tmp/dfs/data</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑etc/yarn-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑etc/mapred-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cp mapred-site.xml.template mapred-site.xml</span><br><span class="line">vim !$</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">        # 指定mapreduce运行在yarn框架上</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置从节点的主机名etc/slaves</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node1</span><br><span class="line">node2</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h4 id="下载需要的镜像"><a href="#下载需要的镜像" class="headerlink" title="下载需要的镜像"></a>下载需要的镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx:alpine</span><br><span class="line">docker pull php:5.6-fpm</span><br><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2台node节点也需创建对应安装目录，环境变量配置等</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.bash_profile node1:~/.bash_profile</span><br><span class="line">scp * node1:/data/modules/hadoop-2.6.5/etc/hadoop/</span><br><span class="line"># 2台节点上如下操作</span><br><span class="line">source ~/.bash_profile</span><br><span class="line">mkdir -p /data/hadoop/app/tmp/dfs/name</span><br><span class="line">mkdir -p /data/hadoop/app/tmp/dfs/data</span><br></pre></td></tr></table></figure>
 
-<h4 id="相关部署"><a href="#相关部署" class="headerlink" title="相关部署"></a>相关部署</h4><ul>
-<li><p>启动php</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run --name  myphp -v /data/nginx/www:/www  -d php:5.6-fpm</span><br><span class="line"># --name myphp :将容器命名为 myphp</span><br><span class="line"># -v /data/nginx/www:/www :将主机中项目的目录/data/nginx/www 挂载到容器的/www</span><br><span class="line"># -d :后台运行</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加nginx配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 创建 /data/nginx/conf/conf.d 目录：</span><br><span class="line">mkdir -p /data/nginx/conf/conf.d</span><br><span class="line"></span><br><span class="line">在/data/nginx/conf/conf.d/test-php.conf 文件，内容如下：</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm index.php;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        fastcgi_pass   172.17.0.4:9000;</span><br><span class="line">        # 这里为php容器的ip</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_param  SCRIPT_FILENAME  /www/$fastcgi_script_name;</span><br><span class="line">        include        fastcgi_params;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># fastcgi_pass ：填写php器的ip，使用docker inspect myphp -f `&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;`查看IP</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动nginx</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mynginx -p 80:80 -d -v /data/nginx/www:/usr/share/nginx/html:ro -v /data/nginx/conf/conf.d:/etc/nginx/conf.d:ro --link myphp5.6:php nginx:alpine</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>测试php</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 在/data/nginx/www目录下创建test-php.php，代码如下：</span><br><span class="line">&lt;?php</span><br><span class="line">echo phpinfo();</span><br><span class="line">?&gt;</span><br><span class="line"># 浏览器访问测试：IP/test-php.php</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动mysql</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name myMysql -P -e MYSQL_ROOT_PASSWORD=Xxzx@789 -d mysql</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>测试php连接mysql</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$dbms=&apos;mysql&apos;;     //数据库类型</span><br><span class="line">$host=&apos;172.17.0.2&apos;; //数据库主机名,此处写mysql 容器的名字</span><br><span class="line">$dbport = &apos;3306&apos;;</span><br><span class="line">$dbName=&apos;emlog&apos;;    //使用的数据库</span><br><span class="line">$user=&apos;root&apos;;      //数据库连接用户名</span><br><span class="line">$pass=&apos;X****&apos;;          //对应的密码</span><br><span class="line">$dsn=&quot;$dbms:host=$host;port=$dbport;dbname=$dbName&quot;;</span><br><span class="line">try &#123;</span><br><span class="line">   $dbh = new PDO($dsn, $user, $pass); //初始化一个PDO对象</span><br><span class="line">   echo &quot;successful!&lt;br/&gt;&quot;;</span><br><span class="line">  //你还可以进行一次搜索操作</span><br><span class="line">   // foreach ($dbh-&gt;query(&apos;SELECT * from user&apos;) as $row) &#123;</span><br><span class="line">   //     print_r($row); //你可以用 echo($GLOBAL); 来看到这些值</span><br><span class="line">   // &#125;</span><br><span class="line">   $dbh = null;</span><br><span class="line">&#125; catch (PDOException $e) &#123;</span><br><span class="line">   die (&quot;Error!: &quot; . $e-&gt;getMessage() . &quot;&lt;br/&gt;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>docker容器安装vim等命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 进入容器</span><br><span class="line">docker exec -it 容器名 /bin/bash（或者/bin/sh）</span><br><span class="line"># 查看容器的系统版本</span><br><span class="line">cat /etc/issue</span><br><span class="line"># 此处以ubuntu为例,先更新软件包，否则安装可能会提示Unable to locate package vim</span><br><span class="line">apt-get update</span><br><span class="line">apt-get install vim</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>php连接mysql报错：could not find driver</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 默认官方php是没添加支持mysql，需自行安装配置</span><br><span class="line">1、进入php容器</span><br><span class="line">docker exec -it myphp /bin/bash</span><br><span class="line">2、进入安装扩展目录下</span><br><span class="line">whereis php  # 查看在/usr/local/bin下</span><br><span class="line"># 安装扩展 ：docker-php-ext-install </span><br><span class="line">./docker-php-ext-install pdo pdo_mysql</span><br><span class="line">./docker-php-ext-install mysqli</span><br><span class="line">3、查看php.ini</span><br><span class="line">php --ini</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装gd扩展：验证码要用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1、进入php容器</span><br><span class="line">docker exec -it myphp /bin/bash</span><br><span class="line">2、安装依赖</span><br><span class="line">apt-get install libpng-dev</span><br><span class="line">3、进入安装扩展目录</span><br><span class="line">./docker-php-ext-install -j$(nproc) gd</span><br><span class="line">4、重启php容器，测试gd</span><br><span class="line">&lt;?</span><br><span class="line">if(extension_loaded(&apos;gd&apos;)) &#123;</span><br><span class="line">  echo &apos;您可以使用gd&lt;br&gt;&apos;;</span><br><span class="line">  foreach(gd_info() as $cate=&gt;$value)</span><br><span class="line">    echo &quot;$cate: $value&lt;br&gt;&quot;;</span><br><span class="line">&#125; else</span><br><span class="line">  echo &apos;没安装gd扩展!&apos;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Hadoop格式化及启停"><a href="#Hadoop格式化及启停" class="headerlink" title="Hadoop格式化及启停"></a>Hadoop格式化及启停</h4><blockquote>
+<p>对NameNode做格式化，只需要在master上执行即可</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master hadoop]# hdfs namenode -format</span><br><span class="line"># 格式化是对HDFS这个分布式文件系统中的DataNode进行分块，统计所有分块后的初始元数据的存储在NameNode中</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>格式化之后就可以启动Hadoop集群</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># sbin目录下,执行脚本，执行后要输入master服务器的密码</span><br><span class="line">[root@master hadoop]# ./start-all.sh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查看机器进程</p>
+<ul>
+<li>master</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@master sbin]# jps</span><br><span class="line">19237 SecondaryNameNode</span><br><span class="line">22231 NodeManager</span><br><span class="line">21978 ResourceManager</span><br><span class="line">19019 NameNode</span><br><span class="line">30941 Jps</span><br><span class="line">21327 DataNode</span><br><span class="line"># 如果master上的某些服务进程未启动，需要再次手动执行脚本启动</span><br><span class="line"># 启动NameNode</span><br><span class="line">sbin/hadoop-daemon.sh start namenode</span><br><span class="line"># 启动DataNode</span><br><span class="line">sbin/hadoop-daemon.sh start datanode</span><br><span class="line"># 启动SecondaryNameNode</span><br><span class="line">sbin/hadoop-daemon.sh start secondarynamenode</span><br><span class="line"># 启动Resourcemanager</span><br><span class="line">sbin/yarn-daemon.sh start resourcemanager</span><br><span class="line"># 启动nodemanager</span><br><span class="line">sbin/yarn-daemon.sh start nodemanager</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>node<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]# jps</span><br><span class="line">25827 Jps</span><br><span class="line">18742 DataNode</span><br><span class="line">20583 NodeManager</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
+<h4 id="访问测试"><a href="#访问测试" class="headerlink" title="访问测试"></a>访问测试</h4><blockquote>
+<p>访问主节点 50070    </p>
+</blockquote>
+<p><img src="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-3.png" alt="image"></p>
+<blockquote>
+<p>访问主节点 YARN的web页面</p>
+</blockquote>
+<p><img src="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-4.png" alt="image"><br>点击“Active Nodes”查看存活的节点</p>
+<blockquote>
+<p>执行命令</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /</span><br><span class="line">hdfs dfs -mkdir /test123</span><br><span class="line">hdfs dfs -put ./test.sh /test123</span><br><span class="line">#  然后去其他节点查看，不同的节点，访问的数据也是一样的</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>运行MapReduce Job</p>
+</blockquote>
+<p>在Hadoop的share目录里，自带了一些jar包，里面带有一些mapreduce实例小例子。位置在/data/modules/hadoop-2.6.5/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.5.jar</p>
+<ul>
+<li><p>创建输入目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bin/hdfs dfs -mkdir -p /test1/input</span><br><span class="line"># 原始文件</span><br><span class="line">[root@master hadoop-2.6.5]# cat /data/hadoop/test1.input </span><br><span class="line">hadoop hadoop hive</span><br><span class="line">mapreduce hive storm</span><br><span class="line">sqoop hadoop hive</span><br><span class="line">spark hadoop hbase</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上传到HDFS的/test1/input目录中</p>
+</li>
+</ul>
+<p><img src="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-6.png" alt="image"></p>
+<ul>
+<li>运行WordCount MapReduce Job<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master hadoop-2.6.5]# bin/yarn jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.5.jar wordcount /test1/input /test1/output</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-7.png" alt="image"></p>
+<p>YARN web控制台查看<br><img src="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-8.png" alt="image"></p>
+<ul>
+<li><p>查看输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@master hadoop-2.6.5]# hdfs dfs -ls /test1/output</span><br><span class="line">Found 2 items</span><br><span class="line">-rw-r--r--   3 root supergroup          0 2018-12-13 15:22 /test1/output/_SUCCESS</span><br><span class="line">-rw-r--r--   3 root supergroup         60 2018-12-13 15:22 /test1/output/part-r-00000</span><br><span class="line"># output目录中有两个文件，_SUCCESS文件是空文件，有这个文件说明Job执行成功。part-r-00000文件是结果文件，其中-r-说明这个文件是Reduce阶段产生的结果。一个reduce会产生一个part-r-开头的文件。</span><br><span class="line"># 查看执行结果</span><br><span class="line">[root@master hadoop-2.6.5]# hdfs dfs -cat /test1/output/part-r-00000</span><br><span class="line">hadoop	4</span><br><span class="line">hbase	1</span><br><span class="line">hive	3</span><br><span class="line">mapreduce	1</span><br><span class="line">spark	1</span><br><span class="line">sqoop	1</span><br><span class="line">storm	1</span><br><span class="line"># 结果是按照键值排序好的</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>停止Hadoop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 主节点上执行 stop-all.sh，如果进程未全部终止，就执行如下脚本对应停止。</span><br><span class="line">[root@master hadoop-2.6.5]# sbin/hadoop-daemon.sh stop namenode</span><br><span class="line">stopping namenode</span><br><span class="line">[root@master hadoop-2.6.5]# sbin/hadoop-daemon.sh stop datanode</span><br><span class="line">stopping datanode</span><br><span class="line">[root@master hadoop-2.6.5]# sbin/yarn-daemon.sh stop resourcemanager</span><br><span class="line">stopping resourcemanager</span><br><span class="line">[root@master hadoop-2.6.5]# sbin/yarn-daemon.sh stop nodemanager</span><br><span class="line">stopping nodemanager</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="开启历史服务"><a href="#开启历史服务" class="headerlink" title="开启历史服务"></a>开启历史服务</h4><blockquote>
+<p>Hadoop开启历史服务可以在web页面上查看Yarn上执行job情况的详细信息。可以通过历史服务器查看已经运行完的Mapreduce作业记录，比如用了多少个Map、用了多少个Reduce、作业提交时间、作业启动时间、作业完成时间等信息。</p>
+</blockquote>
+<ul>
+<li>开启日志聚集<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Hadoop默认是不启用日志聚集的。在yarn-site.xml文件里配置启用日志聚集。</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.log-aggregation-enable&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.log-aggregation.retain-seconds&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;106800&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"># yarn.log-aggregation-enable:是否启用日志聚集功能。</span><br><span class="line"># yarn.log-aggregation.retain-seconds：设置日志保留时间，单位是秒。</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>将配置文件发布到其他节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp etc/hadoop/yarn-site.xml node1:/data/modules/hadoop-2.6.5/etc/hadoop/</span><br><span class="line">scp etc/hadoop/yarn-site.xml node2:/data/modules/hadoop-2.6.5/etc/hadoop/</span><br></pre></td></tr></table></figure>
+
+<p>重启Yarn进程和HistoryServer进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sbin/stop-yarn.sh</span><br><span class="line">sbin/start-yarn.sh</span><br><span class="line">sbin/mr-jobhistory-daemon.sh stop historyserver</span><br><span class="line">sbin/mr-jobhistory-daemon.sh start historyserver</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试日志聚集<br>运行一个demo MapReduce，使之产生日志：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master hadoop-2.6.5]# bin/yarn jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.5.jar wordcount2 /test1/input /test1/output2</span><br><span class="line"># 访问主节点的19888端口，运行job后就可以在web页面查看各个Map和Reduce的日志了。</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-9.png" alt="image"><br><img src="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-10.png" alt="image"><br><img src="https://liyk-1251987943.cos.ap-chengdu.myqcloud.com/img/2018-12/12-13-11.png" alt="image"></p>
 
       
     </div>
@@ -520,7 +659,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
           
         </div>
       
@@ -533,8 +672,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/14/windows下bat脚本自动重启Apache服务/" rel="next" title="Windows下通过bat脚本自动重启apache服务">
-                <i class="fa fa-chevron-left"></i> Windows下通过bat脚本自动重启apache服务
+              <a href="/2019/07/19/Django-debug-toolbar/" rel="next" title="Django-debug-toolbar">
+                <i class="fa fa-chevron-left"></i> Django-debug-toolbar
               </a>
             
           </div>
@@ -542,10 +681,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/01/Linux下的jq命令处理json数据/" rel="prev" title="Linux下的jq命令处理json数据">
-                Linux下的jq命令处理json数据 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -695,7 +830,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装docker"><span class="nav-number">1.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载需要的镜像"><span class="nav-number">2.</span> <span class="nav-text">下载需要的镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关部署"><span class="nav-number">3.</span> <span class="nav-text">相关部署</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础配置"><span class="nav-number">1.</span> <span class="nav-text">基础配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hadpop配置分发"><span class="nav-number">2.</span> <span class="nav-text">Hadpop配置分发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hadoop格式化及启停"><span class="nav-number">3.</span> <span class="nav-text">Hadoop格式化及启停</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问测试"><span class="nav-number">4.</span> <span class="nav-text">访问测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开启历史服务"><span class="nav-number">5.</span> <span class="nav-text">开启历史服务</span></a></li></ol></div>
             
 
           </div>
