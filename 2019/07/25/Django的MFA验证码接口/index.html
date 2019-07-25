@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="Docker,">
+  <meta name="keywords" content="python,MFA,">
 
 
 
@@ -94,18 +94,22 @@
 
 
 
-<meta name="description" content="Harbor正是一个用于存储Docker镜像的企业级Registry服务。 Harbor核心组件 Proxy：他是一个nginx的前端代理，代理Harbor的registry,UI, token等服务。 db：负责储存用户权限、审计日志、Dockerimage分组信息等数据。 UI：提供图形化界面，帮助用户管理registry上的镜像, 并对用户进行授权。 jobsevice：jobsevice是">
-<meta name="keywords" content="Docker">
+<meta name="description" content="背景 增加双因子认证，提高网站登录的安全性。利用谷歌身份验证器绑定密钥，从而进行动态MFA验证。  原理核心内容 Google Authenticator采用的算法是TOTP（Time-Based One-Time Password基于时间的一次性密码），其核心内容包括以下三点：   一个共享密钥 当前时间输入 一个签名函数  加密原理和步骤 Step1：base32 secret  K：共享密钥">
+<meta name="keywords" content="python,MFA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Harbor安装">
-<meta property="og:url" content="http://www.key1024.cn/2019/07/01/Harbor安装/index.html">
+<meta property="og:title" content="Django的MFA验证码接口">
+<meta property="og:url" content="http://www.key1024.cn/2019/07/25/Django的MFA验证码接口/index.html">
 <meta property="og:site_name" content="So what">
-<meta property="og:description" content="Harbor正是一个用于存储Docker镜像的企业级Registry服务。 Harbor核心组件 Proxy：他是一个nginx的前端代理，代理Harbor的registry,UI, token等服务。 db：负责储存用户权限、审计日志、Dockerimage分组信息等数据。 UI：提供图形化界面，帮助用户管理registry上的镜像, 并对用户进行授权。 jobsevice：jobsevice是">
+<meta property="og:description" content="背景 增加双因子认证，提高网站登录的安全性。利用谷歌身份验证器绑定密钥，从而进行动态MFA验证。  原理核心内容 Google Authenticator采用的算法是TOTP（Time-Based One-Time Password基于时间的一次性密码），其核心内容包括以下三点：   一个共享密钥 当前时间输入 一个签名函数  加密原理和步骤 Step1：base32 secret  K：共享密钥">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-01T06:07:16.000Z">
+<meta property="og:image" content="http://img.key1024.cn/md/20190725/RVrp4W8tD2eG.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20190725/GvhQNGnaO1Kj.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20190725/iSdo7l3WSAkg.png">
+<meta property="og:updated_time" content="2019-07-25T09:29:57.272Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Harbor安装">
-<meta name="twitter:description" content="Harbor正是一个用于存储Docker镜像的企业级Registry服务。 Harbor核心组件 Proxy：他是一个nginx的前端代理，代理Harbor的registry,UI, token等服务。 db：负责储存用户权限、审计日志、Dockerimage分组信息等数据。 UI：提供图形化界面，帮助用户管理registry上的镜像, 并对用户进行授权。 jobsevice：jobsevice是">
+<meta name="twitter:title" content="Django的MFA验证码接口">
+<meta name="twitter:description" content="背景 增加双因子认证，提高网站登录的安全性。利用谷歌身份验证器绑定密钥，从而进行动态MFA验证。  原理核心内容 Google Authenticator采用的算法是TOTP（Time-Based One-Time Password基于时间的一次性密码），其核心内容包括以下三点：   一个共享密钥 当前时间输入 一个签名函数  加密原理和步骤 Step1：base32 secret  K：共享密钥">
+<meta name="twitter:image" content="http://img.key1024.cn/md/20190725/RVrp4W8tD2eG.png">
 
 
 
@@ -135,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://www.key1024.cn/2019/07/01/Harbor安装/">
+  <link rel="canonical" href="http://www.key1024.cn/2019/07/25/Django的MFA验证码接口/">
 
 
 
 
 
-  <title>Harbor安装 | So what</title>
+  <title>Django的MFA验证码接口 | So what</title>
   
 
 
@@ -300,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2019/07/01/Harbor安装/">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2019/07/25/Django的MFA验证码接口/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Key liyk">
@@ -317,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Harbor安装</h1>
+          <h1 class="post-title" itemprop="name headline">Django的MFA验证码接口</h1>
         
 
         <div class="post-meta">
@@ -329,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-01T12:20:00+08:00">
-                2019-07-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-25T17:28:00+08:00">
+                2019-07-25
               </time>
             
 
@@ -352,8 +356,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
+                  <a href="/categories/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -383,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  838 字
+                  1.2k 字
                 </span>
               
 
@@ -399,7 +403,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -420,64 +424,78 @@
       
 
       
-        <p>Harbor正是一个用于存储Docker镜像的企业级Registry服务。</p>
-<h4 id="Harbor核心组件"><a href="#Harbor核心组件" class="headerlink" title="Harbor核心组件"></a>Harbor核心组件</h4><ul>
-<li>Proxy：他是一个nginx的前端代理，代理Harbor的registry,UI, token等服务。</li>
-<li>db：负责储存用户权限、审计日志、Dockerimage分组信息等数据。</li>
-<li>UI：提供图形化界面，帮助用户管理registry上的镜像, 并对用户进行授权。</li>
-<li>jobsevice：jobsevice是负责镜像复制工作的，他和registry通信，从一个registry pull镜像然后push到另一个registry，并记录job_log。</li>
-<li>Adminserver：是系统的配置管理中心附带检查存储用量，ui和jobserver启动时候回需要加载adminserver的配置。</li>
-<li>Registry：镜像仓库，负责存储镜像文件。</li>
-<li>Log：为了帮助监控Harbor运行，负责收集其他组件的log，供日后进行分析。</li>
-</ul>
-<h4 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h4><h5 id="安装要求"><a href="#安装要求" class="headerlink" title="安装要求"></a>安装要求</h5><ul>
-<li>最小配置：2核、4G内存、40G硬盘   </li>
-<li>Docker引擎：17.03.0-ce +或更高版本    </li>
-<li>Docker compose：1.18.0或更高版本    </li>
-<li>安装Openssl：为Harbor生成证书和密钥    </li>
-</ul>
-<h5 id="网络端口"><a href="#网络端口" class="headerlink" title="网络端口"></a>网络端口</h5><table>
-<thead>
-<tr>
-<th>端口</th>
-<th>协议</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>443</td>
-<td>HPPTS</td>
-<td>Harbor端口和核心API将接受此端口上的https协议请求，此端口可以在配置文件中更改</td>
-</tr>
-<tr>
-<td>8443</td>
-<td>HTTPS</td>
-<td>只有在启用“公证”时才需要连接到Dock的Docker Content Trust服务，此端口可以在配置文件中更改</td>
-</tr>
-<tr>
-<td>80</td>
-<td>HTTP</td>
-<td>Harbor端口和核心API将接受此端口上的http协议请求</td>
-</tr>
-</tbody></table>
-<h5 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h5><p>1.下载安装程序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://storage.googleapis.com/harbor-releases/release-1.8.0/harbor-offline-installer-v1.8.1.tgz</span><br><span class="line">tar -zxvf harbor-online-installer-v1.8.1.tgz</span><br></pre></td></tr></table></figure>
-
-<p>2.配置harbor.yml<br>有两类参数，必需参数和可选参数</p>
+        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><blockquote>
+<p>增加双因子认证，提高网站登录的安全性。利用谷歌身份验证器绑定密钥，从而进行动态MFA验证。</p>
+</blockquote>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><h5 id="核心内容"><a href="#核心内容" class="headerlink" title="核心内容"></a>核心内容</h5><blockquote>
+<p>Google Authenticator采用的算法是TOTP（Time-Based One-Time Password基于时间的一次性密码），其核心内容包括以下三点：</p>
+</blockquote>
 <ul>
-<li><p>必需参数：</p>
+<li>一个共享密钥</li>
+<li>当前时间输入</li>
+<li>一个签名函数</li>
+</ul>
+<h5 id="加密原理和步骤"><a href="#加密原理和步骤" class="headerlink" title="加密原理和步骤"></a>加密原理和步骤</h5><ul>
+<li><p>Step1：base32 secret</p>
 <ul>
-<li>hostname：目标主机的主机名，用于访问Portal和注册表服务。例如192.168.1.10或reg.yourdomain.com。不要使用localhost或127.0.0.1作为主机名 - 外部客户端需要访问注册表服务！ </li>
-<li>data_volume：本地存储harbor数据的位置</li>
-<li>harbor_admin_password：管理员的初始密码。此密码仅在Harbor首次启动时生效。之后，将忽略此设置，并且应在Portal中设置管理员密码。请注意，默认用户名/密码为admin / Harbor12345。</li>
-<li>database：与本地数据库相关的配置，password：用于db_auth的PostgreSQL数据库的root密码。</li>
-<li>jobservice：jobservice相关服务，max_job_workers：作业服务中的最大复制工作者数。对于每个映像复制作业，工作程序将存储库的所有标记同步到远程目标。增加此数量可以在系统中执行更多并发复制作业。但是，由于每个工作者都消耗一定量的网络/ CPU / IO资源，请根据主机的硬件资源仔细选择该属性的值。</li>
-<li>log：log相关的url；</li>
+<li>K：共享密钥，在Google Authenticator中是通过将一段字符串进行base32解码成bytes得到的。但由于此密钥在不够32位或超过32位时会用’=’表示，故用的pyotp随机生成的密钥。    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Secret = pyotp.random_base32()</span><br><span class="line">K = base64.b32decode(Secret, True)</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
-<li><p>3.运行install.sh安装并启动Harbor</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 安装docker</span><br><span class="line">1.下载yum源</span><br><span class="line">https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">2.修改baseurl地址</span><br><span class="line">底行模式下：%s/https:\/\/download.docker.com\//https:\/\/mirrors.tuna.tsinghua.edu.cn\/docker-ce\//g</span><br><span class="line">3.查看程序包 </span><br><span class="line">yum repolist</span><br><span class="line">4.安装</span><br><span class="line">yum install -y docker-ce</span><br><span class="line">5.配置文件：/etc/docker/daemon.json ,docker启动之前不存在可自行定义创建，启动之前就自动生成。</span><br><span class="line">&#123;</span><br><span class="line">    &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line"># 阿里云镜像</span><br><span class="line">&#123;</span><br><span class="line">    &quot;registry-mirrors&quot;: [&quot;https://6ucotgoh.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line"># systemctl daemon-reload</span><br><span class="line"># systemcctl start docker</span><br><span class="line"># 安装docker-compose，如果提前安装过忽略此步骤</span><br><span class="line">yum install docker-compose -y </span><br><span class="line"># 安装harbor</span><br><span class="line">./install.sh</span><br></pre></td></tr></table></figure>
+<li><p>Step2：get current timestamp</p>
+<ul>
+<li>C：计数器，通过当前时间戳除以30然后将得到的整数转换成一个大端序的字节。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># int(time.time()) // 30  到当前经历了多少个30秒</span><br><span class="line"># 将间隔时间转为big-endian(大端序)并且为长整型的字节</span><br><span class="line">C = struct.pack(&quot;&gt;Q&quot;, int(time.time()) // 30)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Step3：start hmac-sha1</p>
+<ul>
+<li>H：将K和C做HMAC-SHA-1加密然后以字节方式保存，因为后期需要进行与运算，而str是不能和int进行与运算的。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># hmac = SHA1(secret + SHA1(secret + input))</span><br><span class="line"># 为了方便演示，将字节转换成了字符串显示</span><br><span class="line">H = hmac.new(K, C, hashlib.sha1).digest()</span><br><span class="line"># 取出最后一位和数字15做与运算</span><br><span class="line">O = H[19] &amp; 15</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Step4：get DynamicPasswd</p>
+<ul>
+<li>通过计算出来的O在H中取出4个16进制的字节，然后将字节转换成正整数，因转换后的正整数是放在数组里面的，所以需要使用[0]取出。最后与一个全为1的二进制与运算然后与10^6做取余运算，最终会得到一个6位数的TOTP<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DynamicPasswd = str((struct.unpack(&quot;&gt;I&quot;, H[O:O + 4])[0] &amp; 0x7fffffff) % 1000000)    </span><br><span class="line"># struct.unpack(&apos;&gt;I&apos;,h[o:o+4])[0] :转为big-endian(大端序)并且不为负数的数字(整数),因为转换完是一个数组,类似&quot;(2828101188,)&quot;,所以需要[0]取出</span><br><span class="line"># h[o:o+4] :取其中4个字节  o=10  则取索引分别为 10,11,12,13的字节</span><br><span class="line"># &amp; 0x7fffffff = 11111111 :与字节转换的数字做与运算</span><br><span class="line"># % 1000000 :得出的数字与1000000相除然后取余</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Step5：get MFA</p>
+<ul>
+<li>最后计算出的6位数字最左边的一位可能为0，所以需要判断如果DynamicPasswd得到的是一个5位数的数字，那就在最左边加上一个0。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TOTP = str(0) + str(DynamicPasswd) if len(DynamicPasswd) &lt; 6 else DynamicPasswd</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><ul>
+<li>1.使用python的pyotp模块生成谷歌认证需要的密钥</li>
+<li>2.根据密钥生成二维码图片以及计算出6位动态验证码</li>
+<li>3.使用谷歌的身份验证器app，扫描二维码或者手动输入密钥</li>
+<li>4.平台二次认证通过对输入的动态验证码进行校验</li>
+</ul>
+<h4 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import base64, time, struct, hmac, hashlib</span><br><span class="line">import pyotp</span><br><span class="line">from qrcode import QRCode</span><br><span class="line">from qrcode import constants</span><br><span class="line"></span><br><span class="line">name = &apos;user01&apos;+&apos;:SmartMS&apos;</span><br><span class="line"></span><br><span class="line"># 利用参数secretKey,计算Google Authenticator 6位动态码。</span><br><span class="line">def getMFACode(Secret):</span><br><span class="line">    print(&apos;MFA密钥:&#123;&#125;&apos;.format(Secret))</span><br><span class="line">    K = base64.b32decode(Secret, True)</span><br><span class="line">    C = struct.pack(&quot;&gt;Q&quot;, int(time.time()) // 30)  </span><br><span class="line">    H = hmac.new(K, C, hashlib.sha1).digest()</span><br><span class="line">    O = H[19] &amp; 15  # bin(15)=00001111=0b1111</span><br><span class="line">    DynamicPasswd = str((struct.unpack(&quot;&gt;I&quot;, H[O:O + 4])[0] &amp; 0x7fffffff) % 1000000)</span><br><span class="line">    TOTP = str(0) + str(DynamicPasswd) if len(DynamicPasswd) &lt; 6 else DynamicPasswd</span><br><span class="line">    print(&apos;动态MFA:&#123;&#125;&apos;.format(TOTP))</span><br><span class="line">    return TOTP</span><br><span class="line"></span><br><span class="line">def getMFAImg(name,Secret):</span><br><span class="line">    # otpauth://totp/  固定格式</span><br><span class="line">    # name：标识符信息，issuer：发行信息</span><br><span class="line">    url = &quot;otpauth://totp/&quot; + name + &quot;?secret=%s&quot; % Secret + &quot;&amp;issuer=Anchnet&quot;</span><br><span class="line">    qr = QRCode(version=1, error_correction=constants.ERROR_CORRECT_L,box_size=6,border=4)</span><br><span class="line">    qr.add_data(url)</span><br><span class="line">    qr.make(fit=True)</span><br><span class="line">    img = qr.make_image()</span><br><span class="line">    # img.show()</span><br><span class="line"></span><br><span class="line">def checkCode(Secret):</span><br><span class="line">    code = int(input(&apos;输入验证码:&apos;))</span><br><span class="line">    t = pyotp.TOTP(Secret)</span><br><span class="line">    result = t.verify(code)</span><br><span class="line">    msg = result if result is True else False</span><br><span class="line">    print(&apos;验证码验证&#123;&#125;&apos;.format(msg))</span><br><span class="line">    return msg</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    Secret = pyotp.random_base32()</span><br><span class="line">    # Secret = &apos;UFB6R5QKLPV7FGIU&apos;</span><br><span class="line">    getMFACode(Secret)</span><br><span class="line">    Secret = getMFAImg(name,Secret)</span><br><span class="line">    # checkCode(Secret)</span><br></pre></td></tr></table></figure>
+
+<h4 id="封装为接口"><a href="#封装为接口" class="headerlink" title="封装为接口"></a>封装为接口</h4><ul>
+<li>views.py</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from utils import restful  # 自定义的restful</span><br><span class="line">import base64, time, struct, hmac, hashlib</span><br><span class="line">import pyotp</span><br><span class="line">from qrcode import QRCode</span><br><span class="line">from qrcode import constants</span><br><span class="line"></span><br><span class="line">def getMFAinfo(request):</span><br><span class="line">    name = request.GET[&apos;name&apos;] + &apos;:SmartMS&apos;</span><br><span class="line">    # Secret = request.GET[&apos;secret&apos;]</span><br><span class="line">    Secret = pyotp.random_base32()</span><br><span class="line">    K = base64.b32decode(Secret, True)</span><br><span class="line">    C = struct.pack(&quot;&gt;Q&quot;, int(time.time()) // 30) </span><br><span class="line">    H = hmac.new(K, C, hashlib.sha1).digest()</span><br><span class="line">    O = H[19] &amp; 15  # bin(15)=00001111=0b1111</span><br><span class="line">    DynamicPasswd = str((struct.unpack(&quot;&gt;I&quot;, H[O:O + 4])[0] &amp; 0x7fffffff) % 1000000)</span><br><span class="line">    TOTP = str(0) + str(DynamicPasswd) if len(DynamicPasswd) &lt; 6 else DynamicPasswd</span><br><span class="line">    url = &quot;otpauth://totp/&quot; + name + &quot;?secret=%s&quot; % Secret + &quot;&amp;issuer=Anchnet&quot;</span><br><span class="line">    qr = QRCode(version=1, error_correction=constants.ERROR_CORRECT_L, box_size=6, border=4)</span><br><span class="line">    qr.add_data(url)</span><br><span class="line">    qr.make(fit=True)</span><br><span class="line">    img = qr.make_image()</span><br><span class="line">    codeinfo = &#123;&quot;name&quot;:name, &quot;MFAcode&quot;:TOTP, &quot;Secret&quot;:Secret, &quot;QRurl&quot;:url&#125;</span><br><span class="line">    </span><br><span class="line">    return restful.result(message=&quot;获取成功&quot;,data=codeinfo)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>主urls.py</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from django.urls import path,include</span><br><span class="line">from apps.news import views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    ...</span><br><span class="line">    path(&apos;account/&apos;,include(&quot;apps.xfzauth.urls&quot;)),</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>apps的urls.py</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from django.urls import path</span><br><span class="line">from . import  views</span><br><span class="line"></span><br><span class="line">app_name = &apos;xfzauth&apos;</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    ...</span><br><span class="line">    path(&apos;code/&apos;,views.getMFAinfo,name=&apos;code&apos;),</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><ul>
+<li><p>验证码生成测试<br><img src="http://img.key1024.cn/md/20190725/RVrp4W8tD2eG.png" alt="mark"></p>
+</li>
+<li><p>接口测试<br><img src="http://img.key1024.cn/md/20190725/GvhQNGnaO1Kj.png" alt="mark"></p>
+<p><img src="http://img.key1024.cn/md/20190725/iSdo7l3WSAkg.png" alt="mark"></p>
 </li>
 </ul>
 
@@ -539,7 +557,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/MFA/" rel="tag"># MFA</a>
           
         </div>
       
@@ -552,8 +572,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/01/nginx日志切割/" rel="next" title="nginx日志切割">
-                <i class="fa fa-chevron-left"></i> nginx日志切割
+              <a href="/2019/07/19/Hadoop集群搭建/" rel="next" title="Hadoop集群搭建">
+                <i class="fa fa-chevron-left"></i> Hadoop集群搭建
               </a>
             
           </div>
@@ -561,10 +581,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/01/Docker存储卷/" rel="prev" title="Docker存储卷">
-                Docker存储卷 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -714,7 +730,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Harbor核心组件"><span class="nav-number">1.</span> <span class="nav-text">Harbor核心组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装和配置"><span class="nav-number">2.</span> <span class="nav-text">安装和配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装要求"><span class="nav-number">2.1.</span> <span class="nav-text">安装要求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#网络端口"><span class="nav-number">2.2.</span> <span class="nav-text">网络端口</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装步骤"><span class="nav-number">2.3.</span> <span class="nav-text">安装步骤</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#核心内容"><span class="nav-number">2.1.</span> <span class="nav-text">核心内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加密原理和步骤"><span class="nav-number">2.2.</span> <span class="nav-text">加密原理和步骤</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现步骤"><span class="nav-number">3.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关代码"><span class="nav-number">4.</span> <span class="nav-text">相关代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#封装为接口"><span class="nav-number">5.</span> <span class="nav-text">封装为接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试"><span class="nav-number">6.</span> <span class="nav-text">测试</span></a></li></ol></div>
             
 
           </div>
