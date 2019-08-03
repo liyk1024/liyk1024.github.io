@@ -94,13 +94,13 @@
 
 
 
-<meta name="description" content="背景客户需要提供秒级监控，使用agent发送获取是server取数据都会大大消耗性能，影响server和client的正常运行。zabbix-sender可解决这一问题，既能实现秒级监控也只是针对某一监控项单独定义，不会对整体造成太多的性能消耗。安装zabbix-sender安装zabbix-sender，主动发数据实现秒级监控 安装需与zabbix-server版本一致，例如zabbix-ser">
+<meta name="description" content="背景客户需要提供秒级监控，使用agent发送获取是server取数据都会大大消耗性能，影响server和client的正常运行。zabbix-sender可解决这一问题，既能实现秒级监控也只是针对某一监控项单独定义，不会对整体造成太多的性能消耗。 安装zabbix-sender安装zabbix-sender，主动发数据实现秒级监控安装需与zabbix-server版本一致，例如zabbix-ser">
 <meta name="keywords" content="zabbix">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Zabbix-sender实现秒级监控">
 <meta property="og:url" content="http://www.key1024.cn/2019/08/03/Zabbix-sender实现秒级监控/index.html">
 <meta property="og:site_name" content="So what">
-<meta property="og:description" content="背景客户需要提供秒级监控，使用agent发送获取是server取数据都会大大消耗性能，影响server和client的正常运行。zabbix-sender可解决这一问题，既能实现秒级监控也只是针对某一监控项单独定义，不会对整体造成太多的性能消耗。安装zabbix-sender安装zabbix-sender，主动发数据实现秒级监控 安装需与zabbix-server版本一致，例如zabbix-ser">
+<meta property="og:description" content="背景客户需要提供秒级监控，使用agent发送获取是server取数据都会大大消耗性能，影响server和client的正常运行。zabbix-sender可解决这一问题，既能实现秒级监控也只是针对某一监控项单独定义，不会对整体造成太多的性能消耗。 安装zabbix-sender安装zabbix-sender，主动发数据实现秒级监控安装需与zabbix-server版本一致，例如zabbix-ser">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.key1024.cn/md/20190803/e3IaVwfqOETd.png">
 <meta property="og:image" content="http://img.key1024.cn/md/20190803/4tJSwEcPRwvq.png">
@@ -108,10 +108,10 @@
 <meta property="og:image" content="http://img.key1024.cn/md/20190803/A0PFaxYDU1OE.png">
 <meta property="og:image" content="http://img.key1024.cn/md/20190803/XbyNWWGliFi2.png">
 <meta property="og:image" content="http://img.key1024.cn/md/20190803/p60dutCeo97d.png">
-<meta property="og:updated_time" content="2019-08-03T14:10:27.428Z">
+<meta property="og:updated_time" content="2019-08-03T14:14:02.090Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix-sender实现秒级监控">
-<meta name="twitter:description" content="背景客户需要提供秒级监控，使用agent发送获取是server取数据都会大大消耗性能，影响server和client的正常运行。zabbix-sender可解决这一问题，既能实现秒级监控也只是针对某一监控项单独定义，不会对整体造成太多的性能消耗。安装zabbix-sender安装zabbix-sender，主动发数据实现秒级监控 安装需与zabbix-server版本一致，例如zabbix-ser">
+<meta name="twitter:description" content="背景客户需要提供秒级监控，使用agent发送获取是server取数据都会大大消耗性能，影响server和client的正常运行。zabbix-sender可解决这一问题，既能实现秒级监控也只是针对某一监控项单独定义，不会对整体造成太多的性能消耗。 安装zabbix-sender安装zabbix-sender，主动发数据实现秒级监控安装需与zabbix-server版本一致，例如zabbix-ser">
 <meta name="twitter:image" content="http://img.key1024.cn/md/20190803/e3IaVwfqOETd.png">
 
 
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  468 字
+                  469 字
                 </span>
               
 
@@ -427,8 +427,9 @@
       
 
       
-        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><pre><code>客户需要提供秒级监控，使用agent发送获取是server取数据都会大大消耗性能，影响server和client的正常运行。zabbix-sender可解决这一问题，既能实现秒级监控也只是针对某一监控项单独定义，不会对整体造成太多的性能消耗。</code></pre><h4 id="安装zabbix-sender"><a href="#安装zabbix-sender" class="headerlink" title="安装zabbix-sender"></a>安装zabbix-sender</h4><pre><code>安装zabbix-sender，主动发数据实现秒级监控
-安装需与zabbix-server版本一致，例如zabbix-server是3.4，zabbix-sender也是3.4.x</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh https://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</span><br><span class="line">yum install zabbix-sender -y</span><br></pre></td></tr></table></figure>
+        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>客户需要提供秒级监控，使用agent发送获取是server取数据都会大大消耗性能，影响server和client的正常运行。zabbix-sender可解决这一问题，既能实现秒级监控也只是针对某一监控项单独定义，不会对整体造成太多的性能消耗。</p>
+<h4 id="安装zabbix-sender"><a href="#安装zabbix-sender" class="headerlink" title="安装zabbix-sender"></a>安装zabbix-sender</h4><p>安装zabbix-sender，主动发数据实现秒级监控<br>安装需与zabbix-server版本一致，例如zabbix-server是3.4，zabbix-sender也是3.4.x</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh https://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</span><br><span class="line">yum install zabbix-sender -y</span><br></pre></td></tr></table></figure>
 
 <p><img src="http://img.key1024.cn/md/20190803/e3IaVwfqOETd.png" alt="mark"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">其核心为利用zabbix_sender来发送数据</span><br><span class="line">zabbix_sender </span><br><span class="line">	-z zabbix服务器的地址</span><br><span class="line">	-s 创建主机的主机名称</span><br><span class="line">	-k 键值名称</span><br><span class="line">	-o 上报的数据</span><br><span class="line">	-p zabbix 服务器的端口</span><br></pre></td></tr></table></figure>
