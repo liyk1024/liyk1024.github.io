@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.key1024.cn/2019/08/03/%E9%83%A8%E7%BD%B2django-uwsgi-nginx/</loc>
+    
+    <lastmod>2019-08-03T05:57:34.917Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.key1024.cn/2019/07/25/Django%E7%9A%84MFA%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3/</loc>
     
-    <lastmod>2019-07-25T09:29:57.272Z</lastmod>
+    <lastmod>2019-08-03T05:53:47.822Z</lastmod>
     
   </url>
   
