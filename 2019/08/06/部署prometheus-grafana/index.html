@@ -94,20 +94,20 @@
 
 
 
-<meta name="description" content="简介 prometheus 是由SoundCloud开发的开源监控报警系统和时序列数据库(TSDB)，prometheus是一个监控采集与数据存储框架（监控server端），具体采集什么数据依赖于具体的exporter（监控client端）      grafana是一个高颜值的监控绘图程序，也是一个可视化面板（Dashboard），grafana的厉害之处除了高颜值，还支持多种数据源（支持Gra">
+<meta name="description" content="简介 prometheus 是由SoundCloud开发的开源监控报警系统和时序列数据库(TSDB)，prometheus是一个监控采集与数据存储框架（监控server端），具体采集什么数据依赖于具体的exporter（监控client端）grafana是一个高颜值的监控绘图程序，也是一个可视化面板（Dashboard），grafana的厉害之处除了高颜值，还支持多种数据源（支持Graphite、">
 <meta name="keywords" content="prometheus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="部署prometheus+grafana">
 <meta property="og:url" content="http://www.key1024.cn/2019/08/06/部署prometheus-grafana/index.html">
 <meta property="og:site_name" content="So what">
-<meta property="og:description" content="简介 prometheus 是由SoundCloud开发的开源监控报警系统和时序列数据库(TSDB)，prometheus是一个监控采集与数据存储框架（监控server端），具体采集什么数据依赖于具体的exporter（监控client端）      grafana是一个高颜值的监控绘图程序，也是一个可视化面板（Dashboard），grafana的厉害之处除了高颜值，还支持多种数据源（支持Gra">
+<meta property="og:description" content="简介 prometheus 是由SoundCloud开发的开源监控报警系统和时序列数据库(TSDB)，prometheus是一个监控采集与数据存储框架（监控server端），具体采集什么数据依赖于具体的exporter（监控client端）grafana是一个高颜值的监控绘图程序，也是一个可视化面板（Dashboard），grafana的厉害之处除了高颜值，还支持多种数据源（支持Graphite、">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.key1024.cn/md/20190806/D67vv5XpxNb9.png">
 <meta property="og:image" content="http://img.key1024.cn/md/20190806/S8slennNKNUc.png">
-<meta property="og:updated_time" content="2019-08-06T04:45:01.845Z">
+<meta property="og:updated_time" content="2019-08-07T01:17:13.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="部署prometheus+grafana">
-<meta name="twitter:description" content="简介 prometheus 是由SoundCloud开发的开源监控报警系统和时序列数据库(TSDB)，prometheus是一个监控采集与数据存储框架（监控server端），具体采集什么数据依赖于具体的exporter（监控client端）      grafana是一个高颜值的监控绘图程序，也是一个可视化面板（Dashboard），grafana的厉害之处除了高颜值，还支持多种数据源（支持Gra">
+<meta name="twitter:description" content="简介 prometheus 是由SoundCloud开发的开源监控报警系统和时序列数据库(TSDB)，prometheus是一个监控采集与数据存储框架（监控server端），具体采集什么数据依赖于具体的exporter（监控client端）grafana是一个高颜值的监控绘图程序，也是一个可视化面板（Dashboard），grafana的厉害之处除了高颜值，还支持多种数据源（支持Graphite、">
 <meta name="twitter:image" content="http://img.key1024.cn/md/20190806/D67vv5XpxNb9.png">
 
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  881 字
+                  877 字
                 </span>
               
 
@@ -424,12 +424,9 @@
 
       
         <h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><blockquote>
-<p>prometheus 是由SoundCloud开发的开源监控报警系统和时序列数据库(TSDB)，prometheus是一个监控采集与数据存储框架（监控server端），具体采集什么数据依赖于具体的exporter（监控client端）   </p>
+<p>prometheus 是由SoundCloud开发的开源监控报警系统和时序列数据库(TSDB)，prometheus是一个监控采集与数据存储框架（监控server端），具体采集什么数据依赖于具体的exporter（监控client端）<br>grafana是一个高颜值的监控绘图程序，也是一个可视化面板（Dashboard），grafana的厉害之处除了高颜值，还支持多种数据源（支持Graphite、zabbix、InfluxDB、Prometheus和OpenTSDB作为数据源）、支持灵活丰富的dashboard配置选项</p>
 </blockquote>
-<blockquote>
-<p>grafana是一个高颜值的监控绘图程序，也是一个可视化面板（Dashboard），grafana的厉害之处除了高颜值，还支持多种数据源（支持Graphite、zabbix、InfluxDB、Prometheus和OpenTSDB作为数据源）、支持灵活丰富的dashboard配置选项</p>
-</blockquote>
-<h5 id="一、安装prometheus"><a href="#一、安装prometheus" class="headerlink" title="一、安装prometheus"></a>一、安装prometheus</h5><ul>
+<h5 id="安装prometheus"><a href="#安装prometheus" class="headerlink" title="安装prometheus"></a>安装prometheus</h5><ul>
 <li><p><a href="https://prometheus.io/download/" target="_blank" rel="noopener">https://prometheus.io/download/</a><br><img src="http://img.key1024.cn/md/20190806/D67vv5XpxNb9.png" alt="mark"></p>
 <ol>
 <li>prometheus程序包</li>
@@ -437,7 +434,7 @@
 <li>mysql_exporter：监控mysql各种性能指标的采集程序包</li>
 <li>alertmanager: 监控告警</li>
 </ol>
-<h6 id="1、安装prometheus"><a href="#1、安装prometheus" class="headerlink" title="1、安装prometheus"></a>1、安装prometheus</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/prometheus/prometheus/releases/download/v2.5.0/prometheus-2.5.0.linux-amd64.tar.gz</span><br><span class="line">tar -zxvf prometheus-2.5.0.linux-amd64.tar.gz -C /data/</span><br><span class="line">mv /data/prometheus-2.5.0.linux-amd64 /data/prometheus</span><br><span class="line">#依次下载并解压node_exporter、mysql_exporter</span><br></pre></td></tr></table></figure>
+<h6 id="安装prometheus-1"><a href="#安装prometheus-1" class="headerlink" title="安装prometheus"></a>安装prometheus</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/prometheus/prometheus/releases/download/v2.5.0/prometheus-2.5.0.linux-amd64.tar.gz</span><br><span class="line">tar -zxvf prometheus-2.5.0.linux-amd64.tar.gz -C /data/</span><br><span class="line">mv /data/prometheus-2.5.0.linux-amd64 /data/prometheus</span><br><span class="line">#依次下载并解压node_exporter、mysql_exporter</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
@@ -454,7 +451,7 @@
 <blockquote>
 <p>控制台查看</p>
 </blockquote>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  http://172.20.2.214:9090</span><br><span class="line">  #访问，点击Status-&gt;Targets,查看刚prometheus.yml配置文件创建的job_name</span><br><span class="line">  ```    </span><br><span class="line">![mark](http://img.key1024.cn/md/20190806/aRqOzs3qbvec.png)</span><br><span class="line"></span><br><span class="line">- 添加系统服务启动脚本</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">###### 2、安装grafana</span><br><span class="line">- 下载安装包</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  http://172.20.2.214:9090</span><br><span class="line">  #访问，点击Status-&gt;Targets,查看刚prometheus.yml配置文件创建的job_name</span><br><span class="line">  ```    </span><br><span class="line">  </span><br><span class="line">![mark](http://img.key1024.cn/md/20190806/aRqOzs3qbvec.png)</span><br><span class="line"></span><br><span class="line">- 添加系统服务启动脚本</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">###### 安装grafana</span><br><span class="line">- 下载安装包</span><br></pre></td></tr></table></figure>
 
 <p><a href="https://grafana.com/grafana/download" target="_blank" rel="noopener">https://grafana.com/grafana/download</a></p>
 <h1 id="grafana程序包"><a href="#grafana程序包" class="headerlink" title="grafana程序包"></a>grafana程序包</h1><p><a href="https://github.com/percona/grafana-dashboards/releases" target="_blank" rel="noopener">https://github.com/percona/grafana-dashboards/releases</a></p>
@@ -462,16 +459,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 解压安装包</span><br></pre></td></tr></table></figure>
 
 <p>wget <a href="https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.3.4-1.x86_64.rpm" target="_blank" rel="noopener">https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.3.4-1.x86_64.rpm</a><br>yum localinstall grafana-5.3.4-1.x86_64.rpm<br>systemctl start grafana-server</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- 配置grafana    </span><br><span class="line"></span><br><span class="line">	**a**、打开grafana页面(默认账户密码：admin/admin，默认端口3000),配置数据来源。    </span><br><span class="line">    ![mark](http://img.key1024.cn/md/20190806/VHB1NBaqNNiN.png)</span><br><span class="line"></span><br><span class="line">	**b**、点击+Add data source，HTTP的URL填写prometheus服务所在的服务器ip及服务端口,然后点击保存并测试。 </span><br><span class="line">    </span><br><span class="line">![mark](http://img.key1024.cn/md/20190806/7anaEe7mQEDR.png)</span><br><span class="line"></span><br><span class="line">- grafana中导入grafana-dashboards    </span><br><span class="line">解压grafana-dashboards包，该包提供了大量的json格式文件的grafana dashboards,根据需要自行选择。</span><br><span class="line">![mark](http://img.key1024.cn/md/20190806/j66xNY89q6S9.png)</span><br><span class="line"></span><br><span class="line">- grafana页面中，导入需要的json文件</span><br><span class="line">![mark](http://img.key1024.cn/md/20190806/hqWPLuoi2UkE.png)</span><br><span class="line">![mark](http://img.key1024.cn/md/20190806/8OFgPoo9cRJU.png)</span><br><span class="line"></span><br><span class="line">###### 3、监控节点部署</span><br><span class="line">- 添加主机监控</span><br><span class="line"></span><br><span class="line">	**a**、添加prometheus主机为例，解压exporter压缩包</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 配置grafana    </span><br><span class="line"></span><br><span class="line">	**a**、打开grafana页面(默认账户密码：admin/admin，默认端口3000),配置数据来源。    </span><br><span class="line">    ![mark](http://img.key1024.cn/md/20190806/VHB1NBaqNNiN.png)</span><br><span class="line"></span><br><span class="line">	**b**、点击+Add data source，HTTP的URL填写prometheus服务所在的服务器ip及服务端口,然后点击保存并测试。 </span><br><span class="line">    </span><br><span class="line">![mark](http://img.key1024.cn/md/20190806/7anaEe7mQEDR.png)</span><br><span class="line"></span><br><span class="line">- grafana中导入grafana-dashboards    </span><br><span class="line">解压grafana-dashboards包，该包提供了大量的json格式文件的grafana dashboards,根据需要自行选择。</span><br><span class="line">![mark](http://img.key1024.cn/md/20190806/j66xNY89q6S9.png)</span><br><span class="line"></span><br><span class="line">- grafana页面中，导入需要的json文件</span><br><span class="line">![mark](http://img.key1024.cn/md/20190806/hqWPLuoi2UkE.png)</span><br><span class="line">![mark](http://img.key1024.cn/md/20190806/8OFgPoo9cRJU.png)</span><br><span class="line"></span><br><span class="line">###### 3、监控节点部署</span><br><span class="line">- 添加主机监控</span><br><span class="line"></span><br><span class="line">	**a**、添加prometheus主机为例，解压exporter压缩包</span><br></pre></td></tr></table></figure>
 
 <p>  tar zxvf node_exporter-0.15.2.linux-amd64.tar<br>  mv node_exporter-0.15.2.linux-amd64 node_exporter<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**b**、启动node_exporter程序</span><br></pre></td></tr></table></figure></p>
 <p>  cd node_exporter<br>  nohup ./node_exporter &amp;<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">**c**、配置prometheus.yml文件，如果其中已定义了监控主机的配置文件host.yml，则只需把主机IP信息填入即可动态生效</span><br><span class="line">   ![mark](http://img.key1024.cn/md/20190806/mfXPqqUCrFRQ.png)</span><br><span class="line">   </span><br><span class="line">   如果需要在添加新的实例，可直接把实例IP放在同一个targets下即可。</span><br><span class="line">  </span><br><span class="line">**d**、添加mysql监控</span><br></pre></td></tr></table></figure></p>
 <p>  tar -zxvf mysqld_exporter-0.11.0.linux-amd64.tar.gz</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 配置   </span><br><span class="line">监控数据库需要的主机IP、数据库端口、数据库帐号和密码的环境变量（注意：该账号需要单独创建，需要对所有库所有表至少具有PROCESS, REPLICATION CLIENT, SELECT权限）</span><br><span class="line">- 启动exporter</span><br></pre></td></tr></table></figure>
 
-<p>nohup ./mysqld_exporter &amp;</p>
-<pre><code>
-&gt; 注意事项：如果grafana中没获取到数据，可检查配置的Data Sources中的name是否与监控项的一致</code></pre>
+<p>nohup ./mysqld_exporter &amp;<br>```</p>
+<blockquote>
+<p>注意事项：如果grafana中没获取到数据，可检查配置的Data Sources中的name是否与监控项的一致</p>
+</blockquote>
+
       
     </div>
     
@@ -701,7 +700,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、安装prometheus"><span class="nav-number">1.1.</span> <span class="nav-text">一、安装prometheus</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1、安装prometheus"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、安装prometheus</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#grafana程序包"><span class="nav-number"></span> <span class="nav-text">grafana程序包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grafana-dashboards包"><span class="nav-number"></span> <span class="nav-text">grafana-dashboards包</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装prometheus"><span class="nav-number">1.1.</span> <span class="nav-text">安装prometheus</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#安装prometheus-1"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装prometheus</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#grafana程序包"><span class="nav-number"></span> <span class="nav-text">grafana程序包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grafana-dashboards包"><span class="nav-number"></span> <span class="nav-text">grafana-dashboards包</span></a></li></div>
             
 
           </div>
