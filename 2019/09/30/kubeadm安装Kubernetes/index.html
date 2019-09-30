@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="python,MFA,">
+  <meta name="keywords" content="K8s,">
 
 
 
@@ -94,22 +94,25 @@
 
 
 
-<meta name="description" content="背景 增加双因子认证，提高网站登录的安全性。利用谷歌身份验证器绑定密钥，从而进行动态MFA验证。  原理核心内容 Google Authenticator采用的算法是TOTP（Time-Based One-Time Password基于时间的一次性密码），其核心内容包括以下三点：   一个共享密钥 当前时间输入 一个签名函数  加密原理和步骤 Step1：base32 secret  Key：共享">
-<meta name="keywords" content="python,MFA">
+<meta name="description" content="Kubernetes简介123Kubernetes（简称K8S）是开源的容器集群管理系统，可以实现容器集群的自动化部署、自动扩缩容、维护等功能。它既是一款容器编排工具，也是全新的基于容器技术的分布式架构领先方案。在Docker技术的基础上，为容器化的应用提供部署运行、资源调度、服务发现和动态伸缩等功能，提高了大规模容器集群管理的便捷性。  两种节点类型 管理节点：主要负责K8S集群管理，集群中各节">
+<meta name="keywords" content="K8s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django的MFA验证码接口">
-<meta property="og:url" content="http://www.key1024.cn/2019/07/25/Django的MFA验证码接口/index.html">
+<meta property="og:title" content="kubeadm安装Kubernetes">
+<meta property="og:url" content="http://www.key1024.cn/2019/09/30/kubeadm安装Kubernetes/index.html">
 <meta property="og:site_name" content="So what">
-<meta property="og:description" content="背景 增加双因子认证，提高网站登录的安全性。利用谷歌身份验证器绑定密钥，从而进行动态MFA验证。  原理核心内容 Google Authenticator采用的算法是TOTP（Time-Based One-Time Password基于时间的一次性密码），其核心内容包括以下三点：   一个共享密钥 当前时间输入 一个签名函数  加密原理和步骤 Step1：base32 secret  Key：共享">
+<meta property="og:description" content="Kubernetes简介123Kubernetes（简称K8S）是开源的容器集群管理系统，可以实现容器集群的自动化部署、自动扩缩容、维护等功能。它既是一款容器编排工具，也是全新的基于容器技术的分布式架构领先方案。在Docker技术的基础上，为容器化的应用提供部署运行、资源调度、服务发现和动态伸缩等功能，提高了大规模容器集群管理的便捷性。  两种节点类型 管理节点：主要负责K8S集群管理，集群中各节">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img.key1024.cn/md/20190725/RVrp4W8tD2eG.png">
-<meta property="og:image" content="http://img.key1024.cn/md/20190725/GvhQNGnaO1Kj.png">
-<meta property="og:image" content="http://img.key1024.cn/md/20190725/iSdo7l3WSAkg.png">
-<meta property="og:updated_time" content="2019-08-03T05:53:47.822Z">
+<meta property="og:image" content="http://img.key1024.cn/md/20190829/SlMvIKhJR70y.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20190829/rEXzpPOQJTdH.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20190829/vQXgk5PGT347.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20190830/jkddWKL3DPjR.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20190829/yQ3Eo3Kd8ldf.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20190830/RTw2U0fC0bhJ.png">
+<meta property="og:updated_time" content="2019-09-30T09:12:26.911Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django的MFA验证码接口">
-<meta name="twitter:description" content="背景 增加双因子认证，提高网站登录的安全性。利用谷歌身份验证器绑定密钥，从而进行动态MFA验证。  原理核心内容 Google Authenticator采用的算法是TOTP（Time-Based One-Time Password基于时间的一次性密码），其核心内容包括以下三点：   一个共享密钥 当前时间输入 一个签名函数  加密原理和步骤 Step1：base32 secret  Key：共享">
-<meta name="twitter:image" content="http://img.key1024.cn/md/20190725/RVrp4W8tD2eG.png">
+<meta name="twitter:title" content="kubeadm安装Kubernetes">
+<meta name="twitter:description" content="Kubernetes简介123Kubernetes（简称K8S）是开源的容器集群管理系统，可以实现容器集群的自动化部署、自动扩缩容、维护等功能。它既是一款容器编排工具，也是全新的基于容器技术的分布式架构领先方案。在Docker技术的基础上，为容器化的应用提供部署运行、资源调度、服务发现和动态伸缩等功能，提高了大规模容器集群管理的便捷性。  两种节点类型 管理节点：主要负责K8S集群管理，集群中各节">
+<meta name="twitter:image" content="http://img.key1024.cn/md/20190829/SlMvIKhJR70y.png">
 
 
 
@@ -139,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="http://www.key1024.cn/2019/07/25/Django的MFA验证码接口/">
+  <link rel="canonical" href="http://www.key1024.cn/2019/09/30/kubeadm安装Kubernetes/">
 
 
 
 
 
-  <title>Django的MFA验证码接口 | So what</title>
+  <title>kubeadm安装Kubernetes | So what</title>
   
 
 
@@ -304,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2019/07/25/Django的MFA验证码接口/">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2019/09/30/kubeadm安装Kubernetes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Key liyk">
@@ -321,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Django的MFA验证码接口</h1>
+          <h1 class="post-title" itemprop="name headline">kubeadm安装Kubernetes</h1>
         
 
         <div class="post-meta">
@@ -333,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-25T17:28:00+08:00">
-                2019-07-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-30T17:09:00+08:00">
+                2019-09-30
               </time>
             
 
@@ -356,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/categories/kubernetes/" itemprop="url" rel="index">
+                    <span itemprop="name">kubernetes</span>
                   </a>
                 </span>
 
@@ -387,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.3k 字
+                  1.6k 字
                 </span>
               
 
@@ -403,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -424,85 +427,130 @@
       
 
       
-        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><blockquote>
-<p>增加双因子认证，提高网站登录的安全性。利用谷歌身份验证器绑定密钥，从而进行动态MFA验证。</p>
+        <h4 id="Kubernetes简介"><a href="#Kubernetes简介" class="headerlink" title="Kubernetes简介"></a>Kubernetes简介</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Kubernetes（简称K8S）是开源的容器集群管理系统，可以实现容器集群的自动化部署、自动扩缩容、维护等功能。</span><br><span class="line">它既是一款容器编排工具，也是全新的基于容器技术的分布式架构领先方案。</span><br><span class="line">在Docker技术的基础上，为容器化的应用提供部署运行、资源调度、服务发现和动态伸缩等功能，提高了大规模容器集群管理的便捷性。</span><br></pre></td></tr></table></figure>
+
+<h5 id="两种节点类型"><a href="#两种节点类型" class="headerlink" title="两种节点类型"></a>两种节点类型</h5><ul>
+<li>管理节点：主要负责K8S集群管理，集群中各节点间的信息交互、任务调度，还负责容器、Pod、NameSpaces、PV等生命周期的管理。</li>
+<li>工作节点：主要为容器和Pod提供计算资源，Pod及容器全部运行在工作节点上，工作节点通过kubelet服务与管理节点通信以管理容器的生命周期，并与集群其他节点进行通信。</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20190829/SlMvIKhJR70y.png" alt="mark"></p>
+<h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><p>配置信息如下：</p>
+<table>
+<thead>
+<tr>
+<th>IP地址</th>
+<th>节点角色</th>
+<th>hostname</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.100.10</td>
+<td>master</td>
+<td>master</td>
+</tr>
+<tr>
+<td>192.168.100.11</td>
+<td>worker</td>
+<td>node1</td>
+</tr>
+<tr>
+<td>192.168.100.12</td>
+<td>worker</td>
+<td>node2</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>1.设置主机名，所有主机分别进行设置(contos7)<br><code>hostnamectl set-hostname master</code></p>
+</li>
+<li><p>2.编辑/etc/hosts文件，添加域名解析    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt; EOF &gt;&gt; /etc/hosts</span><br><span class="line">192.168.100.10  master</span><br><span class="line">192.168.100.11  node1</span><br><span class="line">192.168.100.12  node2</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.关闭防火墙、SELinux和swap    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 关闭防火墙</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br><span class="line"># 关闭SELinux</span><br><span class="line">setenforce 0</span><br><span class="line">sed -i &quot;s/^SELINUX=enforcing/SELINUX=disabled/g&quot; /etc/selinux/config</span><br><span class="line"># 关闭swap，取消开机加载(如果有设置)</span><br><span class="line">swapoff -a</span><br><span class="line">sed -i &apos;s/.*swap.*/#&amp;/&apos; /etc/fstab</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4.配置内核参数，将桥接的IPv4流量传递到iptables的链    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /etc/sysctl.d/k8s.conf &lt;&lt;EOF</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">EOF</span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>5.配置国内相关安装源    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 配置国内yum源</span><br><span class="line">yum install -y wget  # 安装wget</span><br><span class="line">mkdir /etc/yum.repos.d/bak &amp;&amp; mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/bak</span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.cloud.tencent.com/repo/centos7_base.repo</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.cloud.tencent.com/repo/epel-7.repo</span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 配置国内Kubernetes源</span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 配置docker源</span><br><span class="line">wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<h4 id="软件安装-如下所有节点均安装"><a href="#软件安装-如下所有节点均安装" class="headerlink" title="软件安装(如下所有节点均安装)"></a>软件安装(如下所有节点均安装)</h4><ul>
+<li><p>1.安装docker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># docker服务为容器运行提供计算资源，是所有容器运行的基本平台。</span><br><span class="line">yum install -y docker-ce</span><br><span class="line">systemctl enable docker &amp;&amp; systemctl start docker</span><br><span class="line">docker --version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.安装kubeadm、kubelet、kubectl</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Kubelet负责与其他节点集群通信，并进行本节点Pod和容器生命周期的管理。</span><br><span class="line"># Kubeadm是Kubernetes的自动化部署工具，降低了部署难度，提高效率。</span><br><span class="line"># Kubectl是Kubernetes集群管理工具。</span><br><span class="line">yum install -y kubelet kubeadm kubectl</span><br><span class="line">systemctl enable kubelet</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="部署master节点"><a href="#部署master节点" class="headerlink" title="部署master节点"></a>部署master节点</h4><ul>
+<li>1.在master进行kubernetes集群初始化</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 定义POD的网段为: 10.244.0.0/16，api server地址就是master本机IP地址。</span><br><span class="line"># 这一步很关键，由于kubeadm默认从官网k8s.grc.io下载所需镜像，国内无法访问，因此需要通过–image-repository指定阿里云镜像仓库地址，很多新手初次部署都卡在此环节无法进行后续配置。</span><br><span class="line">kubeadm init --kubernetes-version=1.15.3 \</span><br><span class="line">--apiserver-advertise-address=192.168.100.10 \</span><br><span class="line">--image-repository registry.aliyuncs.com/google_containers \</span><br><span class="line">--service-cidr=10.1.0.0/16 \</span><br><span class="line">--pod-network-cidr=10.244.0.0/16</span><br><span class="line"></span><br><span class="line"># 此过程需要点时间</span><br><span class="line"># 如果报错如下(warning可忽略)，就是初始化kubernetes的版本低了</span><br><span class="line">[ERROR KubeletVersion]: the kubelet version is higher than the control plane version. This is not a supported version skew and may lead to a malfunctional cluster. Kubelet version: &quot;1.15.3&quot; Control plane version: &quot;1.14.2&quot;</span><br><span class="line">[preflight] If you know what you are doing, you can make a check non-fatal with `--ignore-preflight-errors=...`</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 集群初始化成功后返回如下信息：</span><br><span class="line"># 记录生成的最后部分内容，此内容需要在其它节点加入Kubernetes集群时执行。</span><br><span class="line">kubeadm join 192.168.100.10:6443 --token ny71b9.yh4680y0vaw0uhso \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:fd8b1e92b8f4006e9af6db653241cd622a32b9cd9e8a02baba60bd66d159a860</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>2.配置kubectl工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /root/.kube</span><br><span class="line">cp /etc/kubernetes/admin.conf /root/.kube/config</span><br><span class="line">kubectl get nodes</span><br><span class="line">[root@master ~]# kubectl get nodes</span><br><span class="line">NAME     STATUS   ROLES    AGE    VERSION</span><br><span class="line">master   Ready    master   17m    v1.15.3</span><br><span class="line">node1    Ready    &lt;none&gt;   110s   v1.15.3</span><br><span class="line">node2    Ready    &lt;none&gt;   62s    v1.15.3</span><br><span class="line">kubectl get cs</span><br><span class="line">[root@master ~]# kubectl get cs</span><br><span class="line">NAME                 STATUS    MESSAGE             ERROR</span><br><span class="line">controller-manager   Healthy   ok                  </span><br><span class="line">scheduler            Healthy   ok                  </span><br><span class="line">etcd-0               Healthy   &#123;&quot;health&quot;:&quot;true&quot;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.部署flannel网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="部署node节点"><a href="#部署node节点" class="headerlink" title="部署node节点"></a>部署node节点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># node节点上加入到kubernetes集群</span><br><span class="line">kubeadm join 192.168.100.10:6443 --token ny71b9.yh4680y0vaw0uhso \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:fd8b1e92b8f4006e9af6db653241cd622a32b9cd9e8a02baba60bd66d159a860</span><br></pre></td></tr></table></figure>
+
+<h4 id="集群状态检测"><a href="#集群状态检测" class="headerlink" title="集群状态检测"></a>集群状态检测</h4><ul>
+<li><p>1.在master节点检查集群状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br><span class="line"># 重点查看STATUS内容为Ready时，则说明集群状态正常。</span><br><span class="line">[root@master ~]# kubectl get nodes</span><br><span class="line">NAME     STATUS   ROLES    AGE     VERSION</span><br><span class="line">master   Ready    master   18m     v1.15.3</span><br><span class="line">node1    Ready    &lt;none&gt;   2m45s   v1.15.3</span><br><span class="line">node2    Ready    &lt;none&gt;   117s    v1.15.3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.创建pod以验证集群是否正常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment nginx --image=nginx</span><br><span class="line">kubectl expose deployment nginx --port=80 --type=NodePort</span><br><span class="line">kubectl get pod,svc</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="部署Dashboard"><a href="#部署Dashboard" class="headerlink" title="部署Dashboard"></a>部署Dashboard</h4><ul>
+<li>1.创建Dashboard的yaml文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 使用如下命令或直接手动编辑kubernetes-dashboard.yaml文件</span><br><span class="line">sed -i &apos;s/k8s.gcr.io/loveone/g&apos; kubernetes-dashboard.yaml</span><br><span class="line">sed -i &apos;/targetPort:/a\ \ \ \ \ \ nodePort: 30001\n\ \ type: NodePort&apos; kubernetes-dashboard.yaml</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>手动编辑kubernetes-dashboard.yaml文件时，需要修改两处内容，首先在Dashboard Deployment部分修改Dashboard镜像下载链接，由于默认从官方社区下载，而不“科学上网”是无法下载的，因此修改为：image: loveone/kubernetes-dashboard-amd64:v1.10.1 修改后内容如图</p>
 </blockquote>
-<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><h5 id="核心内容"><a href="#核心内容" class="headerlink" title="核心内容"></a>核心内容</h5><blockquote>
-<p>Google Authenticator采用的算法是TOTP（Time-Based One-Time Password基于时间的一次性密码），其核心内容包括以下三点：</p>
+<p><img src="http://img.key1024.cn/md/20190829/rEXzpPOQJTdH.png" alt="mark"></p>
+<blockquote>
+<p>此外，需要在Dashboard Service内容加入nodePort： 30001和type: NodePort两项内容，将Dashboard访问端口映射为节点端口，以供外部访问，编辑完成后，状态如图</p>
 </blockquote>
+<p><img src="http://img.key1024.cn/md/20190829/vQXgk5PGT347.png" alt="mark"></p>
 <ul>
-<li>一个共享密钥</li>
-<li>当前时间输入</li>
-<li>一个签名函数</li>
-</ul>
-<h5 id="加密原理和步骤"><a href="#加密原理和步骤" class="headerlink" title="加密原理和步骤"></a>加密原理和步骤</h5><ul>
-<li><p>Step1：base32 secret</p>
-<ul>
-<li>Key：共享密钥，在Google Authenticator中是通过将一段字符串进行base32解码成bytes得到的。但由于此密钥在不够32位或超过32位时会用’=’表示，故用的pyotp随机生成的密钥。    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Secret = pyotp.random_base32()</span><br><span class="line">Key = base64.b32decode(Secret, True)</span><br></pre></td></tr></table></figure>
+<li><p>2.部署Dashboard</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f kubernetes-dashboard.yaml</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
+<li><p>3.检查相关服务运行状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl get deployment kubernetes-dashboard -n kube-system</span><br><span class="line">kubectl get pods -n kube-system -o wide</span><br><span class="line">kubectl get services -n kube-system</span><br><span class="line">netstat -ntlp|grep 30001</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Step2：get current timestamp</p>
-<ul>
-<li>Count：计数器，通过当前时间戳除以30然后将得到的整数转换成一个大端序的字节。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># int(time.time()) // 30  到当前经历了多少个30秒</span><br><span class="line"># 将间隔时间转为big-endian(大端序)并且为长整型的字节</span><br><span class="line">Count = struct.pack(&quot;&gt;Q&quot;, int(time.time()) // 30)</span><br></pre></td></tr></table></figure>
+<li><p>4.浏览器访问测试Dashboard访问地址：<a href="https://192.168.100.10:30001" target="_blank" rel="noopener">https://192.168.100.10:30001</a></p>
 </li>
-</ul>
-</li>
-<li><p>Step3：start hmac-sha1</p>
-<ul>
-<li>Hmac：将K和C做HMAC-SHA-1加密然后以字节方式保存，因为后期需要进行与运算，而str是不能和int进行与运算的。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># hmac = SHA1(secret + SHA1(secret + input))</span><br><span class="line"># 为了方便演示，将字节转换成了字符串显示</span><br><span class="line">Hmac = hmac.new(K, C, hashlib.sha1).digest()</span><br><span class="line"># 取出最后一位和数字15做与运算</span><br><span class="line">O = H[19] &amp; 15</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>Step4：get DynamicPasswd</p>
-<ul>
-<li>通过计算出来的O在H中取出4个16进制的字节，然后将字节转换成正整数，因转换后的正整数是放在数组里面的，所以需要使用[0]取出。最后与一个全为1的二进制与运算然后与10^6做取余运算，最终会得到一个6位数的TOTP<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DynamicPasswd = str((struct.unpack(&quot;&gt;I&quot;, H[O:O + 4])[0] &amp; 0x7fffffff) % 1000000)    </span><br><span class="line"># struct.unpack(&apos;&gt;I&apos;,h[o:o+4])[0] :转为big-endian(大端序)并且不为负数的数字(整数),因为转换完是一个数组,类似&quot;(2828101188,)&quot;,所以需要[0]取出</span><br><span class="line"># h[o:o+4] :取其中4个字节  o=10  则取索引分别为 10,11,12,13的字节</span><br><span class="line"># &amp; 0x7fffffff = 11111111 :与字节转换的数字做与运算</span><br><span class="line"># % 1000000 :得出的数字与1000000相除然后取余</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>Step5：get MFA</p>
-<ul>
-<li>最后计算出的6位数字最左边的一位可能为0，所以需要判断如果DynamicPasswd得到的是一个5位数的数字，那就在最左边加上一个0。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TOTP = str(0) + str(DynamicPasswd) if len(DynamicPasswd) &lt; 6 else DynamicPasswd</span><br></pre></td></tr></table></figure>
+<li><p>5.查看访问Dashboard的认证令牌</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl create serviceaccount  dashboard-admin -n kube-system</span><br><span class="line">kubectl create clusterrolebinding  dashboard-admin --clusterrole=cluster-admin --serviceaccount=kube-system:dashboard-admin</span><br><span class="line">kubectl describe secrets -n kube-system $(kubectl -n kube-system get secret | awk &apos;/dashboard-admin/&#123;print $1&#125;&apos;)</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-</li>
-</ul>
-<h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><ul>
-<li>1.使用python的pyotp模块生成谷歌认证需要的密钥</li>
-<li>2.根据密钥生成二维码图片以及计算出6位动态验证码</li>
-<li>3.使用谷歌的身份验证器app，扫描二维码或者手动输入密钥</li>
-<li>4.平台二次认证通过对输入的动态验证码进行校验</li>
-</ul>
-<h4 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import base64, time, struct, hmac, hashlib</span><br><span class="line">import pyotp</span><br><span class="line">from qrcode import QRCode</span><br><span class="line">from qrcode import constants</span><br><span class="line"></span><br><span class="line">name = &apos;user01&apos;+&apos;:SmartMS&apos;</span><br><span class="line"></span><br><span class="line"># 利用参数secretKey,计算Google Authenticator 6位动态码。</span><br><span class="line">def getMFACode(Secret):</span><br><span class="line">    print(&apos;MFA密钥:&#123;&#125;&apos;.format(Secret))</span><br><span class="line">    K = base64.b32decode(Secret, True)</span><br><span class="line">    C = struct.pack(&quot;&gt;Q&quot;, int(time.time()) // 30)  </span><br><span class="line">    H = hmac.new(K, C, hashlib.sha1).digest()</span><br><span class="line">    O = H[19] &amp; 15  # bin(15)=00001111=0b1111</span><br><span class="line">    DynamicPasswd = str((struct.unpack(&quot;&gt;I&quot;, H[O:O + 4])[0] &amp; 0x7fffffff) % 1000000)</span><br><span class="line">    TOTP = str(0) + str(DynamicPasswd) if len(DynamicPasswd) &lt; 6 else DynamicPasswd</span><br><span class="line">    print(&apos;动态MFA:&#123;&#125;&apos;.format(TOTP))</span><br><span class="line">    return TOTP</span><br><span class="line"></span><br><span class="line">def getMFAImg(name,Secret):</span><br><span class="line">    # otpauth://totp/  固定格式</span><br><span class="line">    # name：标识符信息，issuer：发行信息</span><br><span class="line">    url = &quot;otpauth://totp/&quot; + name + &quot;?secret=%s&quot; % Secret + &quot;&amp;issuer=Anchnet&quot;</span><br><span class="line">    qr = QRCode(version=1, error_correction=constants.ERROR_CORRECT_L,box_size=6,border=4)</span><br><span class="line">    qr.add_data(url)</span><br><span class="line">    qr.make(fit=True)</span><br><span class="line">    img = qr.make_image()</span><br><span class="line">    # img.show()</span><br><span class="line"></span><br><span class="line">def checkCode(Secret):</span><br><span class="line">    code = int(input(&apos;输入验证码:&apos;))</span><br><span class="line">    t = pyotp.TOTP(Secret)</span><br><span class="line">    result = t.verify(code)</span><br><span class="line">    msg = result if result is True else False</span><br><span class="line">    print(&apos;验证码验证&#123;&#125;&apos;.format(msg))</span><br><span class="line">    return msg</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    Secret = pyotp.random_base32()</span><br><span class="line">    # Secret = &apos;UFB6R5QKLPV7FGIU&apos;</span><br><span class="line">    getMFACode(Secret)</span><br><span class="line">    Secret = getMFAImg(name,Secret)</span><br><span class="line">    # checkCode(Secret)</span><br></pre></td></tr></table></figure>
-
-<h4 id="封装为接口"><a href="#封装为接口" class="headerlink" title="封装为接口"></a>封装为接口</h4><ul>
-<li>resful.py</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"># 新建一个包，包下创建resful.py文件</span><br><span class="line">from django.http import JsonResponse</span><br><span class="line">class HttpCode(object):</span><br><span class="line">    ok = 200</span><br><span class="line">    paramserror = 400</span><br><span class="line">    unauth = 401</span><br><span class="line">    methoderror = 405</span><br><span class="line">    servererror = 500</span><br><span class="line"></span><br><span class="line">def result(code=HttpCode.ok,message=&quot;&quot;,data=None,kwargs=None):</span><br><span class="line">    json_dict = &#123;&quot;code&quot;:code,&quot;message&quot;:message,&quot;data&quot;:data&#125;</span><br><span class="line"></span><br><span class="line">    if kwargs and isinstance(kwargs,dict) and kwargs.keys():</span><br><span class="line">        json_dict.update(kwargs)</span><br><span class="line"></span><br><span class="line">    return JsonResponse(json_dict)</span><br><span class="line"></span><br><span class="line">def ok():</span><br><span class="line">    return result()</span><br><span class="line"></span><br><span class="line">def params_error(message=&quot;&quot;,data=None):</span><br><span class="line">    return result(code=HttpCode.paramserror,message=message,data=data)</span><br><span class="line"></span><br><span class="line">def unauth(message=&quot;&quot;,data=None):</span><br><span class="line">    return result(code=HttpCode.unauth,message=message,data=data)</span><br><span class="line"></span><br><span class="line">def method_error(message=&quot;&quot;,data=None):</span><br><span class="line">    return result(code=HttpCode.methoderror,message=message,data=data)</span><br><span class="line"></span><br><span class="line">def server_error(message=&quot;&quot;,data=None):</span><br><span class="line">    return result(code=HttpCode.servererror,message=message,data=data)</span><br></pre></td></tr></table></figure>
-
+<p><img src="http://img.key1024.cn/md/20190830/jkddWKL3DPjR.png" alt="mark"></p>
 <ul>
-<li>views.py</li>
+<li>6.使用输出的token登录Dashboard</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from utils import restful  # 自定义的restful</span><br><span class="line">import base64, time, struct, hmac, hashlib</span><br><span class="line">import pyotp</span><br><span class="line">from qrcode import QRCode</span><br><span class="line">from qrcode import constants</span><br><span class="line"></span><br><span class="line">def getMFAinfo(request):</span><br><span class="line">    name = request.GET[&apos;name&apos;] + &apos;:SmartMS&apos;</span><br><span class="line">    # Secret = request.GET[&apos;secret&apos;]</span><br><span class="line">    Secret = pyotp.random_base32()</span><br><span class="line">    K = base64.b32decode(Secret, True)</span><br><span class="line">    C = struct.pack(&quot;&gt;Q&quot;, int(time.time()) // 30) </span><br><span class="line">    H = hmac.new(K, C, hashlib.sha1).digest()</span><br><span class="line">    O = H[19] &amp; 15  # bin(15)=00001111=0b1111</span><br><span class="line">    DynamicPasswd = str((struct.unpack(&quot;&gt;I&quot;, H[O:O + 4])[0] &amp; 0x7fffffff) % 1000000)</span><br><span class="line">    TOTP = str(0) + str(DynamicPasswd) if len(DynamicPasswd) &lt; 6 else DynamicPasswd</span><br><span class="line">    url = &quot;otpauth://totp/&quot; + name + &quot;?secret=%s&quot; % Secret + &quot;&amp;issuer=Anchnet&quot;</span><br><span class="line">    qr = QRCode(version=1, error_correction=constants.ERROR_CORRECT_L, box_size=6, border=4)</span><br><span class="line">    qr.add_data(url)</span><br><span class="line">    qr.make(fit=True)</span><br><span class="line">    img = qr.make_image()</span><br><span class="line">    codeinfo = &#123;&quot;name&quot;:name, &quot;MFAcode&quot;:TOTP, &quot;Secret&quot;:Secret, &quot;QRurl&quot;:url&#125;</span><br><span class="line">    </span><br><span class="line">    return restful.result(message=&quot;获取成功&quot;,data=codeinfo)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>主urls.py</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from django.urls import path,include</span><br><span class="line">from apps.news import views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    ...</span><br><span class="line">    path(&apos;account/&apos;,include(&quot;apps.xfzauth.urls&quot;)),</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>apps的urls.py</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from django.urls import path</span><br><span class="line">from . import  views</span><br><span class="line"></span><br><span class="line">app_name = &apos;xfzauth&apos;</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    ...</span><br><span class="line">    path(&apos;code/&apos;,views.getMFAinfo,name=&apos;code&apos;),</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><ul>
-<li><p>验证码生成测试<br><img src="http://img.key1024.cn/md/20190725/RVrp4W8tD2eG.png" alt="mark"></p>
-</li>
-<li><p>接口测试<br><img src="http://img.key1024.cn/md/20190725/GvhQNGnaO1Kj.png" alt="mark"></p>
-<p><img src="http://img.key1024.cn/md/20190725/iSdo7l3WSAkg.png" alt="mark"></p>
-</li>
-</ul>
+<p><img src="http://img.key1024.cn/md/20190829/yQ3Eo3Kd8ldf.png" alt="mark"></p>
+<p><img src="http://img.key1024.cn/md/20190830/RTw2U0fC0bhJ.png" alt="mark"></p>
 
       
     </div>
@@ -562,9 +610,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" <i class="fa fa-tag"> python</a>
-          
-            <a href="/tags/MFA/" <i class="fa fa-tag"> MFA</a>
+            <a href="/tags/K8s/" <i class="fa fa-tag"> K8s</a>
           
         </div>
       
@@ -577,8 +623,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/19/Hadoop集群搭建/" rel="next" title="Hadoop集群搭建">
-                <i class="fa fa-chevron-left"></i> Hadoop集群搭建
+              <a href="/2019/09/27/Tornado构建RESTful应用/" rel="next" title="Tornado构建RESTful应用">
+                <i class="fa fa-chevron-left"></i> Tornado构建RESTful应用
               </a>
             
           </div>
@@ -586,10 +632,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/03/部署django-uwsgi-nginx/" rel="prev" title="部署django+uwsgi+nginx">
-                部署django+uwsgi+nginx <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -739,7 +781,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#核心内容"><span class="nav-number">2.1.</span> <span class="nav-text">核心内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加密原理和步骤"><span class="nav-number">2.2.</span> <span class="nav-text">加密原理和步骤</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现步骤"><span class="nav-number">3.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关代码"><span class="nav-number">4.</span> <span class="nav-text">相关代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#封装为接口"><span class="nav-number">5.</span> <span class="nav-text">封装为接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试"><span class="nav-number">6.</span> <span class="nav-text">测试</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Kubernetes简介"><span class="nav-number">1.</span> <span class="nav-text">Kubernetes简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#两种节点类型"><span class="nav-number">1.1.</span> <span class="nav-text">两种节点类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#环境准备"><span class="nav-number">2.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#软件安装-如下所有节点均安装"><span class="nav-number">3.</span> <span class="nav-text">软件安装(如下所有节点均安装)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署master节点"><span class="nav-number">4.</span> <span class="nav-text">部署master节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署node节点"><span class="nav-number">5.</span> <span class="nav-text">部署node节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集群状态检测"><span class="nav-number">6.</span> <span class="nav-text">集群状态检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署Dashboard"><span class="nav-number">7.</span> <span class="nav-text">部署Dashboard</span></a></li></ol></div>
             
 
           </div>
