@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Tornado,">
 
 
 
@@ -94,16 +94,20 @@
 
 
 
-<meta name="description" content="么啥好说的">
-<meta property="og:type" content="website">
-<meta property="og:title" content="So what">
-<meta property="og:url" content="http://www.key1024.cn/archives/2019/07/index.html">
+<meta name="description" content="Tornado框架 http://www.tornadoweb.org/en/stable/ 使用python编写的网络框架和高性能的异步网络库   框架特性和使用场景 优势  微框架、高性能、抗负载能力、搞并发 异步支持: 异步非阻塞IO的处理方式   缺点  轮子少，不像Django，Flask等框架有大量插件支持 缺少最佳实践，使用的公司不多，学习资料少   构建微服务  不适合复杂的CMS">
+<meta name="keywords" content="Tornado">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tornado简介和安装">
+<meta property="og:url" content="http://www.key1024.cn/2019/09/10/Tornado简介和安装/index.html">
 <meta property="og:site_name" content="So what">
-<meta property="og:description" content="么啥好说的">
+<meta property="og:description" content="Tornado框架 http://www.tornadoweb.org/en/stable/ 使用python编写的网络框架和高性能的异步网络库   框架特性和使用场景 优势  微框架、高性能、抗负载能力、搞并发 异步支持: 异步非阻塞IO的处理方式   缺点  轮子少，不像Django，Flask等框架有大量插件支持 缺少最佳实践，使用的公司不多，学习资料少   构建微服务  不适合复杂的CMS">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.key1024.cn/md/20190810/QFoqxrUR8xhX.png">
+<meta property="og:updated_time" content="2019-09-27T03:50:00.744Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="So what">
-<meta name="twitter:description" content="么啥好说的">
+<meta name="twitter:title" content="Tornado简介和安装">
+<meta name="twitter:description" content="Tornado框架 http://www.tornadoweb.org/en/stable/ 使用python编写的网络框架和高性能的异步网络库   框架特性和使用场景 优势  微框架、高性能、抗负载能力、搞并发 异步支持: 异步非阻塞IO的处理方式   缺点  轮子少，不像Django，Flask等框架有大量插件支持 缺少最佳实践，使用的公司不多，学习资料少   构建微服务  不适合复杂的CMS">
+<meta name="twitter:image" content="http://img.key1024.cn/md/20190810/QFoqxrUR8xhX.png">
 
 
 
@@ -133,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://www.key1024.cn/archives/2019/07/">
+  <link rel="canonical" href="http://www.key1024.cn/2019/09/10/Tornado简介和安装/">
 
 
 
 
 
-  <title>归档 | So what</title>
+  <title>Tornado简介和安装 | So what</title>
   
 
 
@@ -158,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,390 +288,284 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 38 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2019/09/10/Tornado简介和安装/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Key liyk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="So what">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">Tornado简介和安装</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-10T11:49:00+08:00">
+                2019-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/25/Django的MFA验证码接口/" itemprop="url">
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="name">Django的MFA验证码接口</span>
+                <span class="post-meta-item-text">分类于</span>
               
-            </a>
-        
-      </h2>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-25T17:28:00+08:00" content="2019-07-25">
-          07-25
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+          
 
+          
+          
 
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  994 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/19/Hadoop集群搭建/" itemprop="url">
-              
-                <span itemprop="name">Hadoop集群搭建</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-19T14:51:00+08:00" content="2019-07-19">
-          07-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/19/Django-debug-toolbar/" itemprop="url">
-              
-                <span itemprop="name">Django-debug-toolbar</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-19T14:36:00+08:00" content="2019-07-19">
-          07-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
+        <h4 id="Tornado框架"><a href="#Tornado框架" class="headerlink" title="Tornado框架"></a>Tornado框架</h4><ul>
+<li><a href="http://www.tornadoweb.org/en/stable/" target="_blank" rel="noopener">http://www.tornadoweb.org/en/stable/</a></li>
+<li>使用python编写的网络框架和高性能的异步网络库</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20190810/QFoqxrUR8xhX.png" alt="mark"></p>
+<h4 id="框架特性和使用场景"><a href="#框架特性和使用场景" class="headerlink" title="框架特性和使用场景"></a>框架特性和使用场景</h4><ul>
+<li><p>优势</p>
+<ul>
+<li>微框架、高性能、抗负载能力、搞并发</li>
+<li>异步支持: 异步非阻塞IO的处理方式</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>轮子少，不像Django，Flask等框架有大量插件支持</li>
+<li>缺少最佳实践，使用的公司不多，学习资料少</li>
+</ul>
+</li>
+<li><p>构建微服务</p>
+<ul>
+<li>不适合复杂的CMS(内容管理系统)应用 </li>
+<li>适合构建网站或者App后端微服务</li>
+</ul>
+</li>
+</ul>
+<h4 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h4><ul>
+<li>文档和书籍<ul>
+<li>官方文档：<a href="http://www.tornadoweb.org/en/stable/" target="_blank" rel="noopener">http://www.tornadoweb.org/en/stable/</a></li>
+<li><a href="https://github.com/tornadoweb/tornado" target="_blank" rel="noopener">https://github.com/tornadoweb/tornado</a></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">同步：</span><br><span class="line">含义：指两个或两个以上随时间变化的量在变化过程中保持一定的相对关系</span><br><span class="line">现象：有一个共同的时钟，按来的顺序一个一个处理</span><br><span class="line">直观感受：就是需要等候，效率低下</span><br><span class="line"></span><br><span class="line">异步：</span><br><span class="line">含义：双方不需要共同的时钟，也就是接收方不知道发送方什么时候发送，所以在发送的信息中就要有提示接收方开始接收的信息，如开始位，同时在结束时有停止位</span><br><span class="line">现象：没有共同的时钟，不考虑顺序来了就处理</span><br><span class="line">直观感受：就是不用等了，效率高</span><br><span class="line"></span><br><span class="line">阻塞调用：</span><br><span class="line">含义：阻塞调用是指调用结果返回之前，当前线程会被挂起（线程进入非可执行状态，在这个状态下，CPU不会给线程分配时间片，即线程暂停运行）。函数只有在得到结果之后才会返回</span><br><span class="line">现象：读套接字时没有数据等数据来，写套接字时写不下了也一直等，等能写下了往里写（套接字被写满的原因不在本地，在于网络另一头的套接字被写满了来不及读出去，导致本地的套接字内容来发不出去堵住了）</span><br><span class="line">直观感受：执着</span><br><span class="line"></span><br><span class="line">非阻塞调用：</span><br><span class="line">含义：非阻塞调用是指没有调用结果立即返回，当前线程不被挂起，可以继续做其它工作</span><br><span class="line">现象：读套接字时没有数据，不等直接返回干别的事去，写套接字写不下了也不写了，直接返回干别的事去</span><br><span class="line">直观感受：勤奋</span><br></pre></td></tr></table></figure>
 
-        
-        
-        
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install tornado </span><br><span class="line"># 运行，浏览器访问127.0.0.1:8888 或者使用curl命令测试</span><br><span class="line">python testapp.py</span><br></pre></td></tr></table></figure>
 
-        
-        
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># testapp.py</span><br><span class="line"># tornado的核心IO循环模块,封装了linux的epoll和BSD的kqueue，是tornado高效的基础</span><br><span class="line">import tornado.ioloop</span><br><span class="line"># tornado的基础web框架模块</span><br><span class="line">import tornado.web</span><br><span class="line"></span><br><span class="line">class MainHandler(tornado.web.RequestHandler):</span><br><span class="line">    def get(self):</span><br><span class="line">        # 对应http请求的方法，给浏览器响应信息</span><br><span class="line">        self.write(&quot;Hello, Tornado&quot;)</span><br><span class="line"></span><br><span class="line">def make_app():</span><br><span class="line">    # 实例化一个make_app对象</span><br><span class="line">    # Application是tornado web框架的核心应用类，是与服务器对应的接口，里面保存了路由映射表</span><br><span class="line">    return tornado.web.Application([</span><br><span class="line">        (r&quot;/&quot;, MainHandler),</span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line"># 执行时name名为__main__，其他调用时为文件名</span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app = make_app()</span><br><span class="line">    # 绑定监听端口，此时服务并没有开启监听</span><br><span class="line">    # http_server.bind(8888)、http_server.start()相当于http_server.listen(8888); http_server = tornado.httpserver.HTTPServer(app)加.listen(8888)相当于app.listen(8888)</span><br><span class="line">    app.listen(8888)</span><br><span class="line">    # app.listen() 只能在单进程中使用，因为没指定要创建几个进程。</span><br><span class="line">    # IOLoop.current():返回当前线程的IOLoop实例</span><br><span class="line">    # IOLoop.start():启动IOLoop实例的I/O循环，并且开启了监听</span><br><span class="line">    tornado.ioloop.IOLoop.current().start()</span><br></pre></td></tr></table></figure>
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/19/树莓派相关配置/" itemprop="url">
-              
-                <span itemprop="name">树莓派相关配置</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-19T11:47:00+08:00" content="2019-07-19">
-          07-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tornado启动多进程建议是手动运行启动多个，不建议在start()方法中定义多个进程。</span><br><span class="line">原因：</span><br><span class="line">1、每个子进程都会从父进程中复制一份IOLoop的实例，如果在创建子进程前修改了IOLoop会影响所有的子进程。</span><br><span class="line">2、所有的进程都是一个命令启动的，无法做到在不停止服务的情况下修改代码。</span><br><span class="line">3、所有进程共享一个端口，想要分别监控很困难。</span><br></pre></td></tr></table></figure>
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/19/Docker上安装mongodb/" itemprop="url">
-              
-                <span itemprop="name">Docker上安装mongodb</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-19T11:22:00+08:00" content="2019-07-19">
-          07-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/19/Oracle-DG/" itemprop="url">
-              
-                <span itemprop="name">Oracle DG</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-19T11:18:00+08:00" content="2019-07-19">
-          07-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/05/Memcache基础使用/" itemprop="url">
-              
-                <span itemprop="name">Memcache基础使用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-05T10:20:00+08:00" content="2019-07-05">
-          07-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/05/Memcached安装/" itemprop="url">
-              
-                <span itemprop="name">Memcache安装</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-05T10:06:00+08:00" content="2019-07-05">
-          07-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/05/SQLserver维护计划/" itemprop="url">
-              
-                <span itemprop="name">SQLserver维护计划</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-05T09:58:00+08:00" content="2019-07-05">
-          07-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/05/nginx版本平滑升级-编译安装/" itemprop="url">
-              
-                <span itemprop="name">nginx版本平滑升级-编译安装</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-05T09:34:00+08:00" content="2019-07-05">
-          07-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    <!--添加-->
+    <div>
+  	
+    	  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  	
+    </div>
+    <!--添加-->
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>原创技术分享，感谢您的支持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Key liyk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Key liyk 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tornado/" <i class="fa fa-tag"> Tornado</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/02/Django支持网站多语言切换/" rel="next" title="Django支持网站多语言切换">
+                <i class="fa fa-chevron-left"></i> Django支持网站多语言切换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/27/Tornado构建RESTful应用/" rel="prev" title="Tornado构建RESTful应用">
+                Tornado构建RESTful应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2019/07/page/2/">2</a><a class="extend next" rel="next" href="/archives/2019/07/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -675,6 +573,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -695,8 +597,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -774,6 +685,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tornado框架"><span class="nav-number">1.</span> <span class="nav-text">Tornado框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#框架特性和使用场景"><span class="nav-number">2.</span> <span class="nav-text">框架特性和使用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#学习资料"><span class="nav-number">3.</span> <span class="nav-text">学习资料</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">4.</span> <span class="nav-text">安装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -923,6 +850,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
