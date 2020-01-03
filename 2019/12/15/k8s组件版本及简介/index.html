@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="k8s,">
 
 
 
@@ -94,16 +94,18 @@
 
 
 
-<meta name="description" content="么啥好说的">
-<meta property="og:type" content="website">
-<meta property="og:title" content="So what">
-<meta property="og:url" content="http://www.key1024.cn/archives/2019/page/3/index.html">
+<meta name="description" content="组件说明 etcd  123456789版本:v3.3高可用:部署奇数台服务器，以便leader选主功能:1.使用raft一致性算法来实现的一款分布式kv存储2.用于存储kubernetes集群中的配置、服务发现、各对对象的状态以及元数据信息等3.用于存储网络插件flannel、calico等网络配置信息注意事项:1.网络插件flannel操作etcd时，只能使用v2版本的API2.kuberne">
+<meta name="keywords" content="k8s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s组件简介">
+<meta property="og:url" content="http://www.key1024.cn/2019/12/15/k8s组件版本及简介/index.html">
 <meta property="og:site_name" content="So what">
-<meta property="og:description" content="么啥好说的">
+<meta property="og:description" content="组件说明 etcd  123456789版本:v3.3高可用:部署奇数台服务器，以便leader选主功能:1.使用raft一致性算法来实现的一款分布式kv存储2.用于存储kubernetes集群中的配置、服务发现、各对对象的状态以及元数据信息等3.用于存储网络插件flannel、calico等网络配置信息注意事项:1.网络插件flannel操作etcd时，只能使用v2版本的API2.kuberne">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-03T09:21:24.449Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="So what">
-<meta name="twitter:description" content="么啥好说的">
+<meta name="twitter:title" content="k8s组件简介">
+<meta name="twitter:description" content="组件说明 etcd  123456789版本:v3.3高可用:部署奇数台服务器，以便leader选主功能:1.使用raft一致性算法来实现的一款分布式kv存储2.用于存储kubernetes集群中的配置、服务发现、各对对象的状态以及元数据信息等3.用于存储网络插件flannel、calico等网络配置信息注意事项:1.网络插件flannel操作etcd时，只能使用v2版本的API2.kuberne">
 
 
 
@@ -133,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://www.key1024.cn/archives/2019/page/3/">
+  <link rel="canonical" href="http://www.key1024.cn/2019/12/15/k8s组件版本及简介/">
 
 
 
 
 
-  <title>归档 | So what</title>
+  <title>k8s组件简介 | So what</title>
   
 
 
@@ -158,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,355 +286,288 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 44 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2019/12/15/k8s组件版本及简介/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Key liyk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="So what">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">k8s组件简介</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-15T11:37:00+08:00">
+                2019-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/02/Shell脚本自动mvn发布war包/" itemprop="url">
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="name">Shell脚本一键mvn发布war包</span>
+                <span class="post-meta-item-text">分类于</span>
               
-            </a>
-        
-      </h2>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kubernetes/" itemprop="url" rel="index">
+                    <span itemprop="name">kubernetes</span>
+                  </a>
+                </span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-02T10:34:00+08:00" content="2019-07-02">
-          07-02
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+          
 
+          
+          
 
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/01/腾讯云网络灾备方案/" itemprop="url">
-              
-                <span itemprop="name">腾讯云网络灾备方案</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-01T17:28:00+08:00" content="2019-07-01">
-          07-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/06/腾讯云api调用/" itemprop="url">
-              
-                <span itemprop="name">腾讯云api调用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-06T11:33:00+08:00" content="2019-05-06">
-          05-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
+        <h4 id="组件说明"><a href="#组件说明" class="headerlink" title="组件说明"></a>组件说明</h4><ul>
+<li>etcd</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">版本:v3.3</span><br><span class="line">高可用:部署奇数台服务器，以便leader选主</span><br><span class="line">功能:</span><br><span class="line">1.使用raft一致性算法来实现的一款分布式kv存储</span><br><span class="line">2.用于存储kubernetes集群中的配置、服务发现、各对对象的状态以及元数据信息等</span><br><span class="line">3.用于存储网络插件flannel、calico等网络配置信息</span><br><span class="line">注意事项:</span><br><span class="line">1.网络插件flannel操作etcd时，只能使用v2版本的API</span><br><span class="line">2.kubernetes集群需要使用v3版本的API</span><br></pre></td></tr></table></figure>
 
-        
-        
-        
+<ul>
+<li>docker引擎</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">版本:19.03</span><br><span class="line">下载:yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo &amp;&amp; yum makecache &amp;&amp; yum -y install docker-ce</span><br><span class="line">功能:</span><br><span class="line">1.提供容器操作的底层引擎</span><br><span class="line">2.为kubernets中Pod提供容器</span><br><span class="line">注意事项:</span><br><span class="line">1.需要配合flannel提供的网络插件一起使用</span><br></pre></td></tr></table></figure>
 
-        
-        
+<ul>
+<li>kube-apiserver</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">版本:1.17</span><br><span class="line">下载:https://dl.k8s.io/v1.17.0/kubernetes-server-linux-amd64.tar.gz</span><br><span class="line">高可用:水平扩展（横向扩展）实现</span><br><span class="line">功能:</span><br><span class="line">1. kube-apiserver负责与etcd交互，其它组件不与etcd交互</span><br><span class="line">2.对集群进行操作和管理都需要通过kube-apiserver组件提供的API来完成</span><br><span class="line">3.集群中各组件不会相互调用，都是通过kube-apiserver组件来完成</span><br><span class="line">4.kube-apiserver开启bootstrap token认证，支持kubelet TLS bootstrapping，确保集群安全</span><br><span class="line">5.为避免其它组件频繁查询apiserver，apiserver为其它组件提供了watch接口，用于监视资源的增删改操作</span><br><span class="line">注意事项:</span><br><span class="line">1.关闭非安全端口8080和匿名访问</span><br><span class="line">2.使用安全端口6443</span><br><span class="line">3.使用nginx 4层代理与keepalive实现高可用</span><br></pre></td></tr></table></figure>
 
-        
+<ul>
+<li>kube-controller-manager</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">版本:1.17</span><br><span class="line">下载:https://dl.k8s.io/v1.17.0/kubernetes-server-linux-amd64.tar.gz</span><br><span class="line">高可用:leader选举实现，只有leader处于运行状态，其它副本去竞争leade</span><br><span class="line">功能:</span><br><span class="line">1.它是控制器管理器，逻辑上每个控制器都有一个单独的协程</span><br><span class="line">2.每个控制器，负责监视（watch）apiserver暴露的集群状态，并不断地尝试把当前状态向所期待的状态迁移</span><br><span class="line">3.默认非安全端口10252，安全端口10257</span><br><span class="line">4.使用kubeconfig访问kube-apiserver安全端口</span><br><span class="line">5.使用approve kubelet证书签名请求（CSR），证书过期后自动轮转</span><br><span class="line">6.kube-controller-manager各节点使用自己的ServiceAccount访问kube-apiserver</span><br><span class="line">7.kube-controller-manager 3节点高可用，去竞争leader锁，成为leader</span><br><span class="line">注意事项:</span><br><span class="line">1.需要--leader-elect=true启动参数</span><br><span class="line">2.安全端口和非安全端口都需要打开</span><br><span class="line">3.kubectl get cs使用的是http|</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<ul>
+<li>kube-scheduler</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">版本:1.17</span><br><span class="line">下载:https://dl.k8s.io/v1.17.0/kubernetes-server-linux-amd64.tar.gz</span><br><span class="line">高可用:leader选举实现，只有leader处于运行状态，其它副本去竞争leader</span><br><span class="line">功能:</span><br><span class="line">1.使用kubeconfig访问kube-apiserver安全端口</span><br><span class="line">2.kube-scheduler 3节点高可用，自选举；</span><br><span class="line">3.它监视kube-apiserver提供的watch接口，找一个最佳适配的节点，然后创建资源，如Pod资源;</span><br><span class="line">4.需要根据预选（Predicates）与优选（Priorities）两个环节找最佳适配节点；</span><br><span class="line">5.预选策略是过滤掉那些不满足Polices的节点，预选的输出作为优选的输入；</span><br><span class="line">6.优选策略是根据预选后的节点进行打分排名，得分最高的节点作为合适的节点，要创建的资源即被调到到此节点；</span><br><span class="line">7.默认非安全端口10251，安全端口10259|</span><br><span class="line">注意事项:</span><br><span class="line">1.需要--leader-elect=true启动参数；</span><br><span class="line">2.安全端口和非安全端口都需要打开；</span><br><span class="line">3.kubectl get cs使用的是http；|</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/02/Django数据库ORM模型/" itemprop="url">
-              
-                <span itemprop="name">Django数据库ORM模型</span>
-              
-            </a>
-        
-      </h2>
+<ul>
+<li>kubelet</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">版本:1.17</span><br><span class="line">下载:https://dl.k8s.io/v1.17.0/kubernetes-node-linux-amd64.tar.gz</span><br><span class="line">高可用:每台机器部署，不需要高可用，节点故障会自动迁移到其它节点</span><br><span class="line">功能:</span><br><span class="line">1.每个Node节点上面都可以接受master节点下发的任务，这些任务由kubelet来管理，主要用来管理Pod和其中的容器；</span><br><span class="line">2.kubelet会在API Server上注册节点信息，它内置了cAdvisor，通过它监控容器和节点资源，并定期向Master节点汇报资源使用情况；&lt;br&gt;3.使用kubeadm动态创建bootstrap token；</span><br><span class="line">4.使用TLS bootstrap机制自动生成Client和Server证书，过期后自动轮转；</span><br><span class="line">5.默认非安全端口10248，安全端口10250；</span><br><span class="line">6.安全端口接受https请求，对请求进行认证和授权；</span><br><span class="line">7.使用kubeconfig访问kube-apiserver的安全端口|</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-02T11:32:00+08:00" content="2019-03-02">
-          03-02
-        </time>
-      </div>
+<ul>
+<li>kube-proxy</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">高可用:每台机器部署，不需要高可用，节点故障会自动迁移到其它节点</span><br><span class="line">功能:</span><br><span class="line">1.service是一组Pod的抽象，相当于一组pod的负载均衡器，负责将请求分发到对应的pod；</span><br><span class="line">2.kube-proxy就是负责service实现的，内部请求到达service，它通过label关联并转发到后端某个pod;</span><br><span class="line">3.外部的node port向service的访问，通过label关联并转发到后端的某个pod；</span><br><span class="line">4.kube-proxy提供了三种负载均衡模式（代理模式），用户态（userspace）、iptables、ipvs模式；</span><br><span class="line">5.service的服务暴露方式由NodePort、hostNetwork、LoadBalancer、Ingress；</span><br><span class="line">6.使用kubeconfig访问kube-apiserver的安全端口；</span><br><span class="line">7.默认非安全端口10249，安全端口10256；</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<ul>
+<li>flanneld</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">版本:0.11</span><br><span class="line">下载:https://github.com/coreos/flannel/releases/download/v0.11.0/flannel-v0.11.0-linux-amd64.tar.gz</span><br><span class="line">高可用:每台机器部署，不需要高可用，节点故障会自动迁移到其它节点|</span><br><span class="line">功能:</span><br><span class="line">1.为每台Node节点分配Pod网段</span><br><span class="line">2.为集群Service网络分配IP（如有需要）</span><br><span class="line">3.flanneld只是做为网络插件的一种，还有很多；</span><br><span class="line">注意事项:flanneld使用的是v2版本etcd的API</span><br></pre></td></tr></table></figure>
 
-
-
+<ul>
+<li>插件coredns</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">版本:1.4</span><br><span class="line">下载:coredns/coredns:1.4.0</span><br><span class="line">高可用:以Pod的方式部署在集群当中，部署2个副本</span><br><span class="line">功能:</span><br><span class="line">1.通过监听service与endpoints的变更事件，将域名和IP对应信息同步到CoreDNS配置中；</span><br><span class="line">2.CoreDNS中ClusterIP，这个IP是虚拟的，具有TCP/IP协议栈，早期版本无法ping通些IP（这个是iptables规则没有允许icmp通过），新版本中可以ping通；</span><br><span class="line">注意事项:Pod副本数，根据需要自行调整</span><br></pre></td></tr></table></figure>
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/02/Django-外键和表关系/" itemprop="url">
-              
-                <span itemprop="name">Django 外键和表关系</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-02T11:30:00+08:00" content="2019-03-02">
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/02/Django过滤器、模板继承、加载静态文件/" itemprop="url">
-              
-                <span itemprop="name">Django ORM模型迁移</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-02T11:25:00+08:00" content="2019-03-02">
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/02/python安装虚拟环境/" itemprop="url">
-              
-                <span itemprop="name">python安装虚拟环境</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-02T11:24:00+08:00" content="2019-03-02">
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/02/Django基础概念/" itemprop="url">
-              
-                <span itemprop="name">Django基础概念</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-02T11:19:00+08:00" content="2019-03-02">
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/14/windows下bat脚本自动重启Apache服务/" itemprop="url">
-              
-                <span itemprop="name">Windows下通过bat脚本自动重启apache服务</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-14T23:10:00+08:00" content="2019-02-14">
-          02-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    <!--添加-->
+    <div>
+  	
+    	  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  	
+    </div>
+    <!--添加-->
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>原创技术分享，感谢您的支持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Key liyk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Key liyk 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/k8s/" <i class="fa fa-tag"> k8s</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/03/k8s-jenkins-gitlab-harbor/" rel="next" title="k8s+jenkins+gitlab+harbor">
+                <i class="fa fa-chevron-left"></i> k8s+jenkins+gitlab+harbor
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/03/等保整改-linux主机/" rel="prev" title="等保整改(linux主机)">
+                等保整改(linux主机) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2019/">1</a><a class="page-number" href="/archives/2019/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -640,6 +575,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -660,8 +599,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -739,6 +687,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#组件说明"><span class="nav-number">1.</span> <span class="nav-text">组件说明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -888,6 +852,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

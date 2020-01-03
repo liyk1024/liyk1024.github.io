@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[等保整改(linux主机)]]></title>
+    <url>%2F2020%2F01%2F03%2F%E7%AD%89%E4%BF%9D%E6%95%B4%E6%94%B9-linux%E4%B8%BB%E6%9C%BA%2F</url>
+    <content type="text"><![CDATA[Linux终端系统安全检查与整改 口令周期设置 123456vim /etc/login.defs# 添加如下PASS_MAX_DAYS 90PASS_MIN_DAYS 5PASS_MIN_LEN 5PASS_WARN_AGE 5 密码复杂度 123vim /etc/pam.d/system-auth# 添加如下password requisite pam_cracklib.so retry=3 difok=3 minlen=10 ucredit=-1 lcredit=-2 dcredit=-1 ocredit=-1 登录锁定 123vim /etc/pam.d/sshd# 添加如下，在第2行位置auth required pam_tally2.so deny=3 unlock_time=600 even_deny_root=5 root_unlock_time=1200 root权限 1vim /etc/passwd,修改权限为0的用户 wheel组用户1vim /etc/group SSH策略 12345678910# 修改端口vim /etc/ssh/sshd_configPort 22122# 修改root登录PermitRootLogin noMaxAuthTries 3# 禁止密码认证登录PasswordAuthentication no# 只允许root和xxx用户登录AllowUsers root xxx]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[k8s组件简介]]></title>
-    <url>%2F2020%2F12%2F15%2Fk8s%E7%BB%84%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%8A%E7%AE%80%E4%BB%8B%2F</url>
+    <url>%2F2019%2F12%2F15%2Fk8s%E7%BB%84%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%8A%E7%AE%80%E4%BB%8B%2F</url>
     <content type="text"><![CDATA[组件说明 etcd 123456789版本:v3.3高可用:部署奇数台服务器，以便leader选主功能:1.使用raft一致性算法来实现的一款分布式kv存储2.用于存储kubernetes集群中的配置、服务发现、各对对象的状态以及元数据信息等3.用于存储网络插件flannel、calico等网络配置信息注意事项:1.网络插件flannel操作etcd时，只能使用v2版本的API2.kubernetes集群需要使用v3版本的API docker引擎 1234567版本:19.03下载:yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo &amp;&amp; yum makecache &amp;&amp; yum -y install docker-ce功能:1.提供容器操作的底层引擎2.为kubernets中Pod提供容器注意事项:1.需要配合flannel提供的网络插件一起使用 kube-apiserver 12345678910111213版本:1.17下载:https://dl.k8s.io/v1.17.0/kubernetes-server-linux-amd64.tar.gz高可用:水平扩展（横向扩展）实现功能:1. kube-apiserver负责与etcd交互，其它组件不与etcd交互2.对集群进行操作和管理都需要通过kube-apiserver组件提供的API来完成3.集群中各组件不会相互调用，都是通过kube-apiserver组件来完成4.kube-apiserver开启bootstrap token认证，支持kubelet TLS bootstrapping，确保集群安全5.为避免其它组件频繁查询apiserver，apiserver为其它组件提供了watch接口，用于监视资源的增删改操作注意事项:1.关闭非安全端口8080和匿名访问2.使用安全端口64433.使用nginx 4层代理与keepalive实现高可用 kube-controller-manager 123456789101112131415版本:1.17下载:https://dl.k8s.io/v1.17.0/kubernetes-server-linux-amd64.tar.gz高可用:leader选举实现，只有leader处于运行状态，其它副本去竞争leade功能:1.它是控制器管理器，逻辑上每个控制器都有一个单独的协程2.每个控制器，负责监视（watch）apiserver暴露的集群状态，并不断地尝试把当前状态向所期待的状态迁移3.默认非安全端口10252，安全端口102574.使用kubeconfig访问kube-apiserver安全端口5.使用approve kubelet证书签名请求（CSR），证书过期后自动轮转6.kube-controller-manager各节点使用自己的ServiceAccount访问kube-apiserver7.kube-controller-manager 3节点高可用，去竞争leader锁，成为leader注意事项:1.需要--leader-elect=true启动参数2.安全端口和非安全端口都需要打开3.kubectl get cs使用的是http| kube-scheduler 123456789101112131415版本:1.17下载:https://dl.k8s.io/v1.17.0/kubernetes-server-linux-amd64.tar.gz高可用:leader选举实现，只有leader处于运行状态，其它副本去竞争leader功能:1.使用kubeconfig访问kube-apiserver安全端口2.kube-scheduler 3节点高可用，自选举；3.它监视kube-apiserver提供的watch接口，找一个最佳适配的节点，然后创建资源，如Pod资源;4.需要根据预选（Predicates）与优选（Priorities）两个环节找最佳适配节点；5.预选策略是过滤掉那些不满足Polices的节点，预选的输出作为优选的输入；6.优选策略是根据预选后的节点进行打分排名，得分最高的节点作为合适的节点，要创建的资源即被调到到此节点；7.默认非安全端口10251，安全端口10259|注意事项:1.需要--leader-elect=true启动参数；2.安全端口和非安全端口都需要打开；3.kubectl get cs使用的是http；| kubelet 12345678910版本:1.17下载:https://dl.k8s.io/v1.17.0/kubernetes-node-linux-amd64.tar.gz高可用:每台机器部署，不需要高可用，节点故障会自动迁移到其它节点功能:1.每个Node节点上面都可以接受master节点下发的任务，这些任务由kubelet来管理，主要用来管理Pod和其中的容器；2.kubelet会在API Server上注册节点信息，它内置了cAdvisor，通过它监控容器和节点资源，并定期向Master节点汇报资源使用情况；&lt;br&gt;3.使用kubeadm动态创建bootstrap token；4.使用TLS bootstrap机制自动生成Client和Server证书，过期后自动轮转；5.默认非安全端口10248，安全端口10250；6.安全端口接受https请求，对请求进行认证和授权；7.使用kubeconfig访问kube-apiserver的安全端口| kube-proxy 123456789高可用:每台机器部署，不需要高可用，节点故障会自动迁移到其它节点功能:1.service是一组Pod的抽象，相当于一组pod的负载均衡器，负责将请求分发到对应的pod；2.kube-proxy就是负责service实现的，内部请求到达service，它通过label关联并转发到后端某个pod;3.外部的node port向service的访问，通过label关联并转发到后端的某个pod；4.kube-proxy提供了三种负载均衡模式（代理模式），用户态（userspace）、iptables、ipvs模式；5.service的服务暴露方式由NodePort、hostNetwork、LoadBalancer、Ingress；6.使用kubeconfig访问kube-apiserver的安全端口；7.默认非安全端口10249，安全端口10256； flanneld 12345678版本:0.11下载:https://github.com/coreos/flannel/releases/download/v0.11.0/flannel-v0.11.0-linux-amd64.tar.gz高可用:每台机器部署，不需要高可用，节点故障会自动迁移到其它节点|功能:1.为每台Node节点分配Pod网段2.为集群Service网络分配IP（如有需要）3.flanneld只是做为网络插件的一种，还有很多；注意事项:flanneld使用的是v2版本etcd的API 插件coredns 1234567版本:1.4下载:coredns/coredns:1.4.0高可用:以Pod的方式部署在集群当中，部署2个副本功能:1.通过监听service与endpoints的变更事件，将域名和IP对应信息同步到CoreDNS配置中；2.CoreDNS中ClusterIP，这个IP是虚拟的，具有TCP/IP协议栈，早期版本无法ping通些IP（这个是iptables规则没有允许icmp通过），新版本中可以ping通；注意事项:Pod副本数，根据需要自行调整]]></content>
       <categories>
         <category>kubernetes</category>
@@ -10,14 +18,6 @@
       <tags>
         <tag>k8s</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[等保整改(linux主机)]]></title>
-    <url>%2F2020%2F01%2F03%2F%E7%AD%89%E4%BF%9D%E6%95%B4%E6%94%B9-linux%E4%B8%BB%E6%9C%BA%2F</url>
-    <content type="text"><![CDATA[Linux终端系统安全检查与整改 口令周期设置 123456vim /etc/login.defs# 添加如下PASS_MAX_DAYS 90PASS_MIN_DAYS 5PASS_MIN_LEN 5PASS_WARN_AGE 5 密码复杂度 123vim /etc/pam.d/system-auth# 添加如下password requisite pam_cracklib.so retry=3 difok=3 minlen=10 ucredit=-1 lcredit=-2 dcredit=-1 ocredit=-1 登录锁定 123vim /etc/pam.d/sshd# 添加如下，在第2行位置auth required pam_tally2.so deny=3 unlock_time=600 even_deny_root=5 root_unlock_time=1200 root权限 1vim /etc/passwd,修改权限为0的用户 wheel组用户1vim /etc/group SSH策略 12345678910# 修改端口vim /etc/ssh/sshd_configPort 22122# 修改root登录PermitRootLogin noMaxAuthTries 3# 禁止密码认证登录PasswordAuthentication no# 只允许root和xxx用户登录AllowUsers root xxx]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
   </entry>
   <entry>
     <title><![CDATA[k8s+jenkins+gitlab+harbor]]></title>
