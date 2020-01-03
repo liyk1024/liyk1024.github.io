@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="k8s+jenkins,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="k8s中安装jenkins传统jenkins集群存在的问题 主master发生单点故障时，整个流程都不可用 每个Slave的环境配置不一样，来完成不同语言的编译打包，但是这些差异化的配置导致管理起来不方便，维护麻烦 资源分配不均衡，有的slave要运行的job出现排队等待，而有的salve处于空闲状态 资源有浪费，每台slave可能是物理机或者虚拟机，当slave处于空闲状态时，也不能完全释放掉资">
+<meta name="keywords" content="k8s+jenkins">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s+jenkins+gitlab+harbor">
+<meta property="og:url" content="http://www.key1024.cn/2019/11/03/k8s-jenkins-gitlab-harbor/index.html">
+<meta property="og:site_name" content="So what">
+<meta property="og:description" content="k8s中安装jenkins传统jenkins集群存在的问题 主master发生单点故障时，整个流程都不可用 每个Slave的环境配置不一样，来完成不同语言的编译打包，但是这些差异化的配置导致管理起来不方便，维护麻烦 资源分配不均衡，有的slave要运行的job出现排队等待，而有的salve处于空闲状态 资源有浪费，每台slave可能是物理机或者虚拟机，当slave处于空闲状态时，也不能完全释放掉资">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/tRWDtszxIKyB.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/YHjqaWvX1igy.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/oKuLamNgKY5G.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/ya97888hIytI.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/QL3df6T7fqRE.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/nrmcX35jEya7.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/VyLEWM4rTEus.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/FfgFiyMGyNXn.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/suRgQfwN3Ube.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/xuflKLy7Fu0X.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/Dfy46lt3dgM6.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/xsDLjUA7zjT1.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/JLl6u4yWhNhL.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/lTqHmIaDGquf.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/zhQs7H4iUVAv.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/QjAzI8JI3JPy.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191121/LzSrTJxnbcgc.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191115/U5DzKpyV14nG.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191115/KsVu8gAE7Aa4.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191115/hUHb4lcE4qs2.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191115/k6ue91yj6CEJ.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191121/NwDHRiJAPi2S.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/80pKU8iqKKga.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191116/0f0WtJ7Ku0yK.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191121/H83RIQ9SwLqz.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191121/PSvkS3v5rHcE.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191121/Y3LUdKTsTsvP.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191121/gO7kWqY0dOH8.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20191121/RF0TzIM0Ygrn.png">
+<meta property="og:updated_time" content="2020-01-03T03:33:11.893Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="k8s+jenkins+gitlab+harbor">
+<meta name="twitter:description" content="k8s中安装jenkins传统jenkins集群存在的问题 主master发生单点故障时，整个流程都不可用 每个Slave的环境配置不一样，来完成不同语言的编译打包，但是这些差异化的配置导致管理起来不方便，维护麻烦 资源分配不均衡，有的slave要运行的job出现排队等待，而有的salve处于空闲状态 资源有浪费，每台slave可能是物理机或者虚拟机，当slave处于空闲状态时，也不能完全释放掉资">
+<meta name="twitter:image" content="http://img.key1024.cn/md/20191116/tRWDtszxIKyB.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.key1024.cn/2019/11/03/k8s-jenkins-gitlab-harbor/">
+
+
+
+
+
+  <title>k8s+jenkins+gitlab+harbor | So what</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">So what</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Evething will be ok!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2019/11/03/k8s-jenkins-gitlab-harbor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Key liyk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="So what">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">k8s+jenkins+gitlab+harbor</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T11:23:00+08:00">
+                2019-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kubernetes/" itemprop="url" rel="index">
+                    <span itemprop="name">kubernetes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.6k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="k8s中安装jenkins"><a href="#k8s中安装jenkins" class="headerlink" title="k8s中安装jenkins"></a>k8s中安装jenkins</h4><h5 id="传统jenkins集群存在的问题"><a href="#传统jenkins集群存在的问题" class="headerlink" title="传统jenkins集群存在的问题"></a>传统jenkins集群存在的问题</h5><ul>
+<li>主master发生单点故障时，整个流程都不可用</li>
+<li>每个Slave的环境配置不一样，来完成不同语言的编译打包，但是这些差异化的配置导致管理起来不方便，维护麻烦</li>
+<li>资源分配不均衡，有的slave要运行的job出现排队等待，而有的salve处于空闲状态</li>
+<li>资源有浪费，每台slave可能是物理机或者虚拟机，当slave处于空闲状态时，也不能完全释放掉资源</li>
+</ul>
+<blockquote>
+<p>正因为上面的问题，我们需要采用一种更高效可靠的方式来完成这个CI/CD流程。<br>而Docker虚拟化容器技能很好的解决这个痛点，又特别是在Kubernetes集群环境下面能够更好来解决上面的问题。</p>
+</blockquote>
+<h5 id="k8s部署jenkins点评"><a href="#k8s部署jenkins点评" class="headerlink" title="k8s部署jenkins点评"></a>k8s部署jenkins点评</h5><p><img src="http://img.key1024.cn/md/20191116/tRWDtszxIKyB.png" alt="mark"></p>
+<blockquote>
+<p>如上图我们可以看到Jenkins master和Jenkins slave以Pod形式运行在Kubernetes集群的Node。<br>Master运行在其中一个节点，并且将其配置数据存储到一个volume上去，slave运行在各个节点上。<br>但是它的状态并不是一直处于运行状态，它会按照需求动态的创建并自动删除。</p>
+</blockquote>
+<ul>
+<li><p>运行流程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、当Jenkins Master接受到Build请求后，会根据配置的Label动态创建一个运行在Pod中的Jenkins Slave并注册到Master上。</span><br><span class="line">2、当运行完Job后，这个Slave会被注销并且这个Pod也会自动删除，恢复到最初的状态(这个策略可以设置)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优点：</p>
+<ul>
+<li><p>服务高可用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、当Jenkins Master出现故障时，Kubernetes会自动创建一个新的Jenkins Master容器。</span><br><span class="line">2、然后将Volume分配给新创建的容器，保证数据不丢失，从而达到集群服务高可用的作用。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态伸缩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、合理使用资源，每次运行Job时，会自动创建一个Jenkins Slave。</span><br><span class="line">2、Job完成后，Slave自动注销并删除容器，资源自动释放。</span><br><span class="line">3、Kubernetes会根据每个资源的使用情况，动态分配slave到空闲的节点上创建，降低出现因某节点资源利用率高，降低出现因某节点利用率高出现排队的情况。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>扩展性好</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当Kubernetes集群的资源严重不足导致Job排队等待时，可以很容易的添加一个k8s节点到集群,从而实现扩展。</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Kubernetes安装配置Jenkins"><a href="#Kubernetes安装配置Jenkins" class="headerlink" title="Kubernetes安装配置Jenkins"></a>Kubernetes安装配置Jenkins</h4><h5 id="搭建nfs服务器"><a href="#搭建nfs服务器" class="headerlink" title="搭建nfs服务器"></a>搭建nfs服务器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1、服务端配置</span><br><span class="line">yum install nfs-utils rpcbind -y</span><br><span class="line">mkdir -p /data/k8s-nfs</span><br><span class="line">echo &quot;/data/k8s-nfs  *(rw,no_root_squash,sync)&quot; &gt; /etc/exports</span><br><span class="line">systemctl start rpcbind &amp;&amp; systemctl enable rpcbind</span><br><span class="line">systemctl start nfs &amp;&amp; systemctl enable nfs</span><br><span class="line">2、客户端配置</span><br><span class="line">yum install nfs-utils -y</span><br><span class="line">mkdir -p /data</span><br><span class="line">mount -t nfs 192.168.100.2:/data/k8s-nfs /data</span><br><span class="line"># 建议加入开机挂载</span><br><span class="line">echo &quot;192.168.100.2:/data/k8s-nfs    /data    nfs    defaults  0 0&quot; &gt;&gt;/etc/fstab</span><br></pre></td></tr></table></figure>
+
+<h5 id="编写yaml文件"><a href="#编写yaml文件" class="headerlink" title="编写yaml文件"></a>编写yaml文件</h5><ul>
+<li><p>创建命名空间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create namespace jenkins-cicd</span><br><span class="line"># k8s不支持&quot;_&quot;下划线</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建jenkins持久化存储</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@master k8s-jenkins]# cat jenkins_pv.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolume</span><br><span class="line">metadata:</span><br><span class="line">  name: jenkins-pv</span><br><span class="line">spec:</span><br><span class="line">  capacity:</span><br><span class="line">    storage: 10Gi</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteMany</span><br><span class="line">  nfs:</span><br><span class="line">    path: /data/k8s-nfs/jenkins_home</span><br><span class="line">    server: 192.168.100.2</span><br><span class="line">---</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolumeClaim</span><br><span class="line">metadata:</span><br><span class="line">  name: jenkins-pvc</span><br><span class="line">  namespace: jenkins-cicd</span><br><span class="line">spec:</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteMany</span><br><span class="line">  resources:</span><br><span class="line">    requests:</span><br><span class="line">      storage: 10Gi</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建jenkins的deployment</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">[root@master k8s-jenkins]# cat jenkins_deployment.yaml </span><br><span class="line">apiVersion: extensions/v1beta1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: jenkins</span><br><span class="line">  namespace: jenkins-cicd</span><br><span class="line">spec:</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      name: jenkins</span><br><span class="line">      labels:</span><br><span class="line">        app: jenkins</span><br><span class="line">    spec:</span><br><span class="line">      terminationGracePeriodSeconds: 5</span><br><span class="line">      serviceAccount: jenkins</span><br><span class="line">      containers:</span><br><span class="line">        - name: jenkins</span><br><span class="line">          image: jenkins/jenkins:lts</span><br><span class="line">          imagePullPolicy: IfNotPresent</span><br><span class="line">          ports:</span><br><span class="line">            - containerPort: 8080</span><br><span class="line">              name: web</span><br><span class="line">              protocol: TCP</span><br><span class="line">            - containerPort: 50000</span><br><span class="line">              name: agent</span><br><span class="line">              protocol: TCP</span><br><span class="line">          resources:</span><br><span class="line">            limits:</span><br><span class="line">              cpu: 1</span><br><span class="line">              memory: 1Gi</span><br><span class="line">            requests:</span><br><span class="line">              cpu: 0.5</span><br><span class="line">              memory: 500Mi</span><br><span class="line">          livenessProbe:</span><br><span class="line">            httpGet:</span><br><span class="line">              path: /login</span><br><span class="line">              port: 8080</span><br><span class="line">            initialDelaySeconds: 60</span><br><span class="line">            timeoutSeconds: 5</span><br><span class="line">            failureThreshold: 12</span><br><span class="line">          readinessProbe:</span><br><span class="line">            httpGet:</span><br><span class="line">              path: /login</span><br><span class="line">              port: 8080</span><br><span class="line">            initialDelaySeconds: 60</span><br><span class="line">            timeoutSeconds: 5</span><br><span class="line">            failureThreshold: 12</span><br><span class="line">          volumeMounts:</span><br><span class="line">            - name: jenkins-home</span><br><span class="line">              mountPath: /var/jenkins_home</span><br><span class="line">          env:</span><br><span class="line">            - name: LIMITS_MEMORY</span><br><span class="line">              valueFrom:</span><br><span class="line">                resourceFieldRef:</span><br><span class="line">                  resource: limits.memory</span><br><span class="line">                  divisor: 1Mi</span><br><span class="line">            - name: JAVA_OPTS</span><br><span class="line">              value: -Xmx$(LIMITS_MEMORY)m -XshowSettings:vm -Dhudson.slaves.NodeProvisioner.initialDelay=0 -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85</span><br><span class="line">      securityContext:</span><br><span class="line">        fsGroup: 1000</span><br><span class="line">      volumes:</span><br><span class="line">        - name: jenkins-home</span><br><span class="line">          persistentVolumeClaim:</span><br><span class="line">            claimName: jenkins-pvc</span><br><span class="line">          #hostPath:</span><br><span class="line">            #path: /data/k8s-data/jenkins_home</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建serviceAccount的Jenkins用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">[root@master k8s-jenkins]# cat jenkins_rbac.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: ServiceAccount</span><br><span class="line">metadata:</span><br><span class="line">  name: jenkins</span><br><span class="line">  namespace: jenkins-cicd</span><br><span class="line">---</span><br><span class="line">kind: ClusterRole</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1beta1</span><br><span class="line">metadata:</span><br><span class="line">  name: jenkins</span><br><span class="line">rules:</span><br><span class="line">- apiGroups: [&quot;extensions&quot;,&quot;apps&quot;]</span><br><span class="line">  resources: [&quot;deployments&quot;]</span><br><span class="line">  verbs: [&quot;create&quot;,&quot;delete&quot;,&quot;get&quot;,&quot;list&quot;,&quot;patch&quot;,&quot;update&quot;,&quot;watch&quot;]</span><br><span class="line">- apiGroups: [&quot;&quot;]</span><br><span class="line">  resources: [&quot;services&quot;]</span><br><span class="line">  verbs: [&quot;create&quot;,&quot;delete&quot;,&quot;get&quot;,&quot;list&quot;,&quot;patch&quot;,&quot;update&quot;,&quot;watch&quot;]</span><br><span class="line">- apiGroups: [&quot;&quot;]</span><br><span class="line">  resources: [&quot;pods&quot;]</span><br><span class="line">  verbs: [&quot;create&quot;,&quot;delete&quot;,&quot;get&quot;,&quot;list&quot;,&quot;patch&quot;,&quot;update&quot;,&quot;watch&quot;]</span><br><span class="line">- apiGroups: [&quot;&quot;]</span><br><span class="line">  resources: [&quot;pods/exec&quot;]</span><br><span class="line">  verbs: [&quot;create&quot;,&quot;delete&quot;,&quot;get&quot;,&quot;list&quot;,&quot;patch&quot;,&quot;update&quot;,&quot;watch&quot;]</span><br><span class="line">- apiGroups: [&quot;&quot;]</span><br><span class="line">  resources: [&quot;pods/log&quot;]</span><br><span class="line">  verbs: [&quot;get&quot;,&quot;list&quot;,&quot;watch&quot;]</span><br><span class="line">- apiGroups: [&quot;&quot;]</span><br><span class="line">  resources: [&quot;secrets&quot;]</span><br><span class="line">  verbs: [&quot;get&quot;]</span><br><span class="line">---</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1beta1</span><br><span class="line">kind: ClusterRoleBinding</span><br><span class="line">metadata:</span><br><span class="line">  name: jenkins</span><br><span class="line">  namespace: jenkins-cicd</span><br><span class="line">roleRef:</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">  kind: ClusterRole</span><br><span class="line">  name: jenkins</span><br><span class="line">subjects:</span><br><span class="line">- kind: ServiceAccount</span><br><span class="line">  name: jenkins</span><br><span class="line">  namespace: jenkins-cicd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建jenkins svc</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@master k8s-jenkins]# cat jenkins_svc.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: jenkins</span><br><span class="line">  namespace: jenkins-cicd</span><br><span class="line">  labels:</span><br><span class="line">    app: jenkins</span><br><span class="line">spec:</span><br><span class="line">  type: NodePort</span><br><span class="line">  selector:</span><br><span class="line">    app: jenkins</span><br><span class="line">  ports:</span><br><span class="line">    - name: web</span><br><span class="line">      port: 8080</span><br><span class="line">      targetPort: web</span><br><span class="line">      nodePort: 30003</span><br><span class="line">    - name: agent</span><br><span class="line">      port: 50000</span><br><span class="line">      targetPort: agent</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建harbor仓库secret</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl create secret -n jenkins docker-registry regcred --docker-server=192.168.100.2 --docker-username=admin --docker-password=xxzx@789 --docker-email=admin@qq.com</span><br><span class="line"># yaml文件中加入secret用于访问镜像仓库</span><br><span class="line">imagePullSecrets:</span><br><span class="line">- name: regcred</span><br><span class="line"># 和containers: ，同一位置</span><br></pre></td></tr></table></figure>
+
+<h6 id="先创建pv然后在执行rbac-再创建deployment和svc"><a href="#先创建pv然后在执行rbac-再创建deployment和svc" class="headerlink" title="先创建pv然后在执行rbac,再创建deployment和svc"></a>先创建pv然后在执行rbac,再创建deployment和svc</h6><p><img src="http://img.key1024.cn/md/20191116/YHjqaWvX1igy.png" alt="mark"></p>
+<ul>
+<li><p>登录jenkins</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 可查看pod日志</span><br><span class="line">kubectl logs -n jenkins-cicd jenkins-5458f468bf-mw6n4</span><br><span class="line"># 也可在持久化目录下查看</span><br><span class="line">cat /data/k8s-data/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 可直接安装推荐插件也可自定义安装</span><br><span class="line">需安装的插件：Kubernetes</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="配置动态生成slave的pod"><a href="#配置动态生成slave的pod" class="headerlink" title="配置动态生成slave的pod"></a>配置动态生成slave的pod</h4><ul>
+<li>添加kubernetes</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">进入系统管理 &gt;系统配置 下拉，找到cloud，添加kubernetes</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.key1024.cn/md/20191116/oKuLamNgKY5G.png" alt="mark"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这里name就是配置的名称，url这里写的是k8s内部域名。</span><br><span class="line">jenkins的url就是svcname+namespace+cluster.local:port。</span><br><span class="line">其他配置默认即可</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加jenkins slave模版</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Name：Pod名称</span><br><span class="line">Namespave：Pod命名空间</span><br><span class="line">Labels：Pod标签</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># slave镜像Dockerfile</span><br><span class="line"># 需提前下载好jenkins-slave</span><br><span class="line">FROM  centos:7</span><br><span class="line">ARG AGENT_WORKDIR=/root/agent</span><br><span class="line">RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/3.16/remoting-3.16.jar \</span><br><span class="line">  &amp;&amp; chmod 755 /usr/share/jenkins</span><br><span class="line"></span><br><span class="line">COPY epel-apache-maven.repo /etc/yum.repos.d/epel-apache-maven.repo</span><br><span class="line">RUN yum -y install git libtool-ltdl java-1.8.0-openjdk apache-maven</span><br><span class="line"></span><br><span class="line">ENV AGENT_WORKDIR=$&#123;AGENT_WORKDIR&#125;</span><br><span class="line">COPY jenkins-slave /usr/local/bin/jenkins-slave</span><br><span class="line"></span><br><span class="line">RUN mkdir /root/.jenkins &amp;&amp; mkdir -p $&#123;AGENT_WORKDIR&#125;</span><br><span class="line">ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0</span><br><span class="line">ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin</span><br><span class="line">WORKDIR /root</span><br><span class="line">ENTRYPOINT [&quot;jenkins-slave&quot;]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 也可使用创建好的slave镜像，下载下来上传到自己的镜像仓库</span><br><span class="line">registry.cn-beijing.aliyuncs.com/abcdocker/jenkins:v1.2</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.key1024.cn/md/20191116/ya97888hIytI.png" alt="mark"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、容器模版的name必须为jnlp、工作目录需为/home/jenkins/agent，否则可能无法连接上jenkins slave反复重启。</span><br><span class="line">2、docker镜像这里采用的别人做好的，registry.cn-beijing.aliyuncs.com/abcdocker/jenkins:v1.4。我上传到自己的harbor镜像仓库上。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加volume卷<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 镜像主要是用于kubectl，kubectl是需要kubeconfig文件，所以我们还需要创建一个volume的配置</span><br><span class="line">选择Host path volume</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20191116/QL3df6T7fqRE.png" alt="mark"></p>
+<ul>
+<li>配置kubectl权限<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果jenkins提示权限错误，请在配置中添加jenkins rbac创建的serviceaccounts</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20191116/nrmcX35jEya7.png" alt="mark"></p>
+<ul>
+<li>应用并保存</li>
+</ul>
+<h4 id="添加jenkins-job并测试"><a href="#添加jenkins-job并测试" class="headerlink" title="添加jenkins job并测试"></a>添加jenkins job并测试</h4><ul>
+<li>创建一个freestyle project</li>
+<li>限制运行节点<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过上面pod模版的label限制</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20191116/VyLEWM4rTEus.png" alt="mark"></p>
+<ul>
+<li><p>添加构建 执行shell测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">添加一个shell命令，测试docker和kubectl</span><br><span class="line">echo &quot;*******测试jenkins-slave******&quot;</span><br><span class="line">sleep 3</span><br><span class="line">echo &quot;*******测试docker******&quot;</span><br><span class="line">docker info</span><br><span class="line">echo &quot;*******测试kubectl******&quot;</span><br><span class="line">kubectl get pod -n jenkins-cicd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>立即构建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">返回项目，点击立即构建，观察。</span><br><span class="line">1、先拉取指定镜像，然后创建一个slave pod</span><br><span class="line">2、slave连接上后开始执行相关任务命令</span><br><span class="line">3、执行完后自动释放该pod(这里设置了执行完保留3分钟,便于观察)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20191116/FfgFiyMGyNXn.png" alt="mark"><br><img src="http://img.key1024.cn/md/20191116/suRgQfwN3Ube.png" alt="mark"><br><img src="http://img.key1024.cn/md/20191116/xuflKLy7Fu0X.png" alt="mark"></p>
+<h4 id="使用pipeline发布"><a href="#使用pipeline发布" class="headerlink" title="使用pipeline发布"></a>使用pipeline发布</h4><h5 id="准备代码"><a href="#准备代码" class="headerlink" title="准备代码"></a>准备代码</h5><ul>
+<li>创建测试gitlab项目<br><img src="http://img.key1024.cn/md/20191116/Dfy46lt3dgM6.png" alt="mark"></li>
+<li>客户端配置gitlab免密(本例暂未做免密)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将需免密登录的公钥配置到gitlab</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20191116/xsDLjUA7zjT1.png" alt="mark"></p>
+<ul>
+<li>上传测试代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1、拉取代码</span><br><span class="line">git clone http://192.168.100.3/root/my-demo4.git</span><br><span class="line">2、下载测试代码</span><br><span class="line">wget http://down.i4t.com/hello-world-war-master.zip</span><br><span class="line">unzip hello-world-war-master.zip</span><br><span class="line">mv hello-world-war-master/* .</span><br><span class="line">rm -rf hello-world-war-master*</span><br><span class="line">3、上传代码</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20191116/JLl6u4yWhNhL.png" alt="mark"></p>
+<h5 id="编写tomcat-Dockerfile"><a href="#编写tomcat-Dockerfile" class="headerlink" title="编写tomcat Dockerfile"></a>编写tomcat Dockerfile</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">FROM centos</span><br><span class="line">WORKDIR /tmp</span><br><span class="line"># install JDK</span><br><span class="line">COPY jdk1.8.0_66.tar.gz /tmp</span><br><span class="line">RUN tar zxf /tmp/jdk1.8.0_66.tar.gz -C /usr/local/&amp;&amp; rm -rf /tmp/jdk1.8.0_66.tar.gz &amp;&amp; \</span><br><span class="line">ln -s /usr/local/jdk1.8.0_66 /usr/local/jdk</span><br><span class="line">#/etc/profile</span><br><span class="line">ENV JAVA_HOME /usr/local/jdk</span><br><span class="line">ENV CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">ENV PATH $PATH:$JAVA_HOME/bin</span><br><span class="line"># add apache</span><br><span class="line">COPY apache-tomcat-8.5.39.tar.gz /tmp</span><br><span class="line">RUN tar zxf apache-tomcat-8.5.39.tar.gz -C /usr/local &amp;&amp; \</span><br><span class="line">  rm -rf /tmp/apache-tomcat-8.5.39.tar.gz &amp;&amp; \</span><br><span class="line">  mv /usr/local/apache-tomcat-8.5.39/usr/local/tomcat &amp;&amp; \</span><br><span class="line">  rm -rf /usr/local/tomcat/webapps/docs examples host-manager manager</span><br><span class="line">EXPOSE 8080</span><br><span class="line">ENTRYPOINT /usr/local/tomcat/bin/startup.sh &amp;&amp; tail -f /usr/local/tomcat/logs/catalina.out</span><br><span class="line"></span><br><span class="line"># 完成tomcat镜像的创建，接下来配置Jenkins，每次打包上线自动替换ROOT目录</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置jenkins-pipeline"><a href="#配置jenkins-pipeline" class="headerlink" title="配置jenkins pipeline"></a>配置jenkins pipeline</h5><ul>
+<li>添加gitlab凭证<br><img src="http://img.key1024.cn/md/20191116/lTqHmIaDGquf.png" alt="mark"><br><img src="http://img.key1024.cn/md/20191116/zhQs7H4iUVAv.png" alt="mark"></li>
+</ul>
+<h5 id="创建并配置pipeline项目任务"><a href="#创建并配置pipeline项目任务" class="headerlink" title="创建并配置pipeline项目任务"></a>创建并配置pipeline项目任务</h5><ul>
+<li><p>创建任务<br><img src="http://img.key1024.cn/md/20191116/QjAzI8JI3JPy.png" alt="mark"></p>
+</li>
+<li><p>添加参数化构建(需安装插件:Git Parameter Plug-In)<br><img src="http://img.key1024.cn/md/20191121/LzSrTJxnbcgc.png" alt="mark"></p>
+</li>
+<li><p>配置触发器(可选,生产环境不建议配置)<br><img src="http://img.key1024.cn/md/20191115/U5DzKpyV14nG.png" alt="mark"><br><img src="http://img.key1024.cn/md/20191115/KsVu8gAE7Aa4.png" alt="mark"></p>
+<ul>
+<li>配置gitlab<br><img src="http://img.key1024.cn/md/20191115/hUHb4lcE4qs2.png" alt="mark"><br><img src="http://img.key1024.cn/md/20191115/k6ue91yj6CEJ.png" alt="mark"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">点击push events如出现200则说明配置成功</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>配置流水线(也可直接写pipeline script)<br><img src="http://img.key1024.cn/md/20191121/NwDHRiJAPi2S.png" alt="mark"></p>
+</li>
+<li><p>应用保存</p>
+</li>
+<li><p>代码提交上添加Jenkinsfile脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># 代码库上创建deploy目录及Jenkinsfile文件</span><br><span class="line">node(&apos;jenkins-slave&apos;) &#123;</span><br><span class="line">    stage(&apos;Git Clone&apos;)&#123;</span><br><span class="line">        checkout([$class: &apos;GitSCM&apos;, branches: [[name: &apos;$&#123;branch&#125;&apos;]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: &apos;gitlab_root_id&apos;, url:&apos;http://172.20.2.195:81/root/my-demo1.git&apos;]]])</span><br><span class="line">        //git credentialsId: &apos;92ae8184-9661-425d-8609-3c994ddecb21&apos;, url: &apos;http://192.168.100.3/root/my-demo1.git&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    stage(&apos;Maven Build&apos;)&#123;</span><br><span class="line">        echo &quot;Maven Build&quot;</span><br><span class="line">        sh &apos;&apos;&apos;</span><br><span class="line">        /usr/local/maven/bin/mvn -B clean package -Dmaven.test.skip=true -Dautoconfig.skip -s settings.xml</span><br><span class="line">        &apos;&apos;&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    stage(&quot;Docker Build Stage&quot;)&#123;</span><br><span class="line">        echo &quot;Docker Build Stage&quot;</span><br><span class="line">        sh &apos;&apos;&apos;</span><br><span class="line">        docker build -t 172.20.5.117/ops/tomcat:v$&#123;BUILD_NUMBER&#125; .</span><br><span class="line">        docker login --username=admin 172.20.5.117 --password &quot;xxzx@789&quot;</span><br><span class="line">        docker push 172.20.5.117/ops/tomcat:v$&#123;BUILD_NUMBER&#125;</span><br><span class="line">        &apos;&apos;&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    stage(&quot;Deploy&quot;)&#123;</span><br><span class="line">        echo &quot;K8s Deploy&quot;</span><br><span class="line">        sh &apos;&apos;&apos;</span><br><span class="line">        kubectl set image -n jenkins deploy/my-tomcat my-tomcat=172.20.5.117/ops/tomcat:v$&#123;BUILD_NUMBER&#125;</span><br><span class="line">        &apos;&apos;&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="创建tomcat的deploy和svc"><a href="#创建tomcat的deploy和svc" class="headerlink" title="创建tomcat的deploy和svc"></a>创建tomcat的deploy和svc</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@master k8s-jenkins]# cat jenkins_tomcat.yaml </span><br><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: my-tomcat</span><br><span class="line">  namespace: jenkins-cicd</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: my-tomcat</span><br><span class="line">  minReadySeconds: 1</span><br><span class="line">  progressDeadlineSeconds: 60</span><br><span class="line">  revisionHistoryLimit: 5</span><br><span class="line">  strategy:</span><br><span class="line">    type: RollingUpdate</span><br><span class="line">    rollingUpdate:</span><br><span class="line">      maxSurge: 1</span><br><span class="line">      maxUnavailable: 1</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      name: my-tomcat</span><br><span class="line">      labels:</span><br><span class="line">        app: my-tomcat</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: my-tomcat</span><br><span class="line">        image: 192.168.100.2/ops/tomcat:v1</span><br><span class="line">        imagePullPolicy: IfNotPresent</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 8080</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@master k8s-jenkins]# cat jenkins_tomcat_svc.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: my-tomcat</span><br><span class="line">  namespace: jenkins-cicd</span><br><span class="line">  labels:</span><br><span class="line">    app: my-tomcat</span><br><span class="line">spec:</span><br><span class="line">  type: NodePort</span><br><span class="line">  ports:</span><br><span class="line">   - port: 8080</span><br><span class="line">     nodePort: 30004</span><br><span class="line">  selector:</span><br><span class="line">    app: my-tomcat</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.key1024.cn/md/20191116/80pKU8iqKKga.png" alt="mark"><br><img src="http://img.key1024.cn/md/20191116/0f0WtJ7Ku0yK.png" alt="mark"></p>
+<h4 id="提交发布测试"><a href="#提交发布测试" class="headerlink" title="提交发布测试"></a>提交发布测试</h4><ul>
+<li>jenkins上开始构建<br><img src="http://img.key1024.cn/md/20191121/H83RIQ9SwLqz.png" alt="mark"></li>
+<li>查看构建生成的镜像版本<br><img src="http://img.key1024.cn/md/20191121/PSvkS3v5rHcE.png" alt="mark"><br><img src="http://img.key1024.cn/md/20191121/Y3LUdKTsTsvP.png" alt="mark"></li>
+<li>harbor上查看镜像推送情况<br><img src="http://img.key1024.cn/md/20191121/gO7kWqY0dOH8.png" alt="mark"></li>
+<li>访问测试<br><img src="http://img.key1024.cn/md/20191121/RF0TzIM0Ygrn.png" alt="mark"></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    <!--添加-->
+    <div>
+  	
+    	  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  	
+    </div>
+    <!--添加-->
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>原创技术分享，感谢您的支持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Key liyk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Key liyk 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/k8s-jenkins/" <i class="fa fa-tag"> k8s+jenkins</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/30/Oarcle-日常维护/" rel="next" title="Oarcle 日常维护">
+                <i class="fa fa-chevron-left"></i> Oarcle 日常维护
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/15/k8s组件版本及简介/" rel="prev" title="k8s组件简介">
+                k8s组件简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Key liyk">
+            
+              <p class="site-author-name" itemprop="name">Key liyk</p>
+              <p class="site-description motion-element" itemprop="description">么啥好说的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liyk1024" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liyk@anchnet.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#k8s中安装jenkins"><span class="nav-number">1.</span> <span class="nav-text">k8s中安装jenkins</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#传统jenkins集群存在的问题"><span class="nav-number">1.1.</span> <span class="nav-text">传统jenkins集群存在的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#k8s部署jenkins点评"><span class="nav-number">1.2.</span> <span class="nav-text">k8s部署jenkins点评</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kubernetes安装配置Jenkins"><span class="nav-number">2.</span> <span class="nav-text">Kubernetes安装配置Jenkins</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#搭建nfs服务器"><span class="nav-number">2.1.</span> <span class="nav-text">搭建nfs服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写yaml文件"><span class="nav-number">2.2.</span> <span class="nav-text">编写yaml文件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#先创建pv然后在执行rbac-再创建deployment和svc"><span class="nav-number">2.2.1.</span> <span class="nav-text">先创建pv然后在执行rbac,再创建deployment和svc</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置动态生成slave的pod"><span class="nav-number">3.</span> <span class="nav-text">配置动态生成slave的pod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加jenkins-job并测试"><span class="nav-number">4.</span> <span class="nav-text">添加jenkins job并测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用pipeline发布"><span class="nav-number">5.</span> <span class="nav-text">使用pipeline发布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#准备代码"><span class="nav-number">5.1.</span> <span class="nav-text">准备代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写tomcat-Dockerfile"><span class="nav-number">5.2.</span> <span class="nav-text">编写tomcat Dockerfile</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置jenkins-pipeline"><span class="nav-number">5.3.</span> <span class="nav-text">配置jenkins pipeline</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建并配置pipeline项目任务"><span class="nav-number">5.4.</span> <span class="nav-text">创建并配置pipeline项目任务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建tomcat的deploy和svc"><span class="nav-number">5.5.</span> <span class="nav-text">创建tomcat的deploy和svc</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提交发布测试"><span class="nav-number">6.</span> <span class="nav-text">提交发布测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Key liyk</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+<!---->
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!--<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>-->
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+</body>
+</html>
