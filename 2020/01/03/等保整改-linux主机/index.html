@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="Linux终端系统安全检查与整改 口令周期设置  123456vim /etc/login.defs# 添加如下PASS_MAX_DAYS    90PASS_MIN_DAYS    5PASS_MIN_LEN     5PASS_WARN_AGE    5   密码复杂度  123vim /etc/pam.d/system-auth# 添加如下password  requisite  pam_c">
+<meta name="description" content="Linux终端系统安全检查与整改 口令周期设置 123456vim /etc/login.defs# 添加如下PASS_MAX_DAYS    90PASS_MIN_DAYS    5PASS_MIN_LEN     5PASS_WARN_AGE    5  密码复杂度   123vim /etc/pam.d/system-auth# 添加如下password  requisite  pam_cr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="等保整改(linux主机)">
 <meta property="og:url" content="http://www.key1024.cn/2020/01/03/等保整改-linux主机/index.html">
 <meta property="og:site_name" content="So what">
-<meta property="og:description" content="Linux终端系统安全检查与整改 口令周期设置  123456vim /etc/login.defs# 添加如下PASS_MAX_DAYS    90PASS_MIN_DAYS    5PASS_MIN_LEN     5PASS_WARN_AGE    5   密码复杂度  123vim /etc/pam.d/system-auth# 添加如下password  requisite  pam_c">
+<meta property="og:description" content="Linux终端系统安全检查与整改 口令周期设置 123456vim /etc/login.defs# 添加如下PASS_MAX_DAYS    90PASS_MIN_DAYS    5PASS_MIN_LEN     5PASS_WARN_AGE    5  密码复杂度   123vim /etc/pam.d/system-auth# 添加如下password  requisite  pam_cr">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.key1024.cn/md/20200103/A7b52c83ovhx.png">
 <meta property="og:image" content="http://img.key1024.cn/md/20200103/uChU5mPkhGeE.png">
-<meta property="og:updated_time" content="2020-01-03T09:19:27.735Z">
+<meta property="og:updated_time" content="2020-01-03T09:40:07.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="等保整改(linux主机)">
-<meta name="twitter:description" content="Linux终端系统安全检查与整改 口令周期设置  123456vim /etc/login.defs# 添加如下PASS_MAX_DAYS    90PASS_MIN_DAYS    5PASS_MIN_LEN     5PASS_WARN_AGE    5   密码复杂度  123vim /etc/pam.d/system-auth# 添加如下password  requisite  pam_c">
+<meta name="twitter:description" content="Linux终端系统安全检查与整改 口令周期设置 123456vim /etc/login.defs# 添加如下PASS_MAX_DAYS    90PASS_MIN_DAYS    5PASS_MIN_LEN     5PASS_WARN_AGE    5  密码复杂度   123vim /etc/pam.d/system-auth# 添加如下password  requisite  pam_cr">
 <meta name="twitter:image" content="http://img.key1024.cn/md/20200103/A7b52c83ovhx.png">
 
 
@@ -423,12 +423,11 @@
 
       
         <h4 id="Linux终端系统安全检查与整改"><a href="#Linux终端系统安全检查与整改" class="headerlink" title="Linux终端系统安全检查与整改"></a>Linux终端系统安全检查与整改</h4><ul>
-<li>口令周期设置</li>
-</ul>
+<li><p>口令周期设置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/login.defs</span><br><span class="line"># 添加如下</span><br><span class="line">PASS_MAX_DAYS    90</span><br><span class="line">PASS_MIN_DAYS    5</span><br><span class="line">PASS_MIN_LEN     5</span><br><span class="line">PASS_WARN_AGE    5</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>密码复杂度</li>
+</li>
+<li><p>密码复杂度</p>
+</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pam.d/system-auth</span><br><span class="line"># 添加如下</span><br><span class="line">password  requisite  pam_cracklib.so retry=3 difok=3 minlen=10 ucredit=-1 lcredit=-2 dcredit=-1 ocredit=-1</span><br></pre></td></tr></table></figure>
 
@@ -528,6 +527,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/01/20/python脚本备份数据到OSS/" rel="prev" title="python脚本备份数据到OSS">
+                python脚本备份数据到OSS <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -605,7 +608,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
