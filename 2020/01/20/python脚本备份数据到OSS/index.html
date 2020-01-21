@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://img.key1024.cn/md/20200120/fU5dMu4lRCcS.png">
 <meta property="og:image" content="http://img.key1024.cn/md/20200119/LntXzAdllSf9.png">
 <meta property="og:image" content="http://img.key1024.cn/md/20200119/tQnBgowQ5HQH.png">
-<meta property="og:updated_time" content="2020-01-20T01:53:25.611Z">
+<meta property="og:updated_time" content="2020-01-21T02:22:34.139Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python脚本备份数据到OSS">
 <meta name="twitter:description" content="需求背景123客户需要将数据备份到对象存储（windows环境）最初使用的是osscmd工具(此工具目前已下线)将压缩的数据上传到oss，此方法是先利用bat脚本对目标路径进行压缩打包，然后使用osscmd上传，再进行上传检查告警通知。目前改良后使用python压缩以及调用api上传数据，根据时间创建对应oss目录。  一些步骤 安装环境（windows）  123456781. 安装python">
@@ -431,7 +431,7 @@
 <h4 id="一些步骤"><a href="#一些步骤" class="headerlink" title="一些步骤"></a>一些步骤</h4><ul>
 <li>安装环境（windows）</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 安装python3</span><br><span class="line">https://www.python.org/ftp/python/3.8.1/python-3.8.1-amd64.exe</span><br><span class="line">配置系统环境变量</span><br><span class="line">2. 安装相关模块</span><br><span class="line">pip install oss2</span><br><span class="line">pip install yaml</span><br><span class="line">3. 安装压缩软件</span><br><span class="line">此处使用的winara，在配置文件config.yaml中设置winara路径。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 安装python3</span><br><span class="line">https://www.python.org/ftp/python/3.8.1/python-3.8.1-amd64.exe</span><br><span class="line">配置系统环境变量</span><br><span class="line">2. 安装相关模块</span><br><span class="line">pip install oss2</span><br><span class="line">pip install pyyaml</span><br><span class="line">3. 安装压缩软件</span><br><span class="line">此处使用的winara，在配置文件config.yaml中设置winara路径。</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>修改配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">根据自身环境情况设置</span><br></pre></td></tr></table></figure>
