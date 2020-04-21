@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="terraform,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="功能简介12Terraform是IT 基础架构自动化编排工具，它的口号是 &amp;quot;Write,Plan, and create Infrastructure as Code&amp;quot;, 基础架构即代码。通过同一套规则和命令来操作不同的云平台，包括私有云。  123456# 四种操作云平台的方法方式一：直接登录到云平台的管理页面，人工点击。这种对于单个或者几个云资源还可以维护，但是当云服务器规">
+<meta name="keywords" content="terraform">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Terraform-云平台操作神器(一)">
+<meta property="og:url" content="http://www.key1024.cn/2020/04/21/Terraform-云平台操作神器-一/index.html">
+<meta property="og:site_name" content="So what">
+<meta property="og:description" content="功能简介12Terraform是IT 基础架构自动化编排工具，它的口号是 &amp;quot;Write,Plan, and create Infrastructure as Code&amp;quot;, 基础架构即代码。通过同一套规则和命令来操作不同的云平台，包括私有云。  123456# 四种操作云平台的方法方式一：直接登录到云平台的管理页面，人工点击。这种对于单个或者几个云资源还可以维护，但是当云服务器规">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.key1024.cn/md/20200420/jRk2Qam5XQMy.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20200420/r9xeeddO0UfE.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20200420/RlMlgerWYw7K.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20200420/cDN1V6DJq02O.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20200420/PsU7QFvBGMi1.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20200420/bvIiQ9a1MRn6.png">
+<meta property="og:updated_time" content="2020-04-21T08:22:48.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Terraform-云平台操作神器(一)">
+<meta name="twitter:description" content="功能简介12Terraform是IT 基础架构自动化编排工具，它的口号是 &amp;quot;Write,Plan, and create Infrastructure as Code&amp;quot;, 基础架构即代码。通过同一套规则和命令来操作不同的云平台，包括私有云。  123456# 四种操作云平台的方法方式一：直接登录到云平台的管理页面，人工点击。这种对于单个或者几个云资源还可以维护，但是当云服务器规">
+<meta name="twitter:image" content="http://img.key1024.cn/md/20200420/jRk2Qam5XQMy.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.key1024.cn/2020/04/21/Terraform-云平台操作神器-一/">
+
+
+
+
+
+  <title>Terraform-云平台操作神器(一) | So what</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">So what</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Evething will be ok!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2020/04/21/Terraform-云平台操作神器-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Key liyk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="So what">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Terraform-云平台操作神器(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-21T16:20:00+08:00">
+                2020-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Case/" itemprop="url" rel="index">
+                    <span itemprop="name">Case</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.3k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Terraform是IT 基础架构自动化编排工具，它的口号是 &quot;Write,Plan, and create Infrastructure as Code&quot;, 基础架构即代码。</span><br><span class="line">通过同一套规则和命令来操作不同的云平台，包括私有云。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 四种操作云平台的方法</span><br><span class="line">方式一：直接登录到云平台的管理页面，人工点击。这种对于单个或者几个云资源还可以维护，但是当云服务器规模达到成本上千后人工操作变得不再现实、而且容易误操作。</span><br><span class="line">方式二：云平台提供的SDK、AIP。这样是大批量操作成为可能，而且代码能相对于减少误操作。但需要相应的开发能力，而且对复杂需求需要编写大量的代码。</span><br><span class="line">方式三：云平台提供的命令行工具，例如aws cli、阿里云cli等，这样就可以通过命令操作云资源，就如sql一样使用增删改查等操作元素来管理云。</span><br><span class="line">方式四：Terraform闪亮登场，如果方式三中CLI是命令式操作，需要明确告知云服务器本次操作是查询、新增，那么Terraform就是目的式操作。在本地维护一份云服务状态的目标，模板编排成什么样子云服务器就是什么样子。</span><br><span class="line">相对于上面三种，Teeraform优势是我们只需要专注于编排结果即可，不需要关心用什么命令去操作。</span><br></pre></td></tr></table></figure>
+
+<h5 id="Terraform知识"><a href="#Terraform知识" class="headerlink" title="Terraform知识"></a>Terraform知识</h5><p>核心文件有个2个，一个是编排文件、另一个是状态文件</p>
+<ul>
+<li>main.tf文件：是业务编排的主文件，定制了一系列的编排规则。</li>
+<li>terraform.tfstate：本地状态文件，相当于本地云服务状态的备份，会影响terraform的执行计划。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">问：如果本地状态与云服务状态不一样时会怎样？</span><br><span class="line">答：这个不需要担心，前面介绍过Terraform是目的式的编排，会按照预设结果完成编排并最终同步更新本地文件。</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><ul>
+<li><p>下载解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 官网下载，找寻对应平台</span><br><span class="line">https://www.terraform.io/downloads.html</span><br><span class="line"># 下载解压</span><br><span class="line">wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">export PATH=$PATH:/data/softapps</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基本操作命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 前期初始化操作</span><br><span class="line">1.创建一个工作目录，目录就像git的仓库，或者像软件开发中的workspace。</span><br><span class="line">2.创建一个xx.ft文件，指定provider等信息。</span><br><span class="line">3.执行terraform init命令，就像git init一样对当前目录做初始化，下载tf中的provider，并对后续的操作准备必要环境条件。</span><br><span class="line"># 资源相关操作</span><br><span class="line">1.terraform plan: 预览执行计划，不是必须的但是强烈建议。好明白这次要把云服务器弄成什么样子。后期版本会与apply合并成一个，所以根据自己的版本使用plan命令。</span><br><span class="line">2.terraform apply：真正执行编排计划</span><br><span class="line">3.terraform show：展示现在状态</span><br><span class="line">4.terraform destroy：销毁云服务，将tf中的云服务清理干净</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="腾讯云Terraform操作"><a href="#腾讯云Terraform操作" class="headerlink" title="腾讯云Terraform操作"></a>腾讯云Terraform操作</h4><ul>
+<li>Terraform工作流程</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20200420/jRk2Qam5XQMy.png" alt="mark"></p>
+<ul>
+<li><p>创建provider.tf文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vim provider.tf</span><br><span class="line">//provider.tf</span><br><span class="line">provider &quot;tencentcloud&quot; &#123;</span><br><span class="line">    secret_id  = &quot;RGID*************SG*&quot;</span><br><span class="line">    secret_key = &quot;CBS************GS&quot;</span><br><span class="line">    region     = &quot;ap-shanghai&quot;</span><br><span class="line">&#125;</span><br><span class="line"># 建议将api密钥放在环境变量中配置,不建议直接把密钥写到源代码里避免泄漏。</span><br><span class="line">vim /etc/profile</span><br><span class="line">export TENCENTCLOUD_SECRET_ID=&quot;your_accessid&quot;</span><br><span class="line">export TENCENTCLOUD_SECRET_KEY=&quot;your_accesskey&quot;</span><br><span class="line">export TENCENTCLOUD_REGION=&quot;ap-shanghai&quot;</span><br><span class="line"># 密钥写环境变量里provider.tf文件可省略相关信息</span><br><span class="line">vim provider.tf</span><br><span class="line">provider &quot;tencentcloud&quot; &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">terraform init：初始化Terraform，erraform会自动检测 provider.tf 文件中的 provider 字段。</span><br><span class="line">发送请求到Terraform官方GitHub下载最新版本腾讯云资源的模块和插件，初始化成功时当前脚本的版本信息也会显示出来。</span><br><span class="line">当腾讯云脚本有新的版本发布时，可以通过 terraform init -upgrade 指令更新脚本，获取最新的应用。</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20200420/r9xeeddO0UfE.png" alt="mark"></p>
+<ul>
+<li>部署腾讯云资源<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 这里展示创建一个vpc</span><br><span class="line">$ vim vpc.tf</span><br><span class="line">// Create a vpc</span><br><span class="line">resource &quot;tencentcloud_vpc&quot; &quot;vpc_test&quot; &#123;</span><br><span class="line">    name = &quot;vpc-test-liyk&quot;</span><br><span class="line">    cidr_block = &quot;10.0.0.0/16&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20200420/RlMlgerWYw7K.png" alt="mark"><br><img src="http://img.key1024.cn/md/20200420/cDN1V6DJq02O.png" alt="mark"><br><img src="http://img.key1024.cn/md/20200420/PsU7QFvBGMi1.png" alt="mark"><br><img src="http://img.key1024.cn/md/20200420/bvIiQ9a1MRn6.png" alt="mark"></p>
+<h5 id="开通云服务器"><a href="#开通云服务器" class="headerlink" title="开通云服务器"></a>开通云服务器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vim cvm.tf</span><br><span class="line">// Create a cvm</span><br><span class="line">resource &quot;tencentcloud_instance&quot; &quot;cvm_test&quot; &#123;</span><br><span class="line">    instance_name = &quot;cvm-test&quot;</span><br><span class="line">    availability_zone = &quot;ap-hongkong-1&quot;</span><br><span class="line">    image_id = &quot;img-pi0ii46r&quot;</span><br><span class="line">    instance_type = &quot;S2.SMALL1&quot;</span><br><span class="line">    system_disk_type = &quot;CLOUD_PREMIUM&quot;</span><br><span class="line"></span><br><span class="line">    security_groups = [</span><br><span class="line">        &quot;$&#123;tencentcloud_security_group.sg_test.id&#125;&quot;</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    vpc_id = &quot;$&#123;tencentcloud_vpc.vpc_test.id&quot;</span><br><span class="line">    subnet_id = &quot;$&#123;tencentcloud_subnet.subnet_test.id&#125;&quot;</span><br><span class="line">    internet_max_bandwidth_out = 10</span><br><span class="line">    count = 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ vim vpc.tf</span><br><span class="line">// Create a vpc</span><br><span class="line">resource &quot;tencentcloud_vpc&quot; &quot;vpc_test&quot; &#123;</span><br><span class="line">    name = &quot;vpc-test-liyk&quot;</span><br><span class="line">    cidr_block = &quot;10.0.0.0/16&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ vim subnet.tf</span><br><span class="line">// Create a subnet</span><br><span class="line">resource &quot;tencentcloud_subnet&quot; &quot;subnet_test&quot; &#123;</span><br><span class="line">   name = &quot;subnet-test&quot;</span><br><span class="line">   cidr_block = &quot;10.0.1.0/24&quot;</span><br><span class="line">   availability_zone = &quot;ap-hongkong-1&quot;</span><br><span class="line">   vpc_id = &quot;$&#123;tencentcloud_vpc.vpc_test.id&#125;&quot;</span><br><span class="line">   route_table_id = &quot;$&#123;tencentcloud_route_table.rtb_test.id&#125;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ vim route_table.tf</span><br><span class="line">// Create a route table</span><br><span class="line">resource &quot;tencentcloud_route_table&quot; &quot;rtb_test&quot; &#123;</span><br><span class="line">    name = &quot;rtb-test&quot;</span><br><span class="line">    vpc_id = &quot;$&#123;tencentcloud_vpc.vpc_test.id&#125;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ vim security_group.tf</span><br><span class="line">// Create a security group and rule</span><br><span class="line">resource &quot;tencentcloud_security_group&quot; &quot;sg_test&quot; &#123;</span><br><span class="line">    name = &quot;sg-test&quot;</span><br><span class="line">&#125;</span><br><span class="line">resource &quot;tencentcloud_security_group_rule&quot; &quot;sg_rule_test&quot; &#123;</span><br><span class="line">    security_group_id = &quot;$&#123;tencentcloud_security_group.sg_test.id&#125;&quot;</span><br><span class="line">   type = &quot;ingress&quot;</span><br><span class="line">   cidr_ip = &quot;0.0.0.0/0&quot;</span><br><span class="line">   ip_protocol = &quot;tcp&quot;</span><br><span class="line">   port_range = &quot;22,80&quot;</span><br><span class="line">   policy = &quot;accept&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="总结及案例"><a href="#总结及案例" class="headerlink" title="总结及案例"></a>总结及案例</h4><p>使用Terraform的Scripting、Plan、Apply和Destroy四个步骤即可轻松实现基础架构资源的全生命周期管理。下面我们以腾讯云的CVM、MySQl、VPC和Security Group服务为例，搭建一个最简单的基础架构。</p>
+<ul>
+<li>Scripting</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用HashiCorp自己的声明型语言HCL编写资源编排脚本。</span><br><span class="line">由于是声明型语言，我们熟悉的过程型语言的一些高级特性，比如“for”循环，HCL是不支持的。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line">#1、Provider info</span><br><span class="line">provider &quot;tencentcloud&quot; &#123;</span><br><span class="line">  secret_id = &quot;AsVv2va1CE5ipdx4&quot;</span><br><span class="line">  secret_key = &quot;KQdafafrtJ&quot;</span><br><span class="line">  region = &quot;ap-shanghai&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#2、Create a VPC resource</span><br><span class="line">resource &quot;tencentcloud_vpc&quot; &quot;main&quot; &#123;</span><br><span class="line">  name = &quot;demo-VPC&quot;</span><br><span class="line">  cidr_block = &quot;10.0.0.0/16&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#3、Create route tables for web and DB</span><br><span class="line">resource &quot;tencentcloud_route_table&quot; &quot;web&quot; &#123;</span><br><span class="line">  name = &quot;demo-rt_web&quot;</span><br><span class="line">  vpc_id = &quot;$&#123;tencentcloud_vpc.main.id&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line">resource &quot;tencentcloud_route_table&quot; &quot;db&quot; &#123;</span><br><span class="line">  name = &quot;demo-rt_db&quot;</span><br><span class="line">  vpc_id = &quot;$&#123;tencentcloud_vpc.main.id&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#4、CVM instances</span><br><span class="line">resource &quot;tencentcloud_instance&quot; &quot;nginx&quot; &#123;</span><br><span class="line">  instance_name = &quot;demo-nginx&quot;</span><br><span class="line">  availability_zone = &quot;ap-shanghai-2&quot;</span><br><span class="line">  image_id      = &quot;img-pi0ii46r&quot;</span><br><span class="line">  instance_type = &quot;S4.SMALL2&quot;</span><br><span class="line"></span><br><span class="line">  security_groups = [</span><br><span class="line">    &quot;$&#123;tencentcloud_security_group.web.id&#125;&quot;</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  vpc_id    = &quot;$&#123;tencentcloud_vpc.main.id&#125;&quot;</span><br><span class="line">  subnet_id = &quot;$&#123;tencentcloud_subnet.web.id&#125;&quot;</span><br><span class="line">  internet_max_bandwidth_out = 10</span><br><span class="line">  count = 10</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#5、Mysql instance</span><br><span class="line">resource &quot;tencentcloud_mysql_instance&quot; &quot;demo-mysql&quot; &#123;</span><br><span class="line">  instance_name = &quot;demo-mysql&quot;</span><br><span class="line">  mem_size = 1000</span><br><span class="line">  root_password = &quot;My_demo_mysql0001&quot;</span><br><span class="line">  volume_size = 50</span><br><span class="line"></span><br><span class="line">  availability_zone = &quot;ap-shanghai-2&quot;</span><br><span class="line">  engine_version = &quot;5.7&quot;</span><br><span class="line">  internet_service = 0</span><br><span class="line">  intranet_port = 3306</span><br><span class="line"></span><br><span class="line">  parameters = &#123;</span><br><span class="line">    max_connections = &quot;1000&quot;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  security_groups = [</span><br><span class="line">    &quot;$&#123;tencentcloud_security_group.db.id&#125;&quot;</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  vpc_id = &quot;$&#123;tencentcloud_vpc.main.id&#125;&quot;</span><br><span class="line">  subnet_id = &quot;$&#123;tencentcloud_subnet.db.id&#125;&quot;</span><br><span class="line"></span><br><span class="line">  tags = &#123;</span><br><span class="line">    name =&quot;demo-project&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#6、Create subnets within the VPC</span><br><span class="line">resource &quot;tencentcloud_subnet&quot; &quot;web&quot; &#123;</span><br><span class="line">  name = &quot;demo-SN_web&quot;</span><br><span class="line">  cidr_block = &quot;10.0.1.0/24&quot;</span><br><span class="line">  availability_zone = &quot;ap-shanghai-2&quot;</span><br><span class="line">  vpc_id = &quot;$&#123;tencentcloud_vpc.main.id&#125;&quot;</span><br><span class="line">  route_table_id = &quot;$&#123;tencentcloud_route_table.web.id&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line">resource &quot;tencentcloud_subnet&quot; &quot;db&quot; &#123;</span><br><span class="line">  name = &quot;demo-SN_db&quot;</span><br><span class="line">  cidr_block = &quot;10.0.2.0/24&quot;</span><br><span class="line">  availability_zone = &quot;ap-shanghai-2&quot;</span><br><span class="line">  vpc_id = &quot;$&#123;tencentcloud_vpc.main.id&#125;&quot;</span><br><span class="line">  route_table_id = &quot;$&#123;tencentcloud_route_table.db.id&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#7、Create security groups and rules</span><br><span class="line">resource &quot;tencentcloud_security_group&quot; &quot;web&quot; &#123;</span><br><span class="line">  name        = &quot;demo-sg_web&quot;</span><br><span class="line">  description = &quot;Accessible for both HTTP and SSH&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;tencentcloud_security_group&quot; &quot;db&quot; &#123;</span><br><span class="line">  name        = &quot;demo-sg_db&quot;</span><br><span class="line">  description = &quot;Accessible for both mysql and SSH from web&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;tencentcloud_security_group_rule&quot; &quot;web-from-public&quot; &#123;</span><br><span class="line">  security_group_id = &quot;$&#123;tencentcloud_security_group.web.id&#125;&quot;</span><br><span class="line">  type              = &quot;ingress&quot;</span><br><span class="line">  cidr_ip           = &quot;0.0.0.0/0&quot;</span><br><span class="line">  ip_protocol       = &quot;tcp&quot;</span><br><span class="line">  port_range        = &quot;80,22&quot;</span><br><span class="line">  policy            = &quot;accept&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;tencentcloud_security_group_rule&quot; &quot;web-to-public&quot; &#123;</span><br><span class="line">  security_group_id = &quot;$&#123;tencentcloud_security_group.web.id&#125;&quot;</span><br><span class="line">  type              = &quot;egress&quot;</span><br><span class="line">  ip_protocol       = &quot;tcp&quot;</span><br><span class="line">  cidr_ip           = &quot;0.0.0.0/0&quot;</span><br><span class="line">  port_range        = &quot;80,22&quot;</span><br><span class="line">  policy            = &quot;accept&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;tencentcloud_security_group_rule&quot; &quot;mysql-from-webtier&quot; &#123;</span><br><span class="line">  security_group_id = &quot;$&#123;tencentcloud_security_group.db.id&#125;&quot;</span><br><span class="line">  type              = &quot;ingress&quot;</span><br><span class="line">  cidr_ip           = &quot;10.0.1.0/24&quot;</span><br><span class="line">  ip_protocol       = &quot;tcp&quot;</span><br><span class="line">  port_range        = &quot;22,3306&quot;</span><br><span class="line">  policy            = &quot;accept&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resource &quot;tencentcloud_security_group_rule&quot; &quot;mysql-to-webtier&quot; &#123;</span><br><span class="line">  security_group_id = &quot;$&#123;tencentcloud_security_group.db.id&#125;&quot;</span><br><span class="line">  type              = &quot;egress&quot;</span><br><span class="line">  cidr_ip           = &quot;0.0.0.0/0&quot;</span><br><span class="line">  ip_protocol       = &quot;tcp&quot;</span><br><span class="line">  port_range        = &quot;22,3306&quot;</span><br><span class="line">  policy            = &quot;accept&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Plan    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Terraform Plan功能可以很好的支持Terraform脚本执行前的检查确认工作。</span><br><span class="line">Terraform基于脚本、本地状态文件（terraform.tfstate）和云平台三者的一致性来保证执行结果的准确性。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Apply</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Terraform apply功能实现基础架构的一键部署。注意，apply前Terraform还是会强制进行资源的确认工作，即Terraform Plan工作。</span><br><span class="line">Terraform的执行结果会保存在本地状态文件（terraform.tfstate）中。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Destroy</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过以上简单地三个步骤即可实现复杂的资源部署工作，同样的，仅需要一个简单地命令即可实现资源的快速高效释放。</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.更高的部署效率。缩短了资源从开发需求到部署实施的流程，同时在批量部署以及多云部署场景下，IaC可以大幅提升资源部署的效率；</span><br><span class="line">2.增加了基础资源配置的一致性。由于采用声明型语言，资源配置更加易读，降低了人工犯错的几率；</span><br><span class="line">3.降低企业成本。将传统的云迁移工作大大简化，提高资源的利用率，从而有效降低企业云上的OPEX；</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    <!--添加-->
+    <div>
+  	
+    	  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  	
+    </div>
+    <!--添加-->
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>原创技术分享，感谢您的支持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Key liyk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Key liyk 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/terraform/" <i class="fa fa-tag"> terraform</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/21/SQL注入/" rel="next" title="SQL注入">
+                <i class="fa fa-chevron-left"></i> SQL注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/21/MQ相关概念/" rel="prev" title="MQ相关概念">
+                MQ相关概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Key liyk">
+            
+              <p class="site-author-name" itemprop="name">Key liyk</p>
+              <p class="site-description motion-element" itemprop="description">么啥好说的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liyk1024" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liyk@anchnet.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#功能简介"><span class="nav-number">1.</span> <span class="nav-text">功能简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Terraform知识"><span class="nav-number">1.0.1.</span> <span class="nav-text">Terraform知识</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#安装配置"><span class="nav-number">2.</span> <span class="nav-text">安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#腾讯云Terraform操作"><span class="nav-number">2.1.</span> <span class="nav-text">腾讯云Terraform操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#开通云服务器"><span class="nav-number">2.1.1.</span> <span class="nav-text">开通云服务器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结及案例"><span class="nav-number">2.2.</span> <span class="nav-text">总结及案例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优势"><span class="nav-number">2.2.1.</span> <span class="nav-text">优势</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Key liyk</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+<!---->
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!--<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>-->
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+</body>
+</html>
