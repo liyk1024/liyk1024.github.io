@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="k8s,">
 
 
 
@@ -94,16 +94,18 @@
 
 
 
-<meta name="description" content="么啥好说的">
-<meta property="og:type" content="website">
-<meta property="og:title" content="So what">
-<meta property="og:url" content="http://www.key1024.cn/archives/page/5/index.html">
+<meta name="description" content="背景123在k8s集群迁移场景中，镜像仓库之间迁移和同步是基本需求。在迁移中当镜像个数较少时可以通过docker pull/push完成镜像迁移，如果涉及到成百上千个镜像，甚至上TB级别的镜像仓库数据时，迁移过程就变得非常漫长，并且可能丢失数据。本文通过阿里云开源工具image-syncer进行镜像迁移。  image-syncer简介和特点 image-syncer  1234567891011">
+<meta name="keywords" content="k8s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s镜像仓库迁移">
+<meta property="og:url" content="http://www.key1024.cn/2020/04/26/k8s镜像仓库迁移/index.html">
 <meta property="og:site_name" content="So what">
-<meta property="og:description" content="么啥好说的">
+<meta property="og:description" content="背景123在k8s集群迁移场景中，镜像仓库之间迁移和同步是基本需求。在迁移中当镜像个数较少时可以通过docker pull/push完成镜像迁移，如果涉及到成百上千个镜像，甚至上TB级别的镜像仓库数据时，迁移过程就变得非常漫长，并且可能丢失数据。本文通过阿里云开源工具image-syncer进行镜像迁移。  image-syncer简介和特点 image-syncer  1234567891011">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-26T06:52:24.456Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="So what">
-<meta name="twitter:description" content="么啥好说的">
+<meta name="twitter:title" content="k8s镜像仓库迁移">
+<meta name="twitter:description" content="背景123在k8s集群迁移场景中，镜像仓库之间迁移和同步是基本需求。在迁移中当镜像个数较少时可以通过docker pull/push完成镜像迁移，如果涉及到成百上千个镜像，甚至上TB级别的镜像仓库数据时，迁移过程就变得非常漫长，并且可能丢失数据。本文通过阿里云开源工具image-syncer进行镜像迁移。  image-syncer简介和特点 image-syncer  1234567891011">
 
 
 
@@ -133,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://www.key1024.cn/archives/page/5/">
+  <link rel="canonical" href="http://www.key1024.cn/2020/04/26/k8s镜像仓库迁移/">
 
 
 
 
 
-  <title>归档 | So what</title>
+  <title>k8s镜像仓库迁移 | So what</title>
   
 
 
@@ -158,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,395 +286,267 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2020/04/26/k8s镜像仓库迁移/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Key liyk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="So what">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
-         
+          <h1 class="post-title" itemprop="name headline">k8s镜像仓库迁移</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-26T14:50:00+08:00">
+                2020-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        好! 目前共计 57 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kubernetes/" itemprop="url" rel="index">
+                    <span itemprop="name">kubernetes</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/02/python安装虚拟环境/" itemprop="url">
-              
-                <span itemprop="name">python安装虚拟环境</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-02T11:24:00+08:00" content="2019-03-02">
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/02/Django基础概念/" itemprop="url">
-              
-                <span itemprop="name">Django基础概念</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-02T11:19:00+08:00" content="2019-03-02">
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/14/windows下bat脚本自动重启Apache服务/" itemprop="url">
-              
-                <span itemprop="name">Windows下通过bat脚本自动重启apache服务</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-14T23:10:00+08:00" content="2019-02-14">
-          02-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/30/Mysql经典问题/" itemprop="url">
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">Mysql经典问题</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  854 字
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-30T17:21:00+08:00" content="2018-09-30">
-          09-30
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/03/Kafka集群搭建/" itemprop="url">
-              
-                <span itemprop="name">Kafka集群搭建</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-03T21:39:00+08:00" content="2018-09-03">
-          09-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在k8s集群迁移场景中，镜像仓库之间迁移和同步是基本需求。</span><br><span class="line">在迁移中当镜像个数较少时可以通过docker pull/push完成镜像迁移，如果涉及到成百上千个镜像，甚至上TB级别的镜像仓库数据时，迁移过程就变得非常漫长，并且可能丢失数据。</span><br><span class="line">本文通过阿里云开源工具image-syncer进行镜像迁移。</span><br></pre></td></tr></table></figure>
 
-        
-        
+<h4 id="image-syncer简介和特点"><a href="#image-syncer简介和特点" class="headerlink" title="image-syncer简介和特点"></a>image-syncer简介和特点</h4><ul>
+<li>image-syncer</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">image-syncer的定位是一个简单、易用的批量镜像迁移和镜像同步复制工具。</span><br><span class="line">支持几乎所有目前主流的基于docker registry V2搭建的镜像存储服务。</span><br><span class="line">对硬件资源几乎没要求（因为 image-syncer 严格控制网络连接数目=并发数，所以只有在单个镜像层过大的情况下，并发数目过大可能会打满内存，内存占用 &lt;= 并发数 x 最大镜像层大小）</span><br><span class="line"></span><br><span class="line"># 特点</span><br><span class="line">1. 支持多对多镜像仓库同步</span><br><span class="line">2. 支持基于Docker Registry V2搭建的Docker镜像仓库服务</span><br><span class="line">3. 镜像同步复制只经过内存和网络，不依赖磁盘存储，同步速度快。</span><br><span class="line">4. 支持增量同步，通过对同步过的镜像blob信息落盘，不会对已同步的镜像进行重复同步。</span><br><span class="line">5. 支持并发同步，可以通过配置文件调整并发数。</span><br><span class="line">6. 支持自动重试失败的同步任务，解决大部分镜像同步中的网络抖动问题。</span><br><span class="line">7. 不依赖Docker以及其他程序。</span><br></pre></td></tr></table></figure>
 
-        
+<ul>
+<li>使用传统脚本方式docker pull/push镜像方式有如下局限性：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 依赖磁盘存储，需要及时进行本地镜像的清理，并且落盘造成多余的时间开销；难以胜任生产场景中大量镜像的迁移。</span><br><span class="line">2. 依赖docker程序，docker daemon对pull/push的并发数进行了严格的限制，无法进行高并发同步。</span><br><span class="line">3. 一些功能只能通过HTTP api进行操作，仅使用docker cli无法做到，使脚本变得复杂。</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h4 id="安装和使用"><a href="#安装和使用" class="headerlink" title="安装和使用"></a>安装和使用</h4><ul>
+<li><p>安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 连接</span><br><span class="line">https://github.com/AliyunContainerService/image-syncer/releases</span><br><span class="line">wget https://github.com/AliyunContainerService/image-syncer/releases/download/v1.1.0/image-syncer-v1.1.0-linux-amd64.tar.gz</span><br><span class="line"># 解压</span><br><span class="line">tar zxvf image-syncer-v1.1.0-linux-amd64.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;auth&quot;: &#123;</span><br><span class="line">        &quot;registry.cn-shanghai.aliyuncs.com&quot;: &#123;</span><br><span class="line">            &quot;username&quot;: &quot;xxxx&quot;,</span><br><span class="line">            &quot;password&quot;: &quot;xxx&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">	&quot;ccr.ccs.tencentyun.com&quot;: &#123;</span><br><span class="line">	    &quot;username&quot;: &quot;xxxxxx&quot;,</span><br><span class="line">	    &quot;password&quot;: &quot;xxxxxx&quot;</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;images&quot;: &#123;</span><br><span class="line">        &quot;registry.cn-shanghai.aliyuncs.com/key1024/test&quot;: &quot;ccr.ccs.tencentyun.com/key1024/test&quot;,</span><br><span class="line">        &quot;registry.cn-shanghai.aliyuncs.com/key1024/mysql&quot;: &quot;ccr.ccs.tencentyun.com/key1024/mysql&quot;,</span><br><span class="line">        &quot;registry.cn-shanghai.aliyuncs.com/key1024/liyk&quot;: &quot;ccr.ccs.tencentyun.com/key1024/liyk&quot;,</span><br><span class="line">        &quot;registry.cn-shanghai.aliyuncs.com/key1024/demo&quot;: &quot;ccr.ccs.tencentyun.com/key1024/demo1&quot;</span><br><span class="line">    &#125;	 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/03/Zabbix简单故障自愈/" itemprop="url">
-              
-                <span itemprop="name">Zabbix简单故障自愈</span>
-              
-            </a>
-        
-      </h2>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># harbor同步到阿里云镜像仓库</span><br><span class="line">&#123;</span><br><span class="line">    &quot;auth&quot;: &#123;</span><br><span class="line">        &quot;harbor.myk8s.paas.com:32080&quot;: &#123;</span><br><span class="line">            &quot;username&quot;: &quot;admin&quot;,</span><br><span class="line">            &quot;password&quot;: &quot;xxxxxxxxx&quot;,</span><br><span class="line">            &quot;insecure&quot;: true</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;registry.cn-beijing.aliyuncs.com&quot;: &#123;</span><br><span class="line">            &quot;username&quot;: &quot;acr_pusher@1938562138124787&quot;,</span><br><span class="line">            &quot;password&quot;: &quot;xxxxxxxx&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;images&quot;: &#123;</span><br><span class="line">        &quot;harbor.myk8s.paas.com:32080/library/nginx&quot;: &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-03T22:51:00+08:00" content="2018-08-03">
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<ul>
+<li>镜像同步测试<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./image-syncer --proc=6 --config=./ali-2-tencent.json</span><br><span class="line"># 或者在运行时指定目的端的namespace和仓库地址</span><br><span class="line">./image-syncer --proc=6 --config=./ali-2-tencent.json --namespace=key1024 --registry=ccr.ccs.tencentyun.com --retries=2 --log=./ali-2-tencent.log</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/03/Zabbix发送邮件告警-含告警图片/" itemprop="url">
-              
-                <span itemprop="name">Zabbix发送邮件告警(含告警图片)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-03T22:26:00+08:00" content="2018-08-03">
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/03/Zabbix-sender实现秒级监控/" itemprop="url">
-              
-                <span itemprop="name">Zabbix-sender实现秒级监控</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-03T21:58:00+08:00" content="2018-08-03">
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/03/Zabbix-使用钉钉发送告警/" itemprop="url">
-              
-                <span itemprop="name">Zabbix-使用钉钉发送告警</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-03T21:49:00+08:00" content="2018-08-03">
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/01/Zabbix安装graphtree/" itemprop="url">
-              
-                <span itemprop="name">Zabbix安装graphtree</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-01T22:18:00+08:00" content="2018-08-01">
-          08-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    <!--添加-->
+    <div>
+  	
+    	  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  	
+    </div>
+    <!--添加-->
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>原创技术分享，感谢您的支持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Key liyk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Key liyk 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/k8s/" <i class="fa fa-tag"> k8s</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/26/Docker深入/" rel="next" title="Docker深入">
+                <i class="fa fa-chevron-left"></i> Docker深入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/6/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -680,6 +554,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -700,8 +578,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -779,6 +666,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#image-syncer简介和特点"><span class="nav-number">2.</span> <span class="nav-text">image-syncer简介和特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装和使用"><span class="nav-number">3.</span> <span class="nav-text">安装和使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -928,6 +831,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

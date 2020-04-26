@@ -94,16 +94,22 @@
 
 
 
-<meta name="description" content="么啥好说的">
-<meta property="og:type" content="website">
-<meta property="og:title" content="So what">
-<meta property="og:url" content="http://www.key1024.cn/archives/page/5/index.html">
+<meta name="description" content="容器中进程启动的两种模式docker容器内运行的进程全部都是宿主机上的独立进程；该进程是不是docker容器进程本身要依据Dockerfile的写法判定。 12345在ENTRYPOINT和CMD指令中，提供了两种不同的进程执行方式：shell和exec1. 在shell方式中，CMD/ENTRYPOINT指令如下定义：这种方式中的1号进程是以/bin/sh -c &amp;quot;executable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker深入">
+<meta property="og:url" content="http://www.key1024.cn/2020/04/26/Docker深入/index.html">
 <meta property="og:site_name" content="So what">
-<meta property="og:description" content="么啥好说的">
+<meta property="og:description" content="容器中进程启动的两种模式docker容器内运行的进程全部都是宿主机上的独立进程；该进程是不是docker容器进程本身要依据Dockerfile的写法判定。 12345在ENTRYPOINT和CMD指令中，提供了两种不同的进程执行方式：shell和exec1. 在shell方式中，CMD/ENTRYPOINT指令如下定义：这种方式中的1号进程是以/bin/sh -c &amp;quot;executable">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.key1024.cn/md/20200422/2wVSen7KYI0G.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20200422/6jx686emH2sc.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20200422/7gIU3YaAOyHn.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20200422/KkKIqDra8geq.png">
+<meta property="og:updated_time" content="2020-04-26T06:41:54.144Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="So what">
-<meta name="twitter:description" content="么啥好说的">
+<meta name="twitter:title" content="Docker深入">
+<meta name="twitter:description" content="容器中进程启动的两种模式docker容器内运行的进程全部都是宿主机上的独立进程；该进程是不是docker容器进程本身要依据Dockerfile的写法判定。 12345在ENTRYPOINT和CMD指令中，提供了两种不同的进程执行方式：shell和exec1. 在shell方式中，CMD/ENTRYPOINT指令如下定义：这种方式中的1号进程是以/bin/sh -c &amp;quot;executable">
+<meta name="twitter:image" content="http://img.key1024.cn/md/20200422/2wVSen7KYI0G.png">
 
 
 
@@ -133,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://www.key1024.cn/archives/page/5/">
+  <link rel="canonical" href="http://www.key1024.cn/2020/04/26/Docker深入/">
 
 
 
 
 
-  <title>归档 | So what</title>
+  <title>Docker深入 | So what</title>
   
 
 
@@ -158,7 +164,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,395 +290,276 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2020/04/26/Docker深入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Key liyk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="So what">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
-         
+          <h1 class="post-title" itemprop="name headline">Docker深入</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-26T14:29:00+08:00">
+                2020-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        好! 目前共计 57 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/02/python安装虚拟环境/" itemprop="url">
-              
-                <span itemprop="name">python安装虚拟环境</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-02T11:24:00+08:00" content="2019-03-02">
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/02/Django基础概念/" itemprop="url">
-              
-                <span itemprop="name">Django基础概念</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-02T11:19:00+08:00" content="2019-03-02">
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/14/windows下bat脚本自动重启Apache服务/" itemprop="url">
-              
-                <span itemprop="name">Windows下通过bat脚本自动重启apache服务</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-14T23:10:00+08:00" content="2019-02-14">
-          02-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/30/Mysql经典问题/" itemprop="url">
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">Mysql经典问题</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1k 字
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-30T17:21:00+08:00" content="2018-09-30">
-          09-30
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
 
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="容器中进程启动的两种模式"><a href="#容器中进程启动的两种模式" class="headerlink" title="容器中进程启动的两种模式"></a>容器中进程启动的两种模式</h4><p>docker容器内运行的进程全部都是宿主机上的独立进程；该进程是不是docker容器进程本身要依据Dockerfile的写法判定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在ENTRYPOINT和CMD指令中，提供了两种不同的进程执行方式：shell和exec</span><br><span class="line">1. 在shell方式中，CMD/ENTRYPOINT指令如下定义：这种方式中的1号进程是以/bin/sh -c &quot;executable param1 param2&quot;方式启动的。</span><br><span class="line">CMD &quot;executable param1 param2&quot;</span><br><span class="line">2. 而在exec方式中CMD/ENTRYPOINT指令如下定义：此时1号进程会以executable param1 param2方式而不是shell方式启动。</span><br><span class="line">CMD [&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建dockerfile 启动验证<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># shell方式</span><br><span class="line"># 制作镜像docker build -t myshellredis -f shellredis/dockerfile .</span><br><span class="line"># 运行 docker run -d --name myshellredis shellredis</span><br><span class="line">FROM ubuntu:14.04</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install redis-server -y &amp;&amp; rm -rf /var/lib/apt/lists/*</span><br><span class="line">EXPOSE 6379</span><br><span class="line">CMD &quot;/usr/bin/redis-server&quot;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20200422/2wVSen7KYI0G.png" alt="mark"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># exec方式</span><br><span class="line">FROM ubuntu:14.04</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install redis-server -y &amp;&amp; rm -rf /var/lib/apt/lists/*</span><br><span class="line">EXPOSE 6379</span><br><span class="line">CMD [&quot;/usr/bin/redis-server&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.key1024.cn/md/20200422/6jx686emH2sc.png" alt="mark"></p>
+<ul>
+<li>启动总结</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">由此可看出，execredis镜像中以exec方式启动容器中的redis进程，所以redis进程就是容器进程本身。</span><br><span class="line">容器中启动的redis进程就是容器内1号进程。</span><br><span class="line"></span><br><span class="line">而shellredis镜像中用shell方式启动容器中的redis进程，所以被容器启动的redis进程是容器进程的一个子进程，是独立存在的。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>停止容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Docker提供了docker stop和docker kill两个命令向容器中的1号进程发送信号。</span><br><span class="line">当执行docker stop时，docker会首先向容器的1号进程发送一个SIGTERM信号，用于容器内程序的退出。</span><br><span class="line">如果容器在收到SIGTERM信号后没有结束进程，那么docker Daemon会在等待一段时间（默认10秒）后再向容器发送SIGKILL信号，将容器杀死并变为退出状态。</span><br><span class="line">这种方式给docker应用提供了一个优雅的退出机制，允许应用在收到stop命令时清理和释放使用中的资源。</span><br><span class="line"></span><br><span class="line">而docker kill命令可以向容器内的1号进程发送任何信号，默认是发送SIGKILL信号来强制退出应用。</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.key1024.cn/md/20200422/7gIU3YaAOyHn.png" alt="mark"><br><img src="http://img.key1024.cn/md/20200422/KkKIqDra8geq.png" alt="mark"></p>
+<ul>
+<li>总结</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">原因在于，用shell脚本启动的容器，其1号进程是shell进程。shell进程中没有对SIGTERM信号的处理逻辑，所以它忽略了接收到的SIGTERM信号。</span><br><span class="line">当docker等待stop命令执行10秒超时之后，Docker Daemon将发送SIGKILL信号强制杀死1号进程，并销毁它的PID命名空间，其子进程redis-server也在收到SIGKILL信号后被强制终止并退出。</span><br><span class="line">如果此时应用中还有正在执行的事务或未持久化的数据，强制退出进程可能导致数据丢失或状态不一致。</span><br><span class="line"></span><br><span class="line">所以容器的1号进程必须能够正确的处理SIGTERM信号来支持优雅退出。</span><br><span class="line">如果容器中包含多个进程，则需要1号进程能够正确的传播SIGTERM信号来结束所有的子进程，之后再退出。</span><br><span class="line"></span><br><span class="line">正确的做法就是，令每个容器中只包含一个进程，同时都采用exec模式启动进程。</span><br></pre></td></tr></table></figure>
+
+<h6 id="容器中的”隔离”"><a href="#容器中的”隔离”" class="headerlink" title="容器中的”隔离”"></a>容器中的”隔离”</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">每个容器内部的PID和进程体系都是相互隔离、互不影响的。</span><br><span class="line"></span><br><span class="line">docker用户组的权限和root权限差别不大，官方安全文档中警告用户谨慎使用。</span><br><span class="line"></span><br><span class="line">namespace 内核级别的环境隔离方法</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="容器的本质"><a href="#容器的本质" class="headerlink" title="容器的本质"></a>容器的本质</h4><p>简单的给容器下个定论：容器 = CGroups + Namespace + Rootfs</p>
+<ul>
+<li>Namespace</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">namespace是linux提供的一种内核级别的环境隔离方法，提供了对Mount、UTS、IPC、PID、Network、User等进行隔离的机制。</span><br><span class="line"></span><br><span class="line">Namespace的实现主要是基于以下三个系统方法：</span><br><span class="line">clone(): 实现线程的系统调用，用来创建一个新的进程，并可以通过设置相关参数实现隔离。</span><br><span class="line">unshare()：使某个进程脱离某个Namespace</span><br><span class="line">setns()：把某个进程加入某个Namespace中</span><br></pre></td></tr></table></figure>
 
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/03/Kafka集群搭建/" itemprop="url">
-              
-                <span itemprop="name">Kafka集群搭建</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-03T21:39:00+08:00" content="2018-09-03">
-          09-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/03/Zabbix简单故障自愈/" itemprop="url">
-              
-                <span itemprop="name">Zabbix简单故障自愈</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-03T22:51:00+08:00" content="2018-08-03">
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/03/Zabbix发送邮件告警-含告警图片/" itemprop="url">
-              
-                <span itemprop="name">Zabbix发送邮件告警(含告警图片)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-03T22:26:00+08:00" content="2018-08-03">
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/03/Zabbix-sender实现秒级监控/" itemprop="url">
-              
-                <span itemprop="name">Zabbix-sender实现秒级监控</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-03T21:58:00+08:00" content="2018-08-03">
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/03/Zabbix-使用钉钉发送告警/" itemprop="url">
-              
-                <span itemprop="name">Zabbix-使用钉钉发送告警</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-03T21:49:00+08:00" content="2018-08-03">
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/01/Zabbix安装graphtree/" itemprop="url">
-              
-                <span itemprop="name">Zabbix安装graphtree</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-01T22:18:00+08:00" content="2018-08-01">
-          08-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    <!--添加-->
+    <div>
+  	
+    	  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  	
+    </div>
+    <!--添加-->
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>原创技术分享，感谢您的支持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Key liyk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Key liyk 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/21/MQ问答/" rel="next" title="MQ问答">
+                <i class="fa fa-chevron-left"></i> MQ问答
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/26/k8s镜像仓库迁移/" rel="prev" title="k8s镜像仓库迁移">
+                k8s镜像仓库迁移 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/6/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -680,6 +567,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -700,8 +591,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -779,6 +679,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#容器中进程启动的两种模式"><span class="nav-number">1.</span> <span class="nav-text">容器中进程启动的两种模式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#容器中的”隔离”"><span class="nav-number">1.0.1.</span> <span class="nav-text">容器中的”隔离”</span></a></li></ol></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#容器的本质"><span class="nav-number">2.</span> <span class="nav-text">容器的本质</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -928,6 +844,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
