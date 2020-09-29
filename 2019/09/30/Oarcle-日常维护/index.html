@@ -105,7 +105,8 @@
 <meta property="og:image" content="http://img.key1024.cn/md/20190727/yCngQ8aeTMtY.png">
 <meta property="og:image" content="http://img.key1024.cn/md/20190729/AO4xVoTw6zxO.png">
 <meta property="og:image" content="http://img.key1024.cn/md/20190924/YbbiGpnxyCUh.png">
-<meta property="og:updated_time" content="2019-09-30T09:19:50.152Z">
+<meta property="og:image" content="http://img.key1024.cn/20200927145248.png">
+<meta property="og:updated_time" content="2020-09-29T13:25:52.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Oarcle 日常维护">
 <meta name="twitter:description" content="背景 由于归档日志不停增加并且得不到清理，导致硬盘空间不足。因此需要定时清理归档日志，腾出可用空间。  操作步骤123456789101112# 使用rman清理$ rmanRMAN&amp;gt; connect target /RMAN&amp;gt; crosscheck archivelog all;# 列出日志RMAN&amp;gt; list archivelog all;# 清理所有日志RMAN&amp;gt; d">
@@ -387,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  814 字
+                  981 字
                 </span>
               
 
@@ -403,7 +404,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -476,6 +477,13 @@
 <h4 id="ORACLE清理监听日志"><a href="#ORACLE清理监听日志" class="headerlink" title="ORACLE清理监听日志"></a>ORACLE清理监听日志</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/opt/oracle/app/diag/tnslsnr/机器名/listener/trace/listener.log</span><br><span class="line">D:\app\Administrator\diag\tnslsnr\主机名\listenner\trace\listener.log</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 清理步骤</span><br><span class="line"># 先用lsnrctl进入监听模式   </span><br><span class="line">G:\docu&gt;lsnrctl</span><br><span class="line">LSNRCTL&gt;set log_status off (此时便可删除监听日志文件listener.log，然后再新建一个listener.log，日志文件位置：</span><br><span class="line">D:\app\Administrator\diag\tnslsnr\主机名\listenner\trace\下面) </span><br><span class="line"></span><br><span class="line">LSNRCTL&gt;set log_status on</span><br><span class="line">意思就是先停止监听日志输出。删除后再开启日志</span><br></pre></td></tr></table></figure>
+
+<h5 id="win普通用户无法使用sqlplus-as-sysdba登录"><a href="#win普通用户无法使用sqlplus-as-sysdba登录" class="headerlink" title="win普通用户无法使用sqlplus / as sysdba登录"></a>win普通用户无法使用sqlplus / as sysdba登录</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">其实在这种情况下，Oracle采用的是操作系统认证方式.</span><br><span class="line">当属于操作系统DBA组用户登陆到数据库服务器，那么Oracle认为这样的用户就可以授权以SYSDBA身份登录数据库。</span><br><span class="line">这时的用户名和密码随便输什么，都能连上库，使用show user命令查看登陆用户，其实都是SYS用户。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Linux下类似，使用id命令，查看用户所在组，如果在dba组，那么也可以以操作系统的方式直接连库。</span><br><span class="line">[oracle@mydb ~]$ id oracle</span><br><span class="line">uid=54321(oracle) gid=54321(oinstall) groups=54321(oinstall),54322(dba)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.key1024.cn/20200927145248.png" alt></p>
+
       
     </div>
     
@@ -638,7 +646,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -709,7 +717,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作步骤"><span class="nav-number">2.</span> <span class="nav-text">操作步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#授权用户权限"><span class="nav-number">3.1.</span> <span class="nav-text">授权用户权限</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看oracle用户锁定时间"><span class="nav-number">4.</span> <span class="nav-text">查看oracle用户锁定时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORACLE清理监听日志"><span class="nav-number">5.</span> <span class="nav-text">ORACLE清理监听日志</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作步骤"><span class="nav-number">2.</span> <span class="nav-text">操作步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#授权用户权限"><span class="nav-number">3.1.</span> <span class="nav-text">授权用户权限</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看oracle用户锁定时间"><span class="nav-number">4.</span> <span class="nav-text">查看oracle用户锁定时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORACLE清理监听日志"><span class="nav-number">5.</span> <span class="nav-text">ORACLE清理监听日志</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#win普通用户无法使用sqlplus-as-sysdba登录"><span class="nav-number">5.1.</span> <span class="nav-text">win普通用户无法使用sqlplus / as sysdba登录</span></a></li></ol></li></ol></div>
             
 
           </div>

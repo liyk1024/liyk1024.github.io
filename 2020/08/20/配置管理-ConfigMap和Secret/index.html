@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="配置管理需解决的问题： 可变的配置参数如何打包到镜像中 敏感信息防止泄露，如密码、密钥等 每次配置更新都要重新打包，镜像版本过多也给镜像存储管理带来负担 定制化太严重、可扩展能力差，且不容易复用  ConfiMap 作用：主要用来保存一些非敏感数据，如环境变量、命令行参数或挂载到存储卷中。 ConfigMap通过键值对来存储信息，是个namespace级别的资源，kubectl操作时可简写成cm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置管理-ConfigMap和Secret">
+<meta property="og:url" content="http://www.key1024.cn/2020/08/20/配置管理-ConfigMap和Secret/index.html">
+<meta property="og:site_name" content="So what">
+<meta property="og:description" content="配置管理需解决的问题： 可变的配置参数如何打包到镜像中 敏感信息防止泄露，如密码、密钥等 每次配置更新都要重新打包，镜像版本过多也给镜像存储管理带来负担 定制化太严重、可扩展能力差，且不容易复用  ConfiMap 作用：主要用来保存一些非敏感数据，如环境变量、命令行参数或挂载到存储卷中。 ConfigMap通过键值对来存储信息，是个namespace级别的资源，kubectl操作时可简写成cm">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-09-29T13:10:44.293Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="配置管理-ConfigMap和Secret">
+<meta name="twitter:description" content="配置管理需解决的问题： 可变的配置参数如何打包到镜像中 敏感信息防止泄露，如密码、密钥等 每次配置更新都要重新打包，镜像版本过多也给镜像存储管理带来负担 定制化太严重、可扩展能力差，且不容易复用  ConfiMap 作用：主要用来保存一些非敏感数据，如环境变量、命令行参数或挂载到存储卷中。 ConfigMap通过键值对来存储信息，是个namespace级别的资源，kubectl操作时可简写成cm">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.key1024.cn/2020/08/20/配置管理-ConfigMap和Secret/">
+
+
+
+
+
+  <title>配置管理-ConfigMap和Secret | So what</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">So what</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Evething will be ok!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2020/08/20/配置管理-ConfigMap和Secret/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Key liyk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="So what">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">配置管理-ConfigMap和Secret</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-20T21:09:00+08:00">
+                2020-08-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kubernetes/" itemprop="url" rel="index">
+                    <span itemprop="name">kubernetes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.7k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="配置管理需解决的问题："><a href="#配置管理需解决的问题：" class="headerlink" title="配置管理需解决的问题："></a>配置管理需解决的问题：</h5><ul>
+<li>可变的配置参数如何打包到镜像中</li>
+<li>敏感信息防止泄露，如密码、密钥等</li>
+<li>每次配置更新都要重新打包，镜像版本过多也给镜像存储管理带来负担</li>
+<li>定制化太严重、可扩展能力差，且不容易复用</li>
+</ul>
+<h4 id="ConfiMap"><a href="#ConfiMap" class="headerlink" title="ConfiMap"></a>ConfiMap</h4><ul>
+<li>作用：主要用来保存一些非敏感数据，如环境变量、命令行参数或挂载到存储卷中。</li>
+<li>ConfigMap通过键值对来存储信息，是个namespace级别的资源，kubectl操作时可简写成cm</li>
+<li>元数据使用data: 后跟相关键值</li>
+<li>支持键值对（值是数字需用双引号,即需用字符串来表示）、多行的文本（键后使用| 跟多行文本）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$ cat cm-demo-mix.yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: ConfigMap</span><br><span class="line">metadata:</span><br><span class="line">  name: cm-demo-mix # 对象名字</span><br><span class="line">  namespace: demo # 所在的命名空间</span><br><span class="line">data: # 这是跟其他对象不太一样的地方，其他对象这里都是spec</span><br><span class="line">  # 每一个键都映射到一个简单的值</span><br><span class="line">  player_initial_lives: &quot;3&quot; # 注意这里的值如果数字的话，必须用字符串来表示</span><br><span class="line">  ui_properties_file_name: &quot;user-interface.properties&quot;</span><br><span class="line">  # 也可以来保存多行的文本</span><br><span class="line">  game.properties: |</span><br><span class="line">    enemy.types=aliens,monsters</span><br><span class="line">    player.maximum-lives=5</span><br><span class="line">  user-interface.properties: |</span><br><span class="line">    color.good=purple</span><br><span class="line">    color.bad=yellow</span><br><span class="line">    allow.textmode=true</span><br><span class="line">    </span><br><span class="line">$ cat cm-demo-all-env.yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: ConfigMap</span><br><span class="line">metadata:</span><br><span class="line">  name: cm-demo-all-env</span><br><span class="line">  namespace: demo</span><br><span class="line">data:</span><br><span class="line">  SPECIAL_LEVEL: very</span><br><span class="line">  SPECIAL_TYPE: charm</span><br></pre></td></tr></table></figure>
+
+<h6 id="可以通过kubectl-create-cm基于目录、文件或者字面值来创建。"><a href="#可以通过kubectl-create-cm基于目录、文件或者字面值来创建。" class="headerlink" title="可以通过kubectl create cm基于目录、文件或者字面值来创建。"></a>可以通过kubectl create cm基于目录、文件或者字面值来创建。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl create configmap &lt;map-name&gt; &lt;data-source&gt;</span><br><span class="line"># &lt;map-name&gt; 是要设置的ConfigMap名称，&lt;data-source&gt; 是要从中提取数据的目录、文件或者字面值。</span><br><span class="line"># 可以使用kubectl describe 或者 kubectl get 获取有关 ConfigMap 的信息。</span><br></pre></td></tr></table></figure>
+
+<h6 id="基于目录创建ConfigMap"><a href="#基于目录创建ConfigMap" class="headerlink" title="基于目录创建ConfigMap"></a>基于目录创建ConfigMap</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用 kubectl create configmap 基于同一目录中的多个文件创建 ConfigMap。 </span><br><span class="line">当你基于目录来创建 ConfigMap 时，kubectl 识别目录下基本名可以作为合法键名的 文件，并将这些文件打包到新的 ConfigMap 中。</span><br><span class="line">普通文件之外的所有目录项都会被 忽略（例如，子目录、符号链接、设备、管道等等）。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># 创建本地目录</span><br><span class="line">mkdir -p configure-pod-container/configmap/</span><br><span class="line"></span><br><span class="line"># 将实例文件下载到 `configure-pod-container/configmap/` 目录</span><br><span class="line">wget https://kubernetes.io/examples/configmap/game.properties -O configure-pod-container/configmap/game.properties</span><br><span class="line">wget https://kubernetes.io/examples/configmap/ui.properties -O configure-pod-container/configmap/ui.properties</span><br><span class="line"></span><br><span class="line"># 创建 configmap</span><br><span class="line">kubectl create configmap game-config --from-file=configure-pod-container/configmap/</span><br><span class="line"># 以上命令将 configure-pod-container/configmap 目录下的所有文件，也就是 game.properties 和 ui.properties 打包到 game-config ConfigMap 中。</span><br><span class="line"></span><br><span class="line">kubectl describe configmaps game-config</span><br><span class="line">Name:         game-config</span><br><span class="line">Namespace:    default</span><br><span class="line">Labels:       &lt;none&gt;</span><br><span class="line">Annotations:  &lt;none&gt;</span><br><span class="line"></span><br><span class="line">Data</span><br><span class="line">====</span><br><span class="line">game.properties:</span><br><span class="line">----</span><br><span class="line">enemies=aliens</span><br><span class="line">lives=3</span><br><span class="line">enemies.cheat=true</span><br><span class="line">enemies.cheat.level=noGoodRotten</span><br><span class="line">secret.code.passphrase=UUDDLRLRBABAS</span><br><span class="line">secret.code.allowed=true</span><br><span class="line">secret.code.lives=30</span><br><span class="line">ui.properties:</span><br><span class="line">----</span><br><span class="line">color.good=purple</span><br><span class="line">color.bad=yellow</span><br><span class="line">allow.textmode=true</span><br><span class="line">how.nice.to.look=fairlyNice</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">kubectl get configmaps game-config -o yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: ConfigMap</span><br><span class="line">metadata:</span><br><span class="line">  creationTimestamp: 2016-02-18T18:52:05Z</span><br><span class="line">  name: game-config</span><br><span class="line">  namespace: default</span><br><span class="line">  resourceVersion: &quot;516&quot;</span><br><span class="line">  selfLink: /api/v1/namespaces/default/configmaps/game-config</span><br><span class="line">  uid: b4952dc3-d670-11e5-8cd0-68f728db1985</span><br><span class="line">data:</span><br><span class="line">  game.properties: |</span><br><span class="line">    enemies=aliens</span><br><span class="line">    lives=3</span><br><span class="line">    enemies.cheat=true</span><br><span class="line">    enemies.cheat.level=noGoodRotten</span><br><span class="line">    secret.code.passphrase=UUDDLRLRBABAS</span><br><span class="line">    secret.code.allowed=true</span><br><span class="line">    secret.code.lives=30</span><br><span class="line">  ui.properties: |</span><br><span class="line">    color.good=purple</span><br><span class="line">    color.bad=yellow</span><br><span class="line">    allow.textmode=true</span><br><span class="line">    how.nice.to.look=fairlyNice</span><br></pre></td></tr></table></figure>
+
+<h6 id="基于文件创建ConfigMap"><a href="#基于文件创建ConfigMap" class="headerlink" title="基于文件创建ConfigMap"></a>基于文件创建ConfigMap</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 可以使用 kubectl create configmap 基于单个文件或多个文件创建 ConfigMap。</span><br><span class="line">kubectl create configmap game-config-2 --from-file=configure-pod-container/configmap/game.properties</span><br></pre></td></tr></table></figure>
+
+<p><strong>Pod 必须和 ConfigMap 在同一个 namespace 下面;</strong><br><strong>在创建 Pod 之前，请务必保证 ConfigMap 已经存在，否则 Pod 创建会报错</strong></p>
+<h6 id="ConfigMap的几大使用场景"><a href="#ConfigMap的几大使用场景" class="headerlink" title="ConfigMap的几大使用场景"></a>ConfigMap的几大使用场景</h6><ul>
+<li>命令行参数</li>
+<li>环境变量，可以只注入部分变量，也可全部注入</li>
+<li>挂载文件，可以是单个文件也可以是所有键值对，用每个键值作为文件名。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">$ cat cm-demo-pod.yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: cm-demo-pod</span><br><span class="line">  namespace: demo</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: demo</span><br><span class="line">      image: busybox:1.28</span><br><span class="line">      command:</span><br><span class="line">        - &quot;bin/sh&quot;</span><br><span class="line">        - &quot;-c&quot;</span><br><span class="line">        - &quot;echo PLAYER_INITIAL_LIVES=$PLAYER_INITIAL_LIVES &amp;&amp; sleep 10000&quot;</span><br><span class="line">      env:</span><br><span class="line">        # 定义环境变量</span><br><span class="line">        - name: PLAYER_INITIAL_LIVES # 请注意这里和 ConfigMap 中的键名是不一样的</span><br><span class="line">          valueFrom:</span><br><span class="line">            configMapKeyRef:</span><br><span class="line">              name: cm-demo-mix         # 这个值来自ConfigMap</span><br><span class="line">              key: player_initial_lives # 需要取值的键</span><br><span class="line">        - name: UI_PROPERTIES_FILE_NAME</span><br><span class="line">          valueFrom:</span><br><span class="line">            configMapKeyRef:</span><br><span class="line">              name: cm-demo-mix</span><br><span class="line">              key: ui_properties_file_name</span><br><span class="line">      envFrom:  # 可以将 configmap 中的所有键值对都通过环境变量注入容器中</span><br><span class="line">        - configMapRef:</span><br><span class="line">          name: cm-demo-all-env</span><br><span class="line">      volumeMounts:</span><br><span class="line">      - name: full-config # 这里是下面定义的 volume 名字</span><br><span class="line">        mountPath: &quot;/config&quot; # 挂载的目标路径</span><br><span class="line">        readOnly: true</span><br><span class="line">      - name: part-config</span><br><span class="line">        mountPath: /etc/game/</span><br><span class="line">        readOnly: true</span><br><span class="line">  volumes: # 您可以在 Pod 级别设置卷，然后将其挂载到 Pod 内的容器中</span><br><span class="line">    - name: full-config # 这是 volume 的名字</span><br><span class="line">      configMap:</span><br><span class="line">        name: cm-demo-mix # 提供你想要挂载的 ConfigMap 的名字</span><br><span class="line">    - name: part-config</span><br><span class="line">      configMap:</span><br><span class="line">        name: cm-demo-mix</span><br><span class="line">        items: # 我们也可以只挂载部分的配置</span><br><span class="line">        - key: game.properties</span><br><span class="line">          path: properties</span><br></pre></td></tr></table></figure>
+
+<h4 id="Secret"><a href="#Secret" class="headerlink" title="Secret"></a>Secret</h4><ul>
+<li>用secret保存一些敏感数据信息，比如密码、密钥、token等</li>
+<li>用法和ConfigMap基本一致，都可以用作环境变量或者文件挂载</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 使用kubectl来创建secret，支持三种类型</span><br><span class="line">kubectl create secret -h</span><br><span class="line">Available Commands:</span><br><span class="line">   docker-registry Create a secret for use with a Docker registry</span><br><span class="line">   generic         Create a secret from a local file, directory or literal value</span><br><span class="line">   tls             Create a TLS secret</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个secret来保存私有容器仓库的身份信息</span><br><span class="line">$ kubectl create secret -n demo docker-registry regcred \</span><br><span class="line">   --docker-server=yourprivateregistry.com \</span><br><span class="line">   --docker-username=liyk \</span><br><span class="line">   --docker-password=mypassw0rd \</span><br><span class="line">--docker-email=liyk@example.com</span><br><span class="line"> secret/regcred created</span><br><span class="line"> $ kubectl get secret -n demo regcred</span><br><span class="line"> NAME      TYPE                             DATA   AGE</span><br><span class="line"> regcred   kubernetes.io/dockerconfigjson   1      28s</span><br><span class="line"> </span><br><span class="line"># 可看出创建出来的secret类型是：kubernetes.io/dockerconfigjson</span><br><span class="line">$ kubectl get secret regcred -n demo --output=&quot;jsonpath=&#123;.data.\.dockerconfigjson&#125;&quot; | base64 --decode</span><br><span class="line">&#123;&quot;auths&quot;:&#123;&quot;yourprivateregistry.com&quot;:&#123;&quot;username&quot;:&quot;allen&quot;,&quot;password&quot;:&quot;mypassw0rd&quot;,&quot;email&quot;:&quot;allen@example.com&quot;,&quot;auth&quot;:&quot;YWxsZW46bXlwYXNzdzByZA==&quot;&#125;&#125;&#125;</span><br><span class="line"># Secret 保存的数据都是通过 base64 加密后的数据。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 平时使用较为广泛的还有另外一种Opaque类型的 Secret</span><br><span class="line">$ cat secret-demo.yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Secret</span><br><span class="line">metadata:</span><br><span class="line">  name: dev-db-secret</span><br><span class="line">  namespace: demo</span><br><span class="line">type: Opaque</span><br><span class="line">data: # 这里的值都是 base64 加密后的</span><br><span class="line">  password: UyFCXCpkJHpEc2I9</span><br><span class="line">  username: ZGV2dXNlcg==</span><br><span class="line"></span><br><span class="line"># 也可以通过如下等价的 kubectl 命令来创建出来</span><br><span class="line">$ kubectl create secret generic dev-db-secret -n demo \</span><br><span class="line">  --from-literal=username=devuser \</span><br><span class="line">  --from-literal=password=&apos;S!B\*d$zDsb=&apos;</span><br><span class="line">  </span><br><span class="line"># 或通过文件来创建对象</span><br><span class="line">$ echo -n &apos;username=devuser&apos; &gt; ./db_secret.txt</span><br><span class="line">$ echo -n &apos;password=S!B\*d$zDsb=&apos; &gt;&gt; ./db_secret.txt</span><br><span class="line">$ kubectl create secret generic dev-db-secret -n demo \</span><br><span class="line">  --from-file=./db_secret.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 在pod中使用secret</span><br><span class="line">$ cat pod-secret.yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: secret-test-pod</span><br><span class="line">  namespace: demo</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: demo-container</span><br><span class="line">      image: busybox:1.28</span><br><span class="line">      command: [ &quot;/bin/sh&quot;, &quot;-c&quot;, &quot;env&quot; ]</span><br><span class="line">      envFrom:</span><br><span class="line">      - secretRef:</span><br><span class="line">          name: dev-db-secret</span><br><span class="line">  restartPolicy: Never</span><br></pre></td></tr></table></figure>
+
+<h5 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ConfigMap 和 Secret 是 Kubernetes 常用的保存配置数据的对象，你可以根据需要选择合适的对象存储数据。</span><br><span class="line">通过 Volume 方式挂载到 Pod 内的，kubelet 都会定期进行更新。</span><br><span class="line">但是通过环境变量注入到容器中，这样无法感知到 ConfigMap 或 Secret 的内容更新。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果业务自身支持reload，可直接定期进行reload（可以配合readlinessProbe一起使用）。比如nginx -s reload可以通过inotify感知到文件更新。</li>
+<li>如果业务没上述能力，可以采用滚动升级的方式。借助开源工具Reloader，一旦发现configmap和secret更新就自动触发对deployment或statefulset等工作负载对象进行滚动升级。 （<a href="https://github.com/stakater/Reloader）" target="_blank" rel="noopener">https://github.com/stakater/Reloader）</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    <!--添加-->
+    <div>
+  	
+    	  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  	
+    </div>
+    <!--添加-->
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>原创技术分享，感谢您的支持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Key liyk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Key liyk 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/19/Oracle修改表空间大小/" rel="next" title="Oracle修改表空间大小">
+                <i class="fa fa-chevron-left"></i> Oracle修改表空间大小
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/05/PVC/" rel="prev" title="PVC扩容">
+                PVC扩容 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Key liyk">
+            
+              <p class="site-author-name" itemprop="name">Key liyk</p>
+              <p class="site-description motion-element" itemprop="description">么啥好说的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liyk1024" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liyk@anchnet.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置管理需解决的问题："><span class="nav-number">1.</span> <span class="nav-text">配置管理需解决的问题：</span></a></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#ConfiMap"><span class="nav-number"></span> <span class="nav-text">ConfiMap</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#可以通过kubectl-create-cm基于目录、文件或者字面值来创建。"><span class="nav-number">0.1.</span> <span class="nav-text">可以通过kubectl create cm基于目录、文件或者字面值来创建。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#基于目录创建ConfigMap"><span class="nav-number">0.2.</span> <span class="nav-text">基于目录创建ConfigMap</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#基于文件创建ConfigMap"><span class="nav-number">0.3.</span> <span class="nav-text">基于文件创建ConfigMap</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ConfigMap的几大使用场景"><span class="nav-number">0.4.</span> <span class="nav-text">ConfigMap的几大使用场景</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Secret"><span class="nav-number"></span> <span class="nav-text">Secret</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#写在最后"><span class="nav-number">1.</span> <span class="nav-text">写在最后</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Key liyk</span>
+
+  
+</div>
+
+<!-- 添加备案号 -->
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span>
+  陕ICP备19011648号-1
+</span>
+</div>
+<!--
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+-->
+
+<!---->
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!--<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>-->
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+</body>
+</html>
