@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="GitlabRunner简介GItLab Runner是一个开源项目，用于运行您的作业并将结果发送回Gitlab，它与Gitlab CI结合使用，Gitlab CI是gitlab随附的用于协调作业的开源持续集成服务。  特点 允许同时执行多个作业 对多个服务器(甚至每个项目)使用多个令牌 限制每个令牌的并行作业数 可本地、docker容器等执行作业 自动重新加载配置，无需重启    GitLabR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitlabRunner实践">
+<meta property="og:url" content="http://www.key1024.cn/2020/12/05/GitlabRunner实践/index.html">
+<meta property="og:site_name" content="So what">
+<meta property="og:description" content="GitlabRunner简介GItLab Runner是一个开源项目，用于运行您的作业并将结果发送回Gitlab，它与Gitlab CI结合使用，Gitlab CI是gitlab随附的用于协调作业的开源持续集成服务。  特点 允许同时执行多个作业 对多个服务器(甚至每个项目)使用多个令牌 限制每个令牌的并行作业数 可本地、docker容器等执行作业 自动重新加载配置，无需重启    GitLabR">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.key1024.cn/md/20200827/rxSHUvXDaywN.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20200827/iOw60BstjBoB.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20200827/vLX1orzWuq2M.png">
+<meta property="og:image" content="http://img.key1024.cn/20200828110809.png">
+<meta property="og:image" content="http://img.key1024.cn/20200828110855.png">
+<meta property="og:image" content="http://img.key1024.cn/20200828113610.png">
+<meta property="og:updated_time" content="2021-02-25T14:01:09.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GitlabRunner实践">
+<meta name="twitter:description" content="GitlabRunner简介GItLab Runner是一个开源项目，用于运行您的作业并将结果发送回Gitlab，它与Gitlab CI结合使用，Gitlab CI是gitlab随附的用于协调作业的开源持续集成服务。  特点 允许同时执行多个作业 对多个服务器(甚至每个项目)使用多个令牌 限制每个令牌的并行作业数 可本地、docker容器等执行作业 自动重新加载配置，无需重启    GitLabR">
+<meta name="twitter:image" content="http://img.key1024.cn/md/20200827/rxSHUvXDaywN.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.key1024.cn/2020/12/05/GitlabRunner实践/">
+
+
+
+
+
+  <title>GitlabRunner实践 | So what</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">So what</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Evething will be ok!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2020/12/05/GitlabRunner实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Key liyk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="So what">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GitlabRunner实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-05T21:59:00+08:00">
+                2020-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DevOps/" itemprop="url" rel="index">
+                    <span itemprop="name">DevOps</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="GitlabRunner简介"><a href="#GitlabRunner简介" class="headerlink" title="GitlabRunner简介"></a>GitlabRunner简介</h4><p>GItLab Runner是一个开源项目，用于运行您的作业并将结果发送回Gitlab，它与Gitlab CI结合使用，Gitlab CI是gitlab随附的用于协调作业的开源持续集成服务。</p>
+<ul>
+<li>特点<ul>
+<li>允许同时执行多个作业</li>
+<li>对多个服务器(甚至每个项目)使用多个令牌</li>
+<li>限制每个令牌的并行作业数</li>
+<li>可本地、docker容器等执行作业</li>
+<li>自动重新加载配置，无需重启</li>
+</ul>
+</li>
+</ul>
+<h4 id="GitLabRunner安装"><a href="#GitLabRunner安装" class="headerlink" title="GitLabRunner安装"></a>GitLabRunner安装</h4><h5 id="使用gitlab官方仓库安装"><a href="#使用gitlab官方仓库安装" class="headerlink" title="使用gitlab官方仓库安装"></a>使用gitlab官方仓库安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 安装最新版</span><br><span class="line"># For RHEL/CentOS/Fedora</span><br><span class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash</span><br><span class="line"># For RHEL/CentOS/Fedora</span><br><span class="line">yum install gitlab-runner -y</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 安装指定版本</span><br><span class="line">yum list gitlab-runner --showduplicates | sort -r</span><br><span class="line">yum install gitlab-runner-10.0.0-1</span><br><span class="line"></span><br><span class="line"># 根新runner</span><br><span class="line"># For RHEL/CentOS/Fedora</span><br><span class="line">sudo yum update</span><br><span class="line">sudo yum install gitlab-runner</span><br></pre></td></tr></table></figure>
+
+<h4 id="GitlabRunner注册"><a href="#GitlabRunner注册" class="headerlink" title="GitlabRunner注册"></a>GitlabRunner注册</h4><p>大概过程：获取runner token -&gt; 进行注册</p>
+<h5 id="GitlabRunner类型"><a href="#GitlabRunner类型" class="headerlink" title="GitlabRunner类型"></a>GitlabRunner类型</h5><ul>
+<li>shared: 运行整个平台项目的作业（gitlab）</li>
+<li>group: 运行特定group下的所有项目的作业（group）</li>
+<li>specific: 运行指定的项目作业（project）</li>
+<li>locked: 无法运行项目作业</li>
+<li>paused: 不会运行作业</li>
+</ul>
+<h5 id="获取runner-token"><a href="#获取runner-token" class="headerlink" title="获取runner token"></a>获取runner token</h5><h6 id="获取shared类型run"><a href="#获取shared类型run" class="headerlink" title="获取shared类型run"></a>获取shared类型run</h6><p>Admin Area -&gt; Overview -&gt; Runners</p>
+<p><img src="http://img.key1024.cn/md/20200827/rxSHUvXDaywN.png" alt="mark"></p>
+<h6 id="获取group类型的runner-token"><a href="#获取group类型的runner-token" class="headerlink" title="获取group类型的runner token"></a>获取group类型的runner token</h6><p>(先创建组)group -&gt; Settings -&gt; CI/CD -&gt; Runners(点击expand) -&gt; Group Runners</p>
+<p><img src="http://img.key1024.cn/md/20200827/iOw60BstjBoB.png" alt="mark"></p>
+<h6 id="获取specific类型的runner-token"><a href="#获取specific类型的runner-token" class="headerlink" title="获取specific类型的runner token"></a>获取specific类型的runner token</h6><p>进入具体的项目 -&gt; Settings -&gt; CI/CD -&gt; Runners -&gt; Specific Runners</p>
+<p><img src="http://img.key1024.cn/md/20200827/vLX1orzWuq2M.png" alt="mark"></p>
+<h4 id="进行注册"><a href="#进行注册" class="headerlink" title="进行注册"></a>进行注册</h4><ul>
+<li>docker</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 方式1： 启动容器交互式注册</span><br><span class="line">docker run --rm -t -i -v ~/data/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner:v12.6.0 register</span><br><span class="line"></span><br><span class="line">Runtime platform                                    arch=amd64 os=linux pid=6 revision=ac8e767a version=12.6.0</span><br><span class="line">Running in system-mode.</span><br><span class="line"></span><br><span class="line">Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):</span><br><span class="line">http://192.168.1.105</span><br><span class="line">Please enter the gitlab-ci token for this runner:</span><br><span class="line">4tutaeWWL3srNEcmHs1s</span><br><span class="line">Please enter the gitlab-ci description for this runner:</span><br><span class="line">[00e4f023b5ae]: devops-service-runner</span><br><span class="line">Please enter the gitlab-ci tags for this runner (comma separated):</span><br><span class="line">build</span><br><span class="line">Registering runner... succeeded                     runner=4tutaeWW</span><br><span class="line">Please enter the executor: parallels, virtualbox, docker-ssh+machine, kubernetes, docker+machine, custom, docker, docker-ssh, shell, ssh:</span><br><span class="line">shell</span><br><span class="line">Runner registered successfully. Feel free to start it, but if it&apos;s running already the config should be automatically reloaded!</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 方式2：直接注册</span><br><span class="line">docker run -itd --rm -v ~/data/gitlab-runner/config:/etc/gitlab-runner  gitlab/gitlab-runner:v12.6.0 register \</span><br><span class="line">  --non-interactive \</span><br><span class="line">  --executor &quot;shell&quot; \</span><br><span class="line">  --url &quot;http://192.168.1.200:30088/&quot; \</span><br><span class="line">  --registration-token &quot;JRzzw2j1Ji6aBjwvkxAv&quot; \</span><br><span class="line">  --description &quot;devops-runner&quot; \</span><br><span class="line">  --tag-list &quot;build,deploy&quot; \</span><br><span class="line">  --run-untagged=&quot;true&quot; \</span><br><span class="line">  --locked=&quot;false&quot; \</span><br><span class="line">  --access-level=&quot;not_protected&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>系统命令行注册</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner register</span><br><span class="line"># 安装提示输入，回车即可</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.key1024.cn/20200828110809.png" alt></p>
+<ul>
+<li>查看注册情况<br><img src="http://img.key1024.cn/20200828110855.png" alt></li>
+</ul>
+<h4 id="Gitlab-Runner命令"><a href="#Gitlab-Runner命令" class="headerlink" title="Gitlab Runner命令"></a>Gitlab Runner命令</h4><p>GitLab Runner包含一组命令，可用于注册，管理和运行构建。</p>
+<ul>
+<li>启动命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner --debug &lt;command&gt;   #调试模式排查错误特别有用。</span><br><span class="line">gitlab-runner &lt;command&gt; --help    #获取帮助信息</span><br><span class="line">gitlab-runner run       #普通用户模式  配置文件位置 ~/.gitlab-runner/config.toml</span><br><span class="line">sudo gitlab-runner run  # 超级用户模式  配置文件位置/etc/gitlab-runner/config.toml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注册命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner register  #默认交互模式下使用，非交互模式添加 --non-interactive</span><br><span class="line">gitlab-runner list      #此命令列出了保存在配置文件中的所有运行程序</span><br><span class="line">gitlab-runner verify    #此命令检查注册的runner是否可以连接，但不验证GitLab服务是否正在使用runner。 --delete 删除</span><br><span class="line">gitlab-runner unregister   #该命令使用GitLab取消已注册的runner。</span><br><span class="line"></span><br><span class="line">#使用令牌注销</span><br><span class="line">gitlab-runner unregister --url http://gitlab.example.com/ --token t0k3n</span><br><span class="line">#使用名称注销（同名删除第一个）</span><br><span class="line">gitlab-runner unregister --name test-runner</span><br><span class="line">#注销所有</span><br><span class="line">gitlab-runner unregister --all-runners</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>服务管理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner</span><br><span class="line"># --user指定将用于执行构建的用户</span><br><span class="line"># --working-directory  指定将使用**Shell** executor 运行构建时所有数据将存储在其中的根目录</span><br><span class="line"></span><br><span class="line">gitlab-runner uninstall #该命令停止运行并从服务中卸载GitLab Runner。</span><br><span class="line">gitlab-runner start     #该命令启动GitLab Runner服务。</span><br><span class="line">gitlab-runner stop      #该命令停止GitLab Runner服务。</span><br><span class="line">gitlab-runner restart   #该命令将停止，然后启动GitLab Runner服务。</span><br><span class="line">gitlab-runner status #此命令显示GitLab Runner服务的状态。当服务正在运行时，退出代码为零；而当服务未运行时，退出代码为非零。</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行流水线任务"><a href="#运行流水线任务" class="headerlink" title="运行流水线任务"></a>运行流水线任务</h4><p>在gitlab仓库中项目根目录添加一个.gitlab-ci.yml文件，文件内容如下：</p>
+<ul>
+<li>yaml文件</li>
+</ul>
+<h6 id="此流水线共包含两个job，分别是build-和-deploy"><a href="#此流水线共包含两个job，分别是build-和-deploy" class="headerlink" title="此流水线共包含两个job，分别是build 和 deploy"></a>此流水线共包含两个job，分别是build 和 deploy</h6><ul>
+<li>build job包含一个stage build。build stage配置了在具有build标签的runner（build-test）中运行，限制为master分支提交，运行构建命令。</li>
+<li>deploy job包含一个stage deploy。 deploy stage配置了在具有deploy标签的runner（build-test）中运行，限制为master分支提交，运行发布命令。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">stages:</span><br><span class="line">  - build</span><br><span class="line">  - deploy</span><br><span class="line"> </span><br><span class="line">build:</span><br><span class="line">  stage: build</span><br><span class="line">  tags:</span><br><span class="line">    - build-test</span><br><span class="line">  only:</span><br><span class="line">    - master</span><br><span class="line">  script:</span><br><span class="line">    - echo &quot;mvn clean &quot;</span><br><span class="line">    - echo &quot;mvn install&quot;</span><br><span class="line"></span><br><span class="line">deploy:</span><br><span class="line">  stage: deploy</span><br><span class="line">  tags:</span><br><span class="line">    - build-test</span><br><span class="line">  only:</span><br><span class="line">    - master</span><br><span class="line">  script:</span><br><span class="line">    - echo &quot;hello deploy&quot;</span><br><span class="line">    </span><br><span class="line"># 在mster分支上模式提交代码，查看流水线运行情况</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试流水线"><a href="#测试流水线" class="headerlink" title="测试流水线"></a>测试流水线</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">touch 1.txt</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img.key1024.cn/20200828113610.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    <!--添加-->
+    <div>
+  	
+    	  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  	
+    </div>
+    <!--添加-->
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>原创技术分享，感谢您的支持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Key liyk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Key liyk 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/25/GitLab安装配置/" rel="next" title="GitLab安装配置">
+                <i class="fa fa-chevron-left"></i> GitLab安装配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/24/sonarqube集成jenkins/" rel="prev" title="sonarqube集成jenkins">
+                sonarqube集成jenkins <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Key liyk">
+            
+              <p class="site-author-name" itemprop="name">Key liyk</p>
+              <p class="site-description motion-element" itemprop="description">么啥好说的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liyk1024" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liyk@anchnet.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#GitlabRunner简介"><span class="nav-number">1.</span> <span class="nav-text">GitlabRunner简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitLabRunner安装"><span class="nav-number">2.</span> <span class="nav-text">GitLabRunner安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用gitlab官方仓库安装"><span class="nav-number">2.1.</span> <span class="nav-text">使用gitlab官方仓库安装</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitlabRunner注册"><span class="nav-number">3.</span> <span class="nav-text">GitlabRunner注册</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#GitlabRunner类型"><span class="nav-number">3.1.</span> <span class="nav-text">GitlabRunner类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取runner-token"><span class="nav-number">3.2.</span> <span class="nav-text">获取runner token</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#获取shared类型run"><span class="nav-number">3.2.1.</span> <span class="nav-text">获取shared类型run</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#获取group类型的runner-token"><span class="nav-number">3.2.2.</span> <span class="nav-text">获取group类型的runner token</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#获取specific类型的runner-token"><span class="nav-number">3.2.3.</span> <span class="nav-text">获取specific类型的runner token</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进行注册"><span class="nav-number">4.</span> <span class="nav-text">进行注册</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gitlab-Runner命令"><span class="nav-number">5.</span> <span class="nav-text">Gitlab Runner命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行流水线任务"><span class="nav-number">6.</span> <span class="nav-text">运行流水线任务</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#此流水线共包含两个job，分别是build-和-deploy"><span class="nav-number">6.0.1.</span> <span class="nav-text">此流水线共包含两个job，分别是build 和 deploy</span></a></li></ol></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#测试流水线"><span class="nav-number">7.</span> <span class="nav-text">测试流水线</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Key liyk</span>
+
+  
+</div>
+
+<!-- 添加备案号 -->
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span>
+  陕ICP备19011648号-1
+</span>
+</div>
+<!--
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+-->
+
+<!---->
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!--<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>-->
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+</body>
+</html>

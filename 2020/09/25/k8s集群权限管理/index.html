@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="概述任何请求访问k8s的kube-apiserver时都要依次经历这三个阶段：  认证（Authentication，有时简写成AuthN）：做身份校验，解决“你是谁？” 授权（Authorization，有时简写AuthZ）：做权限管控，解决“你能干什么？”，给予访问k8s集群中哪些资源以及做哪些操作的权利，比如你是否能创建一个pod是否能删除一个pod。 准入控制（Admission Cont">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s集群权限管理">
+<meta property="og:url" content="http://www.key1024.cn/2020/09/25/k8s集群权限管理/index.html">
+<meta property="og:site_name" content="So what">
+<meta property="og:description" content="概述任何请求访问k8s的kube-apiserver时都要依次经历这三个阶段：  认证（Authentication，有时简写成AuthN）：做身份校验，解决“你是谁？” 授权（Authorization，有时简写AuthZ）：做权限管控，解决“你能干什么？”，给予访问k8s集群中哪些资源以及做哪些操作的权利，比如你是否能创建一个pod是否能删除一个pod。 准入控制（Admission Cont">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.key1024.cn/md/20201109/v1b0THc67ICI.png">
+<meta property="og:updated_time" content="2021-02-25T14:05:05.365Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="k8s集群权限管理">
+<meta name="twitter:description" content="概述任何请求访问k8s的kube-apiserver时都要依次经历这三个阶段：  认证（Authentication，有时简写成AuthN）：做身份校验，解决“你是谁？” 授权（Authorization，有时简写AuthZ）：做权限管控，解决“你能干什么？”，给予访问k8s集群中哪些资源以及做哪些操作的权利，比如你是否能创建一个pod是否能删除一个pod。 准入控制（Admission Cont">
+<meta name="twitter:image" content="http://img.key1024.cn/md/20201109/v1b0THc67ICI.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.key1024.cn/2020/09/25/k8s集群权限管理/">
+
+
+
+
+
+  <title>k8s集群权限管理 | So what</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">So what</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Evething will be ok!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2020/09/25/k8s集群权限管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Key liyk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="So what">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">k8s集群权限管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-25T22:03:00+08:00">
+                2020-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kubernetes/" itemprop="url" rel="index">
+                    <span itemprop="name">kubernetes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>任何请求访问k8s的kube-apiserver时都要依次经历这三个阶段：</p>
+<ul>
+<li>认证（Authentication，有时简写成AuthN）：做身份校验，解决“你是谁？”</li>
+<li>授权（Authorization，有时简写AuthZ）：做权限管控，解决“你能干什么？”，给予访问k8s集群中哪些资源以及做哪些操作的权利，比如你是否能创建一个pod是否能删除一个pod。</li>
+<li>准入控制（Admission Control）：由一组控制逻辑级联而成，对对象进行拦截校验、更改等操作。比如在一个名为test的ns中创建一个pod，如果这个ns不存在那集群要不要自动创建出来？或者直接拒绝该请求？</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20201109/v1b0THc67ICI.png" alt="mark"></p>
+<p>当然如果你的k8s集群开启了HTTP访问，就不再需要认证和授权流程了，显然这种配置风险太大。</p>
+<h4 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在认证阶段最重要的就是身份（Identity），我们需要从中获取到用户的相关信息。</span><br><span class="line">Identity 信息可以通过 User 或者 Group 来定义，但是 Kubernetes 中其实并没有相关定义，所以你无法通过 Kubernetes API 接口进行创建、查询和管理。</span><br><span class="line">Kubernetes 认为 User 这类信息由外部系统来管理，自己并不负责管理和设计，这样可以避免重复定义用户模型，方便第三方用户权限平台进行对接。</span><br><span class="line">下面介绍几种常见的用户认证方式。</span><br></pre></td></tr></table></figure>
+
+<h5 id="x509证书"><a href="#x509证书" class="headerlink" title="x509证书"></a>x509证书</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">k8s使用mTLS进行身份验证，通过解析请求使用的 客户端（client）证书，将其中的 subject 的通用名称（Common Name）字段（例如&quot;/CN=bob&quot;）作为用户名。</span><br><span class="line">Kubernetes 集群各个组件间相互通信，都是基于 x509 证书进行身份校验的。关于证书的创建、查看等。</span><br><span class="line"></span><br><span class="line">比如使用openssl命令行工具生成一个证书签名请求（CSR）：</span><br><span class="line">openssl req -new -key zhangsan.pem -out zhangsan-csr.pem -subj &quot;/CN=zhangsan/O=app1/O=app2&quot;</span><br><span class="line"></span><br><span class="line">这条命令会使用用户名zhangsan生成一个 CSR，且它属于 &quot;app1&quot; 和 &quot;app2&quot; 两个用户组，然后我们使用 CA 证书根据这个 CSR 就可以签发出一对证书。</span><br><span class="line">当用这对证书去访问 APIServer 时，它拿到的用户就是zhangsan了。</span><br></pre></td></tr></table></figure>
+
+<h5 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">token又分为如下几种类型：</span><br><span class="line">a、用户自己提供的静态Token，可以将这些 Token 写到一个 CSV 文件中，其中至少包含 3 列：分别为 Token、用户名和用户 ID。</span><br><span class="line">你可以增加一个可选列包含 group 的信息，比如：</span><br><span class="line">token1,user1,uid1,&quot;group1,group2,group3&quot; </span><br><span class="line"></span><br><span class="line">APIServer 在启动时会通过参数--token-auth-file=xxxx来指定读取的 CSV 文件。不过这种方式，实际环境中基本上不会使用到。毕竟这种静态文件不方便修改，每次修改后还需要重新启动 APIServer。</span><br></pre></td></tr></table></figure>
+
+<h5 id="ServiceAccount-Token"><a href="#ServiceAccount-Token" class="headerlink" title="ServiceAccount Token"></a>ServiceAccount Token</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">这是 Kubernetes 中使用最为广泛的认证方式之一，主要用来给 Pod 提供访问 APIServer 的权限，通过使用 Volume 的方式挂载到 Pod 中。</span><br><span class="line"></span><br><span class="line">当你创建一个 ServiceAccount 的时候，kube-controller-manager 会自动帮你创建出一个Secret来保存 Token，比如：</span><br><span class="line">$ kubectl create sa demo</span><br><span class="line">serviceaccount/demo created</span><br><span class="line">➜  ~ kubectl get sa demo</span><br><span class="line">NAME   SECRETS   AGE</span><br><span class="line">demo   1         6s</span><br><span class="line">➜  ~ kubectl describe sa demo</span><br><span class="line">Name:                demo</span><br><span class="line">Namespace:           default</span><br><span class="line">Labels:              &lt;none&gt;</span><br><span class="line">Annotations:         &lt;none&gt;</span><br><span class="line">Image pull secrets:  &lt;none&gt;</span><br><span class="line">Mountable secrets:   demo-token-fvsjg</span><br><span class="line">Tokens:              demo-token-fvsjg</span><br><span class="line">Events:              &lt;none&gt;</span><br><span class="line"></span><br><span class="line">可以看到这里自动创建了一个名为demo-token-fvsjg的 Secret，我们来查看一下其中的内容：</span><br><span class="line">$ kubectl get secret demo-token-fvsjg</span><br><span class="line">NAME               TYPE                                  DATA   AGE</span><br><span class="line">demo-token-fvsjg   kubernetes.io/service-account-token   3      27s</span><br><span class="line">$ kubectl describe secret demo-token-fvsjg</span><br><span class="line">Name:         demo-token-fvsjg</span><br><span class="line">Namespace:    default</span><br><span class="line">Labels:       &lt;none&gt;</span><br><span class="line">Annotations:  kubernetes.io/service-account.name: demo</span><br><span class="line">              kubernetes.io/service-account.uid: f8fe4799-9add-4a36-8c29-a6b2744ba9a2</span><br><span class="line">Type:  kubernetes.io/service-account-token</span><br><span class="line">Data</span><br><span class="line">====</span><br><span class="line">token:      eyJhbGciOiJSUzI1NiIsImtpZCI6Ildhc3plOFE0UXBlRE8xTFdsRThRVXktRF93T0otcW55VXI3R0RvV1IzVjgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlbW8tdG9rZW4tZnZzamciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVtbyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImY4ZmU0Nzk5LTlhZGQtNGEzNi04YzI5LWE2YjI3NDRiYTlhMiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlbW8ifQ.t0sNk8PiRIgMXaauzM8v8eW_AF7J5Su_TpyURaeBQX0BuFDpU-rrTC6h9sjetAQOLa6iLFsrG2tqH04pNo2N6TB73-K-M54veVpP6FGhceLO0Vsz_iTJuOsnkS_6agqfW0UrtaY8_oCk1OZipdbTJYZlmwlb6opcfP1j7bFHCdDbwfbWx8ilHqTaJ5_r7zrdhxsmC5ogtBRDaJfEYmsIBZSgnt_0qMHNj9L47n2mj_wo-aQQ25o0lbO_7RSeVA17kkgbAJ2wzwvv8-i3f7K23DSxab3k8trbuIRt1R3Gl33fv5WIwiz9okYIFfus4pe0MCtjBxxTMa526cdezKS4LQ</span><br><span class="line">ca.crt:     1025 bytes</span><br><span class="line">namespace:  7 bytes</span><br><span class="line"></span><br><span class="line">Data里面的token我们可以到https://jwt.io/中 Decode 出来</span><br><span class="line"></span><br><span class="line">Bootstrap Token 是 kubeadm 引入的方便创建新集群所使用的 Token 类型，通过如下类似的命令就可以将其加入新的节点中：</span><br><span class="line">kubeadm join --discovery-token abcdef.1234567890abcdef</span><br></pre></td></tr></table></figure>
+
+<h4 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">k8s内部有多种授权模块，比如 Node、ABAC、RBAC、Webhook。</span><br><span class="line">授权阶段会根据从AuthN拿到的用户信息，依次按配置的授权次序逐一进行权限验证。</span><br><span class="line">任一授权模块验证通过，即允许该请求继续访问。</span><br><span class="line">这里说下ABAC和RBAC。</span><br></pre></td></tr></table></figure>
+
+<h5 id="ABAC"><a href="#ABAC" class="headerlink" title="ABAC"></a>ABAC</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ABAC (Attribute Based Access Control) 是一种基于属性的访问控制，可以给 APIServer 指定一个 JSON 文件--authorization-policy-file=SOME_FILENAME，该文件描述了一组属性组合策略，比如:</span><br><span class="line">&#123;&quot;apiVersion&quot;: &quot;abac.authorization.kubernetes.io/v1beta1&quot;, &quot;kind&quot;: &quot;Policy&quot;, &quot;spec&quot;: &#123;&quot;user&quot;: &quot;zhangsan&quot;, &quot;namespace&quot;: &quot;*&quot;, &quot;resource&quot;: &quot;pods&quot;, &quot;readonly&quot;: true&#125;&#125;</span><br><span class="line">这条策略表示，用户 zhangsan 可以以只读的方式读取任何 namespace 中的 Pod。</span><br></pre></td></tr></table></figure>
+
+<h5 id="RBAC"><a href="#RBAC" class="headerlink" title="RBAC"></a>RBAC</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">相对而言，RBAC使用起来就非常方便。</span><br><span class="line">通过k8s对象就可以直接进行管理，也便于动态调整权限。</span><br><span class="line">RBAC中引入角色，所有的权限都是围着这个角色进行展开的，每个角色里面定义了可以操作的资源以及操作方式。</span><br><span class="line">在 Kubernetes 中有两种角色，一种是 namespace 级别的 Role ，一种是集群级别的 ClusterRole。</span><br><span class="line"></span><br><span class="line">在 Kubernetes 中有些资源是 namespace 级别的，比如 Pod、Service 等，而有些则属于集群级别，比如 Node、PV 等。所以有了 Role 和 ClusterRole 两种角色。</span><br><span class="line">kind: Role</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1</span><br><span class="line">metadata:</span><br><span class="line">  namespace: default</span><br><span class="line">  name: pod-reader</span><br><span class="line">rules:</span><br><span class="line">- apiGroups: [&quot;&quot;] # 空字符串&quot;&quot;表明使用core API group</span><br><span class="line">  resources: [&quot;pods&quot;]</span><br><span class="line">  verbs: [&quot;get&quot;, &quot;watch&quot;, &quot;list&quot;]</span><br><span class="line">  </span><br><span class="line">这样一个角色表示可以访问 default 命名空间下面的 Pods，并可以对其进行 get、watch 以及 list 操作。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ClusterRole 除了可以定义集群方位的资源外，比如 Node，还可以定义跨 namespace 的资源访问，比如你想访问所有命名空间下面的 Pod，就可以这么定义：</span><br><span class="line">kind: ClusterRole</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1</span><br><span class="line">metadata:</span><br><span class="line">  # 鉴于ClusterRole是集群范围对象，所以这里不需要定义&quot;namespace&quot;字段</span><br><span class="line">  name: pods-reader</span><br><span class="line">rules:</span><br><span class="line">- apiGroups: [&quot;&quot;]</span><br><span class="line">  resources: [&quot;pods&quot;]</span><br><span class="line">  verbs: [&quot;get&quot;, &quot;watch&quot;, &quot;list&quot;]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">RBAC 中定义这些角色包含了一组权限规则，这些规则纯粹以累加形式组合，没有互斥的概念。</span><br><span class="line">定义好角色，我们就可以做权限绑定了。这里分别有两个 API 对象，RoleBinding 和 ClusterRoleBinding。角色绑定就是把一个权限授予一个或者一组用户，例如：</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1</span><br><span class="line"></span><br><span class="line"># 此角色绑定使得用户 &quot;jane&quot; 或者 &quot;manager&quot;组（Group）能够读取 &quot;default&quot; 命名空间中的 Pods</span><br><span class="line">kind: RoleBinding</span><br><span class="line">metadata:</span><br><span class="line">  name: read-pods</span><br><span class="line">  namespace: default</span><br><span class="line">subjects:</span><br><span class="line">- kind: User</span><br><span class="line">  name: jane # 名称区分大小写</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">- kind: Group</span><br><span class="line">  name: manager # 名称区分大小写</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">roleRef:</span><br><span class="line">  kind: Role # 这里可以是 Role，也可以是 ClusterRole</span><br><span class="line">  name: pods-reader # 这里的名称必须与你想要绑定的 Role 或 ClusterRole 名称一致</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">  </span><br><span class="line">这里定义的 RoleBinding 对象在 default 命名空间中将 pods-reader 角色授予用户 jane和组 manager。</span><br><span class="line">这一授权将允许用户 jane 和 manager 组中的各个用户从default 命名空间中读取到 Pod。</span><br></pre></td></tr></table></figure>
+
+<h4 id="准入控制"><a href="#准入控制" class="headerlink" title="准入控制"></a>准入控制</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">准入控制可以帮助我们在 APIServer 真正处理对象前做一些校验以及修改的工作。</span><br><span class="line">https://kubernetes.io/zh/docs/reference/access-authn-authz/admission-controllers/#%E6%AF%8F%E4%B8%AA%E5%87%86%E5%85%A5%E6%8E%A7%E5%88%B6%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88</span><br></pre></td></tr></table></figure>
+
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">作为一个企业级的容器管理调度平台，Kubernetes 在 Auth 方面设计得很完善，支持多种后端身份认证授权系统，比如 LDAP (Lightweight Directory Access Protocol)、Webhook 等。</span><br><span class="line">AuthN 负责完成对用户的认证，并获取用户的相关信息（比如 Username、Groups 等）</span><br><span class="line">而 AuthZ 则会根据 AuthN 返回的用户信息，根据配置的授权模式进行权限校验，来决定是否允许对某个 API 资源的操作请求。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    <!--添加-->
+    <div>
+  	
+    	  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  	
+    </div>
+    <!--添加-->
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>原创技术分享，感谢您的支持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Key liyk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Key liyk 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/10/Oracle存档日志空间占满处理/" rel="next" title="Oracle存档日志空间占满处理">
+                <i class="fa fa-chevron-left"></i> Oracle存档日志空间占满处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/10/25/sonarqube安装/" rel="prev" title="sonarqube安装">
+                sonarqube安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Key liyk">
+            
+              <p class="site-author-name" itemprop="name">Key liyk</p>
+              <p class="site-description motion-element" itemprop="description">么啥好说的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liyk1024" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liyk@anchnet.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#认证"><span class="nav-number">2.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#x509证书"><span class="nav-number">2.1.</span> <span class="nav-text">x509证书</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Token"><span class="nav-number">2.2.</span> <span class="nav-text">Token</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ServiceAccount-Token"><span class="nav-number">2.3.</span> <span class="nav-text">ServiceAccount Token</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权"><span class="nav-number">3.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ABAC"><span class="nav-number">3.1.</span> <span class="nav-text">ABAC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RBAC"><span class="nav-number">3.2.</span> <span class="nav-text">RBAC</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#准入控制"><span class="nav-number">4.</span> <span class="nav-text">准入控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Key liyk</span>
+
+  
+</div>
+
+<!-- 添加备案号 -->
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span>
+  陕ICP备19011648号-1
+</span>
+</div>
+<!--
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+-->
+
+<!---->
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!--<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>-->
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+</body>
+</html>
