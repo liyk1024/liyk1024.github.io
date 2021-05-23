@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="认识分布式存储1分布式存储系统，是通过网络将数据分散存储在多台独立的设备上。  分布式存储系统的特性 可扩展性：节点扩展后旧数据会自动迁移到新节点，实现负载均衡，避免单点过热的情况；水平扩展只需将新节点和原有利群连接到同一网络不会对业务造成影响；当节点被添加到集群，集群系统的整体容量和性能也随之线性扩展。 低成本： 高性能 易用、易管理  12分布式存储系统的挑战主要在于数据、状态信息的持久化，要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="存储介绍">
+<meta property="og:url" content="http://www.key1024.cn/2020/11/11/存储介绍/index.html">
+<meta property="og:site_name" content="So what">
+<meta property="og:description" content="认识分布式存储1分布式存储系统，是通过网络将数据分散存储在多台独立的设备上。  分布式存储系统的特性 可扩展性：节点扩展后旧数据会自动迁移到新节点，实现负载均衡，避免单点过热的情况；水平扩展只需将新节点和原有利群连接到同一网络不会对业务造成影响；当节点被添加到集群，集群系统的整体容量和性能也随之线性扩展。 低成本： 高性能 易用、易管理  12分布式存储系统的挑战主要在于数据、状态信息的持久化，要">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.key1024.cn/md/20201122/huczYrQwifQ5.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20201122/ahpazbpg4NAF.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20201122/kEsaeyWGWgjQ.png">
+<meta property="og:image" content="http://img.key1024.cn/md/20201122/jzXWLoaogv8B.png">
+<meta property="og:updated_time" content="2021-05-23T14:25:46.144Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="存储介绍">
+<meta name="twitter:description" content="认识分布式存储1分布式存储系统，是通过网络将数据分散存储在多台独立的设备上。  分布式存储系统的特性 可扩展性：节点扩展后旧数据会自动迁移到新节点，实现负载均衡，避免单点过热的情况；水平扩展只需将新节点和原有利群连接到同一网络不会对业务造成影响；当节点被添加到集群，集群系统的整体容量和性能也随之线性扩展。 低成本： 高性能 易用、易管理  12分布式存储系统的挑战主要在于数据、状态信息的持久化，要">
+<meta name="twitter:image" content="http://img.key1024.cn/md/20201122/huczYrQwifQ5.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.key1024.cn/2020/11/11/存储介绍/">
+
+
+
+
+
+  <title>存储介绍 | So what</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">So what</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Evething will be ok!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.key1024.cn/2020/11/11/存储介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Key liyk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="So what">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">存储介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-11T22:23:00+08:00">
+                2020-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/存储/" itemprop="url" rel="index">
+                    <span itemprop="name">存储</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.3k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="认识分布式存储"><a href="#认识分布式存储" class="headerlink" title="认识分布式存储"></a>认识分布式存储</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">分布式存储系统，是通过网络将数据分散存储在多台独立的设备上。</span><br></pre></td></tr></table></figure>
+
+<h5 id="分布式存储系统的特性"><a href="#分布式存储系统的特性" class="headerlink" title="分布式存储系统的特性"></a>分布式存储系统的特性</h5><ul>
+<li>可扩展性：节点扩展后旧数据会自动迁移到新节点，实现负载均衡，避免单点过热的情况；水平扩展只需将新节点和原有利群连接到同一网络不会对业务造成影响；当节点被添加到集群，集群系统的整体容量和性能也随之线性扩展。</li>
+<li>低成本：</li>
+<li>高性能</li>
+<li>易用、易管理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">分布式存储系统的挑战主要在于数据、状态信息的持久化，要求在自动迁移、自动容错、并发读写的过程中保证数据的一致性。</span><br><span class="line">分布式存储涉及的技术主要来自两个领域：分布式系统以及数据库。</span><br></pre></td></tr></table></figure>
+
+<h5 id="存储分类"><a href="#存储分类" class="headerlink" title="存储分类"></a>存储分类</h5><ul>
+<li>本地存储：硬盘，不能在网络上用，ext3、ext4、xfs、ntfs。</li>
+<li>网络存储：网络文件系统，共享的都是文件系统。nfs、hdfs、glusterfs（后2个都是分布式网络文件系统）</li>
+<li>共享裸设备：块存储，cinder、ceph（可作为块存储、对象存储、分布式网络文件系统）、SAN（光纤交换机存储）</li>
+<li>分布式存储：集群</li>
+</ul>
+<h5 id="分布式存储分类介绍"><a href="#分布式存储分类介绍" class="headerlink" title="分布式存储分类介绍"></a>分布式存储分类介绍</h5><ul>
+<li>Hadoop HDFS: 大数据分布式文件系统</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hadoop的存储组件，hdfs是一个高度容错性的系统，能提供高吞吐量的数据访问非常适合大规模数据集上的应用。</span><br><span class="line"></span><br><span class="line">优点：</span><br><span class="line">  高容错性：数据自动保存多个副本，副本丢失后自动恢复。</span><br><span class="line">  良好的数据访问机制：一次写入多次读取，保证数据一致性。</span><br><span class="line">  适合大数据文件的存储：TB、PB级数据，扩展能力强。</span><br><span class="line">  </span><br><span class="line">缺点：</span><br><span class="line">  低延迟数据访问困难：难以应付毫秒级以下的应用。</span><br><span class="line">  海量小文件存取：占用NameNode大量内存</span><br><span class="line">  一个文件只能有一个写入者：仅支持append追加。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Openstack的对象存储Swift</li>
+</ul>
+<p><img src="http://img.key1024.cn/md/20201122/huczYrQwifQ5.png" alt="mark"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Swift目的使用普通硬件来构建冗余的、可扩展的分布式对象存储集群，存储可达PB级。Swift是python开发。</span><br><span class="line"></span><br><span class="line">特点：</span><br><span class="line">    各个存储的节点完全对等，是对称的系统架构。</span><br><span class="line">    开发者通过一个RESTful HTTP API与对象存储相关作用。</span><br><span class="line">    无单点故障：Swift的元数据存储是完全均匀随机分布的，并且与对象文件存储一样元数据也会存储多份。整个swift集群中没有一个角色是单点的。</span><br><span class="line">    不影响性能情况下，集群通过增加外部节点进行扩展。</span><br><span class="line">    无限的可扩展性：存储容量的无限扩展；swift性能，QPS 吞吐量等可线性提升。扩容只需简单地新增机器系统会自动完成数据迁移等工作使各存储节点重新达到平衡状态。</span><br><span class="line">    </span><br><span class="line">用途：</span><br><span class="line">    图片、文档存储</span><br><span class="line">    长期保存的日志文件</span><br><span class="line">    存储媒体库（照片、音乐、视频等）</span><br><span class="line">    视频监控文件的存档</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>GlusterFS</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GlusterFS是一种全对称的开源分布式文件系统，全对此是指GlusterFS采用弹性哈希算法，没有中心节点所有节点全部平等。GlusterFS配置方便、稳定性好，可轻松到达PB级别容量，数千个节点。</span><br><span class="line"></span><br><span class="line">各种卷的分类：</span><br><span class="line">    分布卷：存储数据时，将文件随机存储各台glusterfs机器上。</span><br><span class="line">        优点：存储数据时。读取速度快</span><br><span class="line">        缺点：一个birck坏掉，文件就会丢失</span><br><span class="line">    复制卷：存储数据时，所有文件分别存储到每台gluster机器上</span><br><span class="line">        优点：对文件进行多次备份。一个brick坏掉文件不会丢失，其他机器的brick上面有备份</span><br><span class="line">        缺点：占用资源</span><br><span class="line">    条带卷：存数据时，一个文件分开存到每台glusterfs机器上</span><br><span class="line">        优点：对大文件读写速度快</span><br><span class="line">        缺点：一个brick坏掉文件就会坏掉</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>公有云对象存储</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">aws s3; azure bolb; 阿里云 oss；腾讯云 cos；华为云 obs等</span><br><span class="line"></span><br><span class="line">场景：</span><br><span class="line">    图片和音视频等应用海量存储</span><br><span class="line">    网页或移动应用静态、动态资源分离</span><br><span class="line">    云端数据处理 配合视频服务</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="ceph介绍"><a href="#ceph介绍" class="headerlink" title="ceph介绍"></a>ceph介绍</h3><h4 id="ceph简介"><a href="#ceph简介" class="headerlink" title="ceph简介"></a>ceph简介</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ceph使用c++语言开发</span><br><span class="line">设计初衷是变成一个可避免单点故障的分布式文件系统，PB级别的扩展能力，开源等。</span><br><span class="line">一个统一的分布式存储系统，提供较好的性能、可靠性和可扩展性。</span><br></pre></td></tr></table></figure>
+
+<h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">高可扩展：使用普通x86服务器，支持10~1000台服务器，支持TB到EB扩展。</span><br><span class="line">高可靠性：没有单点故障，多数据副本，自动管理，自动修复</span><br><span class="line">高性能：数据分布均衡</span><br><span class="line">可用于对象存储、块设备存储和文件系统存储</span><br></pre></td></tr></table></figure>
+
+<h4 id="ceph架构"><a href="#ceph架构" class="headerlink" title="ceph架构"></a>ceph架构</h4><p><img src="http://img.key1024.cn/md/20201122/ahpazbpg4NAF.png" alt="mark"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">基础存储系统</span><br><span class="line">rados：基础存储系统RADOS，所有存储在ceph系统中的用户数据事实上最终都是由这一层来存储的。ceph的高可靠、高可扩展、高性能、高自动化等特性也是由这一层所提供的。</span><br><span class="line"></span><br><span class="line">基础库librados：</span><br><span class="line">librados：这一层功能是对RADOS进行抽象和封装，并向上层提供API，以便直接基于RADOS进行应用开发。</span><br><span class="line"></span><br><span class="line">高层应用接口：</span><br><span class="line">radosgw：对象网关接口（对象存储）</span><br><span class="line">rbd：块存储</span><br><span class="line">cephfs：文件系统存储</span><br><span class="line">其作用是在librados库的基础上提供抽象层次更高、更便于应用或客户端使用的上层接口。</span><br></pre></td></tr></table></figure>
+
+<h4 id="ceph基本组件"><a href="#ceph基本组件" class="headerlink" title="ceph基本组件"></a>ceph基本组件</h4><p><img src="http://img.key1024.cn/md/20201122/kEsaeyWGWgjQ.png" alt="mark"></p>
+<ul>
+<li>ceph主要三个组件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Osd：用于集群中所有数据与对象的存储，处理集群数据的复制、恢复、回填、再均衡。并向其他osd守护进程发送心跳，然后向Mon提供一些监控信息。当ceph存储集群设定数据有两个副本时（一共存2份）则至少需要2个OSD守护进程即2个osd节点，集群才能达到active+clean状态。</span><br><span class="line"></span><br><span class="line">Montor：监控整个集群的状态，维护集群的cluster MAP二进制表，保证集群数据的一致性。clusterMAP描述了对象存储的物理位置，以及一个将设备聚合到物理位置的桶列表。</span><br><span class="line"></span><br><span class="line">Manager（ceph-mgr）：用于收集ceph集群状态、运行指标，比如存储利用率、当前性能指标和系统负载。对外提供ceph dashboard（ceph ui）和restful api。manager组件开启高可用时至少2个。</span><br><span class="line"></span><br><span class="line">MDS（可选）：为ceph文件系统提供元数据计算、缓存同步（也就是ceph块设备和ceph对象存储不使用MDS）。在ceph中元数据也是存储在osd节点中的，mds类似于元数据代理缓存服务器。MDS进程并不是必须的进程，只有需要使用cephFS（文件系统）时，才需要配置MDS节点。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ceph结构包含2个部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ceph client：访问ceph底层服务或组件，对外提供各种接口。比如对象存储接口、块存储接口、文件缓存接口。</span><br><span class="line"></span><br><span class="line">ceph node：ceph底层服务提供端，也就是ceph存储集群。</span><br></pre></td></tr></table></figure>
+
+<h4 id="Ceph存储种类及其应用场景"><a href="#Ceph存储种类及其应用场景" class="headerlink" title="Ceph存储种类及其应用场景"></a>Ceph存储种类及其应用场景</h4><h5 id="块存储"><a href="#块存储" class="headerlink" title="块存储"></a>块存储</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">典型设备：磁盘阵列、硬盘</span><br><span class="line">主要是将裸磁盘空间映射给主机使用的。</span><br><span class="line"></span><br><span class="line">优点：</span><br><span class="line">    通过Raid与LVM等手段，对数据提供了保护。</span><br><span class="line">    多块廉价的硬盘组合起来，提高容量。</span><br><span class="line">    多块磁盘组合出来的逻辑盘，提升读写效率。</span><br><span class="line"></span><br><span class="line">缺点：</span><br><span class="line">    采用SAN架构组网，光纤交换机，造价成本高。</span><br><span class="line">    主机之间无法共享数据。</span><br><span class="line"></span><br><span class="line">使用场景：</span><br><span class="line">    docker容器、虚拟机磁盘存储分配</span><br><span class="line">    日志存储</span><br><span class="line">    文件存储</span><br></pre></td></tr></table></figure>
+
+<h5 id="文件存储"><a href="#文件存储" class="headerlink" title="文件存储"></a>文件存储</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">典型设备：FTP、NFS服务器</span><br><span class="line">为了克服块存储文件无法共享的问题，所以有了文件存储。</span><br><span class="line">在服务器上架设FTP与NFS服务就是文件存储。</span><br><span class="line"></span><br><span class="line">优点：</span><br><span class="line">    造价低，随便一台机器就可</span><br><span class="line">    方便文件共享</span><br><span class="line">    </span><br><span class="line">缺点：</span><br><span class="line">    读写速率低、传输速度慢</span><br><span class="line"></span><br><span class="line">使用场景：</span><br><span class="line">    日志存储、有目的结构的文件存储</span><br></pre></td></tr></table></figure>
+
+<h5 id="对象存储"><a href="#对象存储" class="headerlink" title="对象存储"></a>对象存储</h5><p>ceph同时提供对象存储、块存储和文件系统存储三种功能，满足不同应用需求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">为什么需要对象存储？</span><br><span class="line">一个文件包含了属性（metadata 元数据，例如该文件的大小、修改时间、存储路径等）以及内容（数据）。</span><br><span class="line"></span><br><span class="line">例如FAT32文件系统，存储过程是链表的形式。</span><br><span class="line">对象存储则将元数据独立出来，控制节点叫元数据服务器里面主要负责存储对象的属性，而负责存储数据的分布式服务器叫OSD 主要负责存储文件的数据部分。</span><br><span class="line">例如用户访问先访问元数据服务器，元数据服务器只负责反馈对象存储在哪些OSD。所以当OSD服务器数量越多，这种读写速度的提升就越大。</span><br><span class="line"></span><br><span class="line">所以对象存储的出现，很好的结合了块存储于文件存储的优点。</span><br><span class="line"></span><br><span class="line">优点：</span><br><span class="line">    具备块存储的读写高速</span><br><span class="line">    具备文件存储的共享等特性</span><br><span class="line"></span><br><span class="line">使用场景：</span><br><span class="line">    适合更新变动较少的数据</span><br><span class="line">    图片存储、视频存储、备份存储等。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">什么是OSD？</span><br><span class="line">对象存储（object-based storage）是一种新的网络存储架构，基于对象存储技术的设备就是对象存储设备（object-based storage Device）简称OSD。总体上来讲对象存储综合了NAS和SAN的优点，同时具有SAN的高速直接访问和NAS的分布式数据共享等优势，提供了具有高性能、高可靠性、跨平台以及安全的数据共享的存储体系结构。</span><br></pre></td></tr></table></figure>
+
+<h4 id="ceph数据的存储过程"><a href="#ceph数据的存储过程" class="headerlink" title="ceph数据的存储过程"></a>ceph数据的存储过程</h4><p><img src="http://img.key1024.cn/md/20201122/jzXWLoaogv8B.png" alt="mark"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">无论使用哪种存储方式(对象、块、网络挂载)，存储的数据都会被切分成对象（objects）。</span><br><span class="line">objects size大小可以由管理员调整，通常为2M或4M。</span><br><span class="line">每个对象都会有一个唯一的OID，由ino(文件的File ID，用于在全局唯一标识每一个文件)和ono(分片的编号)生成。OID的好处是可以唯一标识每个不同的对象，并且存储了对象与文件的从属关系。</span><br><span class="line"></span><br><span class="line">但是对象并不会之间存储进OSD中，因为对象的size很小。在一个大规模的集群中可能有几百到几千万个对象，这么多对象光是遍历寻址速度都是很缓慢的。</span><br><span class="line">并且如果将对象直接通过某种固定映射的哈希算法映射到osd上，当这个osd损坏时，对象无法自动迁移至其他osd上面（因为映射函数不允许）。</span><br><span class="line">为了解决这些问题，ceph引入了归置组概念，即PG。</span><br><span class="line"></span><br><span class="line">PG是一个逻辑概念，它在数据寻址时类似于数据库中的索引，每个对象都会固定映射进一个PG中，所以当我们要寻找一个对象时，只需要先找到对象所属的PG然后遍历这个PG就可以了，无需遍历所有对象。</span><br><span class="line">而且在数据迁移时，也是以PG作为基本单位进行迁移，ceph不会直接操作对象。</span><br><span class="line"></span><br><span class="line">对象如何映射进PG？</span><br><span class="line">首先使用静态hash函数对OID做hash取出特征码，用特征码与PG的数量取模，得到的序号则是PGID。</span><br><span class="line">由于这种设计方式，PG的数量多少直接决定了数据分布的均匀性，所以合理设置的PG数量可以很好的提升ceph集群的性能并使数据均匀分布。</span><br><span class="line"></span><br><span class="line">PG会根据管理员设置的副本数量进行复制，然后通过crush算法存储到不同的OSD节点上（其实是把PG中的所有对象存储到节点上），第一个OSD节点即为主节点，其余均为从节点。</span><br></pre></td></tr></table></figure>
+
+<h4 id="ceph名词介绍"><a href="#ceph名词介绍" class="headerlink" title="ceph名词介绍"></a>ceph名词介绍</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Monitor：监控整个集群的状态，维护集群的cluster MAP二进制表，保证集群数据的一致性。</span><br><span class="line">OSD：负责响应客户端请求返回具体数据的进程，一个ceph集群一般有很多个OSD。</span><br><span class="line">MDS：cephFS服务依赖的元数据服务，块存储和对象存储不需要。</span><br><span class="line">object：ceph最底层的存储单元是object对象，每个object包含元数据和原始数据。</span><br><span class="line">PG：placement groups，是一个逻辑的概念，一个PG包含多个OSD。引入PG这一层其实就是为了更好的分配数据和定位数据。</span><br><span class="line">RADOS：ceph集群的精华，用户实现数据分配、Failover等集群操作。</span><br><span class="line">Librados：是Rados提供库，因为Rados是协议很难直接访问，因此上层的RBD、RGW和CephFS都是通过librados访问的。目前提供PHP、JAVA、Python、C和C++支持。</span><br><span class="line">CRUSH：是Ceph使用的数据分布算法，类似一致性哈希，让数据分配到预期的地方。</span><br><span class="line">RBD：是ceph对外提供的块设备服务。</span><br><span class="line">RGW：是ceph对外提供的对象存储服务，接口与S3和Swift兼容。</span><br><span class="line">CephFS：ceph文件系统，是ceph对外提供的文件系统服务。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    <!--添加-->
+    <div>
+  	
+    	  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  	
+    </div>
+    <!--添加-->
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>原创技术分享，感谢您的支持。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Key liyk 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Key liyk 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/25/GitLab安装配置/" rel="next" title="GitLab安装配置">
+                <i class="fa fa-chevron-left"></i> GitLab安装配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/20/ceph分布式部署/" rel="prev" title="ceph分布式部署">
+                ceph分布式部署 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Key liyk">
+            
+              <p class="site-author-name" itemprop="name">Key liyk</p>
+              <p class="site-description motion-element" itemprop="description">么啥好说的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">91</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liyk1024" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liyk@anchnet.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#认识分布式存储"><span class="nav-number">1.</span> <span class="nav-text">认识分布式存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分布式存储系统的特性"><span class="nav-number">2.</span> <span class="nav-text">分布式存储系统的特性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#存储分类"><span class="nav-number">3.</span> <span class="nav-text">存储分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分布式存储分类介绍"><span class="nav-number">4.</span> <span class="nav-text">分布式存储分类介绍</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#ceph介绍"><span class="nav-number"></span> <span class="nav-text">ceph介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ceph简介"><span class="nav-number"></span> <span class="nav-text">ceph简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优势"><span class="nav-number"></span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ceph架构"><span class="nav-number"></span> <span class="nav-text">ceph架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ceph基本组件"><span class="nav-number"></span> <span class="nav-text">ceph基本组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ceph存储种类及其应用场景"><span class="nav-number"></span> <span class="nav-text">Ceph存储种类及其应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#块存储"><span class="nav-number">1.</span> <span class="nav-text">块存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件存储"><span class="nav-number">2.</span> <span class="nav-text">文件存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对象存储"><span class="nav-number">3.</span> <span class="nav-text">对象存储</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ceph数据的存储过程"><span class="nav-number"></span> <span class="nav-text">ceph数据的存储过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ceph名词介绍"><span class="nav-number"></span> <span class="nav-text">ceph名词介绍</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Key liyk</span>
+
+  
+</div>
+
+<!-- 添加备案号 -->
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span>
+  陕ICP备19011648号-1
+</span>
+</div>
+<!--
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+-->
+
+<!---->
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!--<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>-->
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+</body>
+</html>
